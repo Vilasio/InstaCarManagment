@@ -53,6 +53,14 @@ namespace InstaCarManagement.Data
             get { return admin; }
         }
 
+        private bool verfication;
+
+        public bool Verfication
+        {
+            get { return verfication; }
+        }
+
+
         private List<Account> allUsers;
 
         public List<Account> AllUsers
@@ -84,28 +92,71 @@ namespace InstaCarManagement.Data
             Account actualUser = null;
             NpgsqlCommand command = new NpgsqlCommand();
             command.Connection = connection;
-            command.CommandText = $"Select {COLUMN} from {TABLE} where username = :us and password = crypt(:pa, password);";
+            command.CommandText = $"Select {COLUMN} from {TABLE} where username = :us and password = crypt(:pa, password) and blocked != true;";
             command.Parameters.AddWithValue(":us", String.IsNullOrEmpty(username) ? "" : username);
             command.Parameters.AddWithValue(":pa", String.IsNullOrEmpty(password) ? "" : password);
             NpgsqlDataReader reader = command.ExecuteReader();
-
-            while (reader.Read())
+            if (reader.HasRows)
             {
-                actualUser = new Account(connection)
+                while (reader.Read())
                 {
-                    AccountId = reader.GetInt64(0),
-                    Username = reader.IsDBNull(1) ? null : reader.GetString(1),
-                    Role = reader.IsDBNull(3) ? 3 : reader.GetInt64(3),
-                    Tried = reader.IsDBNull(4) ? null : (long?)reader.GetInt64(4),
-                    Blocked = reader.IsDBNull(5) ? true : reader.GetBoolean(5)
-                };
-                if (actualUser.Role == 1)
-                {
-                    actualUser.admin = true;
+                    actualUser = new Account(connection)
+                    {
+                        AccountId = reader.GetInt64(0),
+                        Username = reader.IsDBNull(1) ? null : reader.GetString(1),
+                        Role = reader.IsDBNull(3) ? 3 : reader.GetInt64(3),
+                        Tried = reader.IsDBNull(4) ? null : (long?)reader.GetInt64(4),
+                        Blocked = reader.IsDBNull(5) ? true : reader.GetBoolean(5)
+                    };
+                    if (actualUser.Role == 1)
+                    {
+                        actualUser.admin = true;
+                    }
+                    actualUser.verfication = true;
                 }
-
+                reader.Close();
+                if (actualUser.Tried != 0)
+                {
+                    command.CommandText = $"update {TABLE} set tried = :tr where account_id = :aid";
+                    command.Parameters.AddWithValue("aid", actualUser.AccountId.Value);
+                    command.Parameters.AddWithValue("tr", 0);
+                    command.ExecuteNonQuery();
+                }
             }
-            reader.Close();
+            else
+            {
+                reader.Close();
+                command.CommandText = $"Select account_id, username, tried, blocked from {TABLE} where username = :us;";
+                command.Parameters.AddWithValue(":us", String.IsNullOrEmpty(username) ? "" : username);
+                NpgsqlDataReader subreader = command.ExecuteReader();
+                while (subreader.Read())
+                {
+                    actualUser = new Account(connection)
+                    {
+                        AccountId = reader.GetInt64(0),
+                        Username = reader.IsDBNull(1) ? null : reader.GetString(1),
+                        Tried = reader.IsDBNull(2) ? null : (long?)reader.GetInt64(2),
+                        Blocked = reader.IsDBNull(3) ? true : reader.GetBoolean(3)
+                    };
+                    actualUser.verfication = false;
+                    if (actualUser.Username != "admin")
+                    {
+                        actualUser.Tried += 1;
+                    } 
+                }
+                subreader.Close();
+                if (actualUser.Tried >= 3)
+                {
+                    actualUser.Blocked = true;
+                    actualUser.Tried = 3;
+                }
+                command.CommandText =
+                    $"update {TABLE} set tried = :tr, blocked = :bl where account_id = :aid";
+                command.Parameters.AddWithValue("aid", actualUser.AccountId.Value);
+                command.Parameters.AddWithValue("tr", actualUser.Tried.HasValue ? (object)actualUser.Tried.Value : 3);
+                command.Parameters.AddWithValue("bl", actualUser.Blocked);
+                command.ExecuteNonQuery();
+            }
             return actualUser;
 
         }

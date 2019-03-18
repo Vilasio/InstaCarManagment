@@ -68,7 +68,7 @@ CREATE TABLE InstaCar.rent
 	car_id				NUMERIC(10) not null,
 	datebegin			TIMESTAMP with time zone,
 	dateend				TIMESTAMP with time zone,
-	sumprice			NUMERIC(10),
+	sumprice			NUMERIC(8,2),
 	units				NUMERIC(10),	
 	
 	CONSTRAINT rent_pk PRIMARY KEY (rent_id)

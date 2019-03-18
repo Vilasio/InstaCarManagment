@@ -88,6 +88,36 @@ namespace InstaCarManagement.Data
             reader.Close();
             return allVehicles;
         }
+
+        static Vehicle GetSpecificVehicles(NpgsqlConnection connection, int key)
+        {
+            
+            Vehicle vehicle = null;
+            NpgsqlCommand command = new NpgsqlCommand();
+            command.Connection = connection;
+            command.CommandText = $"Select * from {TABLE} where car_id = :id;";
+            command.Parameters.AddWithValue("id", key);
+            NpgsqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                vehicle = new Vehicle(connection)
+                {
+                    CarId = reader.GetInt64(0),
+                    Modell = reader.IsDBNull(1) ? null : reader.GetString(1),
+                    Brand = reader.IsDBNull(2) ? null : reader.GetString(2),
+                    HP = reader.IsDBNull(3) ? 0 : reader.GetInt64(3),
+                    Price = reader.IsDBNull(4) ? 0 : reader.GetDouble(4),
+                    Feature1 = reader.IsDBNull(5) ? null : reader.GetString(5),
+                    Feature2 = reader.IsDBNull(6) ? null : reader.GetString(6),
+                    Feature3 = reader.IsDBNull(7) ? null : reader.GetString(7),
+                    Feature4 = reader.IsDBNull(8) ? null : reader.GetString(8),
+                    NotAvailable = reader.IsDBNull(9) ? true : reader.GetBoolean(9)
+                };
+            }
+            reader.Close();
+            return vehicle;
+        }
         #endregion
         //----------------------------------------------------------------------------------------------
         //Public

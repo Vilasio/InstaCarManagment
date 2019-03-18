@@ -82,7 +82,7 @@ namespace InstaCarManagement.GUI
             this.comboBoxRole.DataSource = Enum.GetValues(typeof(EnumRole));
             this.comboBoxTried.DataSource = Enum.GetValues(typeof(EnumTried));
             this.checkBoxBlocked.Checked = false;
-
+            this.groupBoxUserEditing.Text = "Neuen User anlegen";
         }
 
         private bool ValidatingUser()
@@ -99,10 +99,26 @@ namespace InstaCarManagement.GUI
                 MessageBox.Show("Benutzername muss mindestens 4 Zeichen lang sein", "Benutzername fehlerhaft!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 result = false;
             }
-            if (this.editUser.AccountId.HasValue && this.textBoxPassword.Text != "" && this.textBoxPassword.Text.Length > 4)
+            if (this.editUser.AccountId.HasValue)
             {
-                this.editUser.Password = this.textBoxPassword.Text;
-                result = true;
+                if (this.textBoxPassword.Text == "" )
+                {
+                    this.editUser.Password = null;
+                }
+                else
+                {
+                    if (this.textBoxPassword.Text.Length > 4)
+                    {
+                        this.editUser.Password = this.textBoxPassword.Text;
+                        result = true;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Passwort muss mindestens 4 Zeichen lang sein", "Passwort fehlerhaft!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        result = false;
+                    }
+                }
+                
             }
             else
             {
@@ -153,6 +169,7 @@ namespace InstaCarManagement.GUI
             {
                 this.checkBoxBlocked.Checked = false;
             }
+            this.groupBoxUserEditing.Text = $" User {this.editUser.Username} bearbeiten";
         }
 
         private void buttonSave_Click(object sender, EventArgs e)
@@ -189,6 +206,41 @@ namespace InstaCarManagement.GUI
             ListViewItem item = this.listViewUser.GetItemAt(e.X, e.Y);
             this.editUser = (Account)item.Tag;
             FillUser();
+        }
+
+        private void checkBoxBlocked_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxBlocked.Checked)
+            {
+                this.comboBoxTried.SelectedIndex = 3;
+            }
+            else
+            {
+                this.comboBoxTried.SelectedIndex = 0;
+            }
+        }
+
+        private void checkBoxPasswordVisibility_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxPasswordVisibility.Checked)
+            {
+                this.textBoxPassword.PasswordChar = '*';
+            }
+            else
+            {
+                this.textBoxPassword.PasswordChar = '\0';
+            }
+        }
+
+        private void buttonCancel_Click(object sender, EventArgs e)
+        {
+            ClearUser();
+
+        }
+
+        private void buttonClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

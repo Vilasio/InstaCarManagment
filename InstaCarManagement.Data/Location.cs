@@ -83,6 +83,31 @@ namespace InstaCarManagement.Data
             reader.Close();
             return allLocations;
         }
+
+        static Location GetSpecificLocation(NpgsqlConnection connection, int key)
+        {
+            Location location = null;
+            NpgsqlCommand command = new NpgsqlCommand();
+            command.Connection = connection;
+            command.CommandText = $"Select * from {TABLE} where location_id = :id;";
+            command.Parameters.AddWithValue("id", key);
+            NpgsqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                location = new Location(connection)
+                {
+                    LocationId = reader.GetInt64(0),
+                    Name = reader.IsDBNull(1) ? null : reader.GetString(1),
+                    Street = reader.IsDBNull(2) ? null : reader.GetString(2),
+                    HouseNr = reader.IsDBNull(3) ? 0 : reader.GetInt64(3),
+                    Postcode = reader.IsDBNull(4) ? null : reader.GetString(4),
+                    City = reader.IsDBNull(5) ? null : reader.GetString(5)
+                };
+            }
+            reader.Close();
+            return location;
+        }
         #endregion
         //----------------------------------------------------------------------------------------------
         //Public

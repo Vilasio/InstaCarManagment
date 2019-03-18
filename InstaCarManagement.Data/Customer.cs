@@ -85,6 +85,31 @@ namespace InstaCarManagement.Data
             return allCustomers;
         }
 
+        static Customer GetSpecificCustomer(NpgsqlConnection connection, int key)
+        { 
+            Customer customer = null;
+            NpgsqlCommand command = new NpgsqlCommand();
+            command.Connection = connection;
+            command.CommandText = $"Select * from {TABLE} where customer_id = :id;";
+            command.Parameters.AddWithValue("id", key);
+            NpgsqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                customer = new Customer(connection)
+                {
+                    CustomerId = reader.GetInt64(0),
+                    Name = reader.IsDBNull(1) ? null : reader.GetString(1),
+                    Familyname = reader.IsDBNull(2) ? null : reader.GetString(2),
+                    Street = reader.IsDBNull(3) ? null : reader.GetString(3),
+                    HouseNr = reader.IsDBNull(4) ? 0 : reader.GetInt64(4),
+                    Postcode = reader.IsDBNull(5) ? null : reader.GetString(5),
+                    City = reader.IsDBNull(6) ? null : reader.GetString(6)
+                };
+            }
+            reader.Close();
+            return customer;
+        }
         #endregion
         //----------------------------------------------------------------------------------------------
         //Public
