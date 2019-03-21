@@ -32,6 +32,9 @@
             this.tabPageCustomer = new System.Windows.Forms.TabPage();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.groupBoxCustomer = new System.Windows.Forms.GroupBox();
+            this.buttonCustomerClose = new System.Windows.Forms.Button();
+            this.buttonCustomerCancel = new System.Windows.Forms.Button();
+            this.buttonCustomerSave = new System.Windows.Forms.Button();
             this.labelCustomerCity = new System.Windows.Forms.Label();
             this.labelCustomerPostcode = new System.Windows.Forms.Label();
             this.labelCustomerHouseNr = new System.Windows.Forms.Label();
@@ -73,6 +76,9 @@
             this.tabPageLocation = new System.Windows.Forms.TabPage();
             this.splitContainerLocation = new System.Windows.Forms.SplitContainer();
             this.groupBoxLocation = new System.Windows.Forms.GroupBox();
+            this.buttonLocationClose = new System.Windows.Forms.Button();
+            this.buttonLocationCancel = new System.Windows.Forms.Button();
+            this.buttonLocationSave = new System.Windows.Forms.Button();
             this.labelLocationCity = new System.Windows.Forms.Label();
             this.labelLocationPostcode = new System.Windows.Forms.Label();
             this.labelLocationHouseNr = new System.Windows.Forms.Label();
@@ -84,12 +90,24 @@
             this.textBoxLocationStreet = new System.Windows.Forms.TextBox();
             this.textBoxLocationName = new System.Windows.Forms.TextBox();
             this.listViewLocation = new System.Windows.Forms.ListView();
-            this.buttonCustomerSave = new System.Windows.Forms.Button();
-            this.buttonCustomerCancel = new System.Windows.Forms.Button();
-            this.buttonCustomerClose = new System.Windows.Forms.Button();
-            this.buttonLocationSave = new System.Windows.Forms.Button();
-            this.buttonLocationCancel = new System.Windows.Forms.Button();
-            this.buttonLocationClose = new System.Windows.Forms.Button();
+            this.columnHeaderName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeaderFamilyName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeaderStreet = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeaderHouseNr = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeaderPostCode = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeaderCity = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeaderModell = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeaderBrand = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeaderHP = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeaderFeature1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeaderFeature2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeaderFeature3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeaderFeature4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeaderLocationName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeaderLocationStreet = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeaderLocationHouseNr = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeaderLocationPostCode = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeaderLocationCity = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabControlBaseData.SuspendLayout();
             this.tabPageCustomer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
@@ -121,7 +139,7 @@
             this.tabControlBaseData.Location = new System.Drawing.Point(0, 0);
             this.tabControlBaseData.Name = "tabControlBaseData";
             this.tabControlBaseData.SelectedIndex = 0;
-            this.tabControlBaseData.Size = new System.Drawing.Size(800, 450);
+            this.tabControlBaseData.Size = new System.Drawing.Size(1138, 613);
             this.tabControlBaseData.TabIndex = 0;
             // 
             // tabPageCustomer
@@ -130,10 +148,12 @@
             this.tabPageCustomer.Location = new System.Drawing.Point(4, 22);
             this.tabPageCustomer.Name = "tabPageCustomer";
             this.tabPageCustomer.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageCustomer.Size = new System.Drawing.Size(792, 424);
+            this.tabPageCustomer.Size = new System.Drawing.Size(1130, 587);
             this.tabPageCustomer.TabIndex = 0;
             this.tabPageCustomer.Text = "Kunde";
             this.tabPageCustomer.UseVisualStyleBackColor = true;
+            this.tabPageCustomer.Enter += new System.EventHandler(this.tabPageCustomer_Enter);
+            this.tabPageCustomer.Leave += new System.EventHandler(this.tabPageCustomer_Leave);
             // 
             // splitContainer2
             // 
@@ -148,8 +168,8 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.listViewCustomer);
-            this.splitContainer2.Size = new System.Drawing.Size(786, 418);
-            this.splitContainer2.SplitterDistance = 262;
+            this.splitContainer2.Size = new System.Drawing.Size(1124, 581);
+            this.splitContainer2.SplitterDistance = 258;
             this.splitContainer2.TabIndex = 0;
             // 
             // groupBoxCustomer
@@ -172,10 +192,37 @@
             this.groupBoxCustomer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxCustomer.Location = new System.Drawing.Point(0, 0);
             this.groupBoxCustomer.Name = "groupBoxCustomer";
-            this.groupBoxCustomer.Size = new System.Drawing.Size(262, 418);
+            this.groupBoxCustomer.Size = new System.Drawing.Size(258, 581);
             this.groupBoxCustomer.TabIndex = 0;
             this.groupBoxCustomer.TabStop = false;
             this.groupBoxCustomer.Text = "Kunde";
+            // 
+            // buttonCustomerClose
+            // 
+            this.buttonCustomerClose.Location = new System.Drawing.Point(181, 392);
+            this.buttonCustomerClose.Name = "buttonCustomerClose";
+            this.buttonCustomerClose.Size = new System.Drawing.Size(75, 23);
+            this.buttonCustomerClose.TabIndex = 14;
+            this.buttonCustomerClose.Text = "Schließen";
+            this.buttonCustomerClose.UseVisualStyleBackColor = true;
+            // 
+            // buttonCustomerCancel
+            // 
+            this.buttonCustomerCancel.Location = new System.Drawing.Point(87, 211);
+            this.buttonCustomerCancel.Name = "buttonCustomerCancel";
+            this.buttonCustomerCancel.Size = new System.Drawing.Size(75, 23);
+            this.buttonCustomerCancel.TabIndex = 13;
+            this.buttonCustomerCancel.Text = "Abbrechen";
+            this.buttonCustomerCancel.UseVisualStyleBackColor = true;
+            // 
+            // buttonCustomerSave
+            // 
+            this.buttonCustomerSave.Location = new System.Drawing.Point(6, 211);
+            this.buttonCustomerSave.Name = "buttonCustomerSave";
+            this.buttonCustomerSave.Size = new System.Drawing.Size(75, 23);
+            this.buttonCustomerSave.TabIndex = 12;
+            this.buttonCustomerSave.Text = "Speichern";
+            this.buttonCustomerSave.UseVisualStyleBackColor = true;
             // 
             // labelCustomerCity
             // 
@@ -275,14 +322,22 @@
             // 
             // listViewCustomer
             // 
+            this.listViewCustomer.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeaderName,
+            this.columnHeaderFamilyName,
+            this.columnHeaderStreet,
+            this.columnHeaderHouseNr,
+            this.columnHeaderPostCode,
+            this.columnHeaderCity});
             this.listViewCustomer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listViewCustomer.FullRowSelect = true;
             this.listViewCustomer.GridLines = true;
             this.listViewCustomer.Location = new System.Drawing.Point(0, 0);
             this.listViewCustomer.Name = "listViewCustomer";
-            this.listViewCustomer.Size = new System.Drawing.Size(520, 418);
+            this.listViewCustomer.Size = new System.Drawing.Size(862, 581);
             this.listViewCustomer.TabIndex = 0;
             this.listViewCustomer.UseCompatibleStateImageBehavior = false;
+            this.listViewCustomer.View = System.Windows.Forms.View.Details;
             // 
             // tabPageVehicle
             // 
@@ -290,10 +345,12 @@
             this.tabPageVehicle.Location = new System.Drawing.Point(4, 22);
             this.tabPageVehicle.Name = "tabPageVehicle";
             this.tabPageVehicle.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageVehicle.Size = new System.Drawing.Size(792, 424);
+            this.tabPageVehicle.Size = new System.Drawing.Size(1130, 587);
             this.tabPageVehicle.TabIndex = 1;
             this.tabPageVehicle.Text = "Fahrzeuge";
             this.tabPageVehicle.UseVisualStyleBackColor = true;
+            this.tabPageVehicle.Enter += new System.EventHandler(this.tabPageVehicle_Enter);
+            this.tabPageVehicle.Leave += new System.EventHandler(this.tabPageVehicle_Leave);
             // 
             // splitContainerVehicle
             // 
@@ -308,8 +365,8 @@
             // splitContainerVehicle.Panel2
             // 
             this.splitContainerVehicle.Panel2.Controls.Add(this.listViewVehicle);
-            this.splitContainerVehicle.Size = new System.Drawing.Size(786, 418);
-            this.splitContainerVehicle.SplitterDistance = 321;
+            this.splitContainerVehicle.Size = new System.Drawing.Size(1124, 581);
+            this.splitContainerVehicle.SplitterDistance = 335;
             this.splitContainerVehicle.TabIndex = 0;
             // 
             // groupBoxVehicles
@@ -338,7 +395,7 @@
             this.groupBoxVehicles.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxVehicles.Location = new System.Drawing.Point(0, 0);
             this.groupBoxVehicles.Name = "groupBoxVehicles";
-            this.groupBoxVehicles.Size = new System.Drawing.Size(321, 418);
+            this.groupBoxVehicles.Size = new System.Drawing.Size(335, 581);
             this.groupBoxVehicles.TabIndex = 0;
             this.groupBoxVehicles.TabStop = false;
             this.groupBoxVehicles.Text = "Fahrzeuge";
@@ -522,12 +579,20 @@
             // 
             // listViewVehicle
             // 
+            this.listViewVehicle.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeaderModell,
+            this.columnHeaderBrand,
+            this.columnHeaderHP,
+            this.columnHeaderFeature1,
+            this.columnHeaderFeature2,
+            this.columnHeaderFeature3,
+            this.columnHeaderFeature4});
             this.listViewVehicle.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listViewVehicle.FullRowSelect = true;
             this.listViewVehicle.GridLines = true;
             this.listViewVehicle.Location = new System.Drawing.Point(0, 0);
             this.listViewVehicle.Name = "listViewVehicle";
-            this.listViewVehicle.Size = new System.Drawing.Size(461, 418);
+            this.listViewVehicle.Size = new System.Drawing.Size(785, 581);
             this.listViewVehicle.TabIndex = 0;
             this.listViewVehicle.UseCompatibleStateImageBehavior = false;
             this.listViewVehicle.View = System.Windows.Forms.View.Details;
@@ -538,10 +603,12 @@
             this.tabPageLocation.Location = new System.Drawing.Point(4, 22);
             this.tabPageLocation.Name = "tabPageLocation";
             this.tabPageLocation.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageLocation.Size = new System.Drawing.Size(792, 424);
+            this.tabPageLocation.Size = new System.Drawing.Size(1130, 587);
             this.tabPageLocation.TabIndex = 2;
             this.tabPageLocation.Text = "Standort";
             this.tabPageLocation.UseVisualStyleBackColor = true;
+            this.tabPageLocation.Enter += new System.EventHandler(this.tabPageLocation_Enter);
+            this.tabPageLocation.Leave += new System.EventHandler(this.tabPageLocation_Leave);
             // 
             // splitContainerLocation
             // 
@@ -556,8 +623,8 @@
             // splitContainerLocation.Panel2
             // 
             this.splitContainerLocation.Panel2.Controls.Add(this.listViewLocation);
-            this.splitContainerLocation.Size = new System.Drawing.Size(786, 418);
-            this.splitContainerLocation.SplitterDistance = 262;
+            this.splitContainerLocation.Size = new System.Drawing.Size(1124, 581);
+            this.splitContainerLocation.SplitterDistance = 261;
             this.splitContainerLocation.TabIndex = 0;
             // 
             // groupBoxLocation
@@ -578,10 +645,37 @@
             this.groupBoxLocation.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxLocation.Location = new System.Drawing.Point(0, 0);
             this.groupBoxLocation.Name = "groupBoxLocation";
-            this.groupBoxLocation.Size = new System.Drawing.Size(262, 418);
+            this.groupBoxLocation.Size = new System.Drawing.Size(261, 581);
             this.groupBoxLocation.TabIndex = 0;
             this.groupBoxLocation.TabStop = false;
             this.groupBoxLocation.Text = "Location";
+            // 
+            // buttonLocationClose
+            // 
+            this.buttonLocationClose.Location = new System.Drawing.Point(181, 389);
+            this.buttonLocationClose.Name = "buttonLocationClose";
+            this.buttonLocationClose.Size = new System.Drawing.Size(75, 23);
+            this.buttonLocationClose.TabIndex = 14;
+            this.buttonLocationClose.Text = "Schließen";
+            this.buttonLocationClose.UseVisualStyleBackColor = true;
+            // 
+            // buttonLocationCancel
+            // 
+            this.buttonLocationCancel.Location = new System.Drawing.Point(87, 213);
+            this.buttonLocationCancel.Name = "buttonLocationCancel";
+            this.buttonLocationCancel.Size = new System.Drawing.Size(75, 23);
+            this.buttonLocationCancel.TabIndex = 13;
+            this.buttonLocationCancel.Text = "Abbrechen";
+            this.buttonLocationCancel.UseVisualStyleBackColor = true;
+            // 
+            // buttonLocationSave
+            // 
+            this.buttonLocationSave.Location = new System.Drawing.Point(6, 213);
+            this.buttonLocationSave.Name = "buttonLocationSave";
+            this.buttonLocationSave.Size = new System.Drawing.Size(75, 23);
+            this.buttonLocationSave.TabIndex = 12;
+            this.buttonLocationSave.Text = "Speichern";
+            this.buttonLocationSave.UseVisualStyleBackColor = true;
             // 
             // labelLocationCity
             // 
@@ -600,7 +694,6 @@
             this.labelLocationPostcode.Size = new System.Drawing.Size(27, 13);
             this.labelLocationPostcode.TabIndex = 10;
             this.labelLocationPostcode.Text = "PLZ";
-            this.labelLocationPostcode.Click += new System.EventHandler(this.label4_Click);
             // 
             // labelLocationHouseNr
             // 
@@ -666,75 +759,117 @@
             // 
             // listViewLocation
             // 
+            this.listViewLocation.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeaderLocationName,
+            this.columnHeaderLocationStreet,
+            this.columnHeaderLocationHouseNr,
+            this.columnHeaderLocationPostCode,
+            this.columnHeaderLocationCity});
             this.listViewLocation.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listViewLocation.FullRowSelect = true;
             this.listViewLocation.GridLines = true;
             this.listViewLocation.Location = new System.Drawing.Point(0, 0);
             this.listViewLocation.Name = "listViewLocation";
-            this.listViewLocation.Size = new System.Drawing.Size(520, 418);
+            this.listViewLocation.Size = new System.Drawing.Size(859, 581);
             this.listViewLocation.TabIndex = 0;
             this.listViewLocation.UseCompatibleStateImageBehavior = false;
             this.listViewLocation.View = System.Windows.Forms.View.Details;
             // 
-            // buttonCustomerSave
+            // columnHeaderName
             // 
-            this.buttonCustomerSave.Location = new System.Drawing.Point(6, 211);
-            this.buttonCustomerSave.Name = "buttonCustomerSave";
-            this.buttonCustomerSave.Size = new System.Drawing.Size(75, 23);
-            this.buttonCustomerSave.TabIndex = 12;
-            this.buttonCustomerSave.Text = "Speichern";
-            this.buttonCustomerSave.UseVisualStyleBackColor = true;
+            this.columnHeaderName.Text = "Vorname";
+            this.columnHeaderName.Width = 100;
             // 
-            // buttonCustomerCancel
+            // columnHeaderFamilyName
             // 
-            this.buttonCustomerCancel.Location = new System.Drawing.Point(87, 211);
-            this.buttonCustomerCancel.Name = "buttonCustomerCancel";
-            this.buttonCustomerCancel.Size = new System.Drawing.Size(75, 23);
-            this.buttonCustomerCancel.TabIndex = 13;
-            this.buttonCustomerCancel.Text = "Abbrechen";
-            this.buttonCustomerCancel.UseVisualStyleBackColor = true;
+            this.columnHeaderFamilyName.Text = "Nachname";
+            this.columnHeaderFamilyName.Width = 100;
             // 
-            // buttonCustomerClose
+            // columnHeaderStreet
             // 
-            this.buttonCustomerClose.Location = new System.Drawing.Point(181, 392);
-            this.buttonCustomerClose.Name = "buttonCustomerClose";
-            this.buttonCustomerClose.Size = new System.Drawing.Size(75, 23);
-            this.buttonCustomerClose.TabIndex = 14;
-            this.buttonCustomerClose.Text = "Schließen";
-            this.buttonCustomerClose.UseVisualStyleBackColor = true;
+            this.columnHeaderStreet.Text = "Straße";
+            this.columnHeaderStreet.Width = 100;
             // 
-            // buttonLocationSave
+            // columnHeaderHouseNr
             // 
-            this.buttonLocationSave.Location = new System.Drawing.Point(6, 213);
-            this.buttonLocationSave.Name = "buttonLocationSave";
-            this.buttonLocationSave.Size = new System.Drawing.Size(75, 23);
-            this.buttonLocationSave.TabIndex = 12;
-            this.buttonLocationSave.Text = "Speichern";
-            this.buttonLocationSave.UseVisualStyleBackColor = true;
+            this.columnHeaderHouseNr.Text = "H.Nr";
+            this.columnHeaderHouseNr.Width = 50;
             // 
-            // buttonLocationCancel
+            // columnHeaderPostCode
             // 
-            this.buttonLocationCancel.Location = new System.Drawing.Point(87, 213);
-            this.buttonLocationCancel.Name = "buttonLocationCancel";
-            this.buttonLocationCancel.Size = new System.Drawing.Size(75, 23);
-            this.buttonLocationCancel.TabIndex = 13;
-            this.buttonLocationCancel.Text = "Abbrechen";
-            this.buttonLocationCancel.UseVisualStyleBackColor = true;
+            this.columnHeaderPostCode.Text = "PLZ";
+            this.columnHeaderPostCode.Width = 70;
             // 
-            // buttonLocationClose
+            // columnHeaderCity
             // 
-            this.buttonLocationClose.Location = new System.Drawing.Point(181, 389);
-            this.buttonLocationClose.Name = "buttonLocationClose";
-            this.buttonLocationClose.Size = new System.Drawing.Size(75, 23);
-            this.buttonLocationClose.TabIndex = 14;
-            this.buttonLocationClose.Text = "Schließen";
-            this.buttonLocationClose.UseVisualStyleBackColor = true;
+            this.columnHeaderCity.Text = "Stadt";
+            this.columnHeaderCity.Width = 100;
+            // 
+            // columnHeaderModell
+            // 
+            this.columnHeaderModell.Text = "Modell";
+            this.columnHeaderModell.Width = 100;
+            // 
+            // columnHeaderBrand
+            // 
+            this.columnHeaderBrand.Text = "Marke";
+            this.columnHeaderBrand.Width = 100;
+            // 
+            // columnHeaderHP
+            // 
+            this.columnHeaderHP.Text = "PS";
+            this.columnHeaderHP.Width = 50;
+            // 
+            // columnHeaderFeature1
+            // 
+            this.columnHeaderFeature1.Text = "Austattung";
+            this.columnHeaderFeature1.Width = 100;
+            // 
+            // columnHeaderFeature2
+            // 
+            this.columnHeaderFeature2.Text = "Austattung";
+            this.columnHeaderFeature2.Width = 100;
+            // 
+            // columnHeaderFeature3
+            // 
+            this.columnHeaderFeature3.Text = "Austattung";
+            this.columnHeaderFeature3.Width = 100;
+            // 
+            // columnHeaderFeature4
+            // 
+            this.columnHeaderFeature4.Text = "Austattung";
+            this.columnHeaderFeature4.Width = 100;
+            // 
+            // columnHeaderLocationName
+            // 
+            this.columnHeaderLocationName.Text = "Name";
+            this.columnHeaderLocationName.Width = 100;
+            // 
+            // columnHeaderLocationStreet
+            // 
+            this.columnHeaderLocationStreet.Text = "Straße";
+            this.columnHeaderLocationStreet.Width = 100;
+            // 
+            // columnHeaderLocationHouseNr
+            // 
+            this.columnHeaderLocationHouseNr.Text = "H.Nr.";
+            this.columnHeaderLocationHouseNr.Width = 70;
+            // 
+            // columnHeaderLocationPostCode
+            // 
+            this.columnHeaderLocationPostCode.Text = "PLZ";
+            this.columnHeaderLocationPostCode.Width = 70;
+            // 
+            // columnHeaderLocationCity
+            // 
+            this.columnHeaderLocationCity.Text = "Stadt";
+            this.columnHeaderLocationCity.Width = 100;
             // 
             // FormEditing
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1138, 613);
             this.Controls.Add(this.tabControlBaseData);
             this.Name = "FormEditing";
             this.Text = "Stammdaten";
@@ -829,5 +964,23 @@
         private System.Windows.Forms.Button buttonLocationClose;
         private System.Windows.Forms.Button buttonLocationCancel;
         private System.Windows.Forms.Button buttonLocationSave;
+        private System.Windows.Forms.ColumnHeader columnHeaderName;
+        private System.Windows.Forms.ColumnHeader columnHeaderFamilyName;
+        private System.Windows.Forms.ColumnHeader columnHeaderStreet;
+        private System.Windows.Forms.ColumnHeader columnHeaderHouseNr;
+        private System.Windows.Forms.ColumnHeader columnHeaderPostCode;
+        private System.Windows.Forms.ColumnHeader columnHeaderCity;
+        private System.Windows.Forms.ColumnHeader columnHeaderModell;
+        private System.Windows.Forms.ColumnHeader columnHeaderBrand;
+        private System.Windows.Forms.ColumnHeader columnHeaderHP;
+        private System.Windows.Forms.ColumnHeader columnHeaderFeature1;
+        private System.Windows.Forms.ColumnHeader columnHeaderFeature2;
+        private System.Windows.Forms.ColumnHeader columnHeaderFeature3;
+        private System.Windows.Forms.ColumnHeader columnHeaderFeature4;
+        private System.Windows.Forms.ColumnHeader columnHeaderLocationName;
+        private System.Windows.Forms.ColumnHeader columnHeaderLocationStreet;
+        private System.Windows.Forms.ColumnHeader columnHeaderLocationHouseNr;
+        private System.Windows.Forms.ColumnHeader columnHeaderLocationPostCode;
+        private System.Windows.Forms.ColumnHeader columnHeaderLocationCity;
     }
 }

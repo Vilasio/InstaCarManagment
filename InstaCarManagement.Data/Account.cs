@@ -145,17 +145,21 @@ namespace InstaCarManagement.Data
                     } 
                 }
                 subreader.Close();
-                if (actualUser.Tried >= 3)
+                if (actualUser != null)
                 {
-                    actualUser.Blocked = true;
-                    actualUser.Tried = 3;
+                    if (actualUser.Tried >= 3)
+                    {
+                        actualUser.Blocked = true;
+                        actualUser.Tried = 3;
+                    }
+                    command.CommandText =
+                        $"update {TABLE} set tried = :tr, blocked = :bl where account_id = :aid";
+                    command.Parameters.AddWithValue("aid", actualUser.AccountId.Value);
+                    command.Parameters.AddWithValue("tr", actualUser.Tried.HasValue ? (object)actualUser.Tried.Value : 3);
+                    command.Parameters.AddWithValue("bl", actualUser.Blocked);
+                    command.ExecuteNonQuery();
                 }
-                command.CommandText =
-                    $"update {TABLE} set tried = :tr, blocked = :bl where account_id = :aid";
-                command.Parameters.AddWithValue("aid", actualUser.AccountId.Value);
-                command.Parameters.AddWithValue("tr", actualUser.Tried.HasValue ? (object)actualUser.Tried.Value : 3);
-                command.Parameters.AddWithValue("bl", actualUser.Blocked);
-                command.ExecuteNonQuery();
+               
             }
             return actualUser;
 

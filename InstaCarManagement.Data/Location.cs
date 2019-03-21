@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace InstaCarManagement.Data
 {
-    class Location
+    public class Location
     {
         //----------------------------------------------------------------------------------------------
         //Const

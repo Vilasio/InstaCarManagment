@@ -47,10 +47,10 @@ namespace InstaCarManagement.Data
         public string Brand { get; set; }
         public long? HP { get; set; }
         public double? Price { get; set; }
-        public string Feature1 { get; set; }
-        public string Feature2 { get; set; }
-        public string Feature3 { get; set; }
-        public string Feature4 { get; set; }
+        public long? Feature1 { get; set; }
+        public long? Feature2 { get; set; }
+        public long? Feature3 { get; set; }
+        public long? Feature4 { get; set; }
         public bool NotAvailable { get; set; }
         #endregion
         //----------------------------------------------------------------------------------------------
