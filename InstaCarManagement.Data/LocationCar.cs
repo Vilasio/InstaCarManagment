@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace InstaCarManagement.Data
 {
-    public class Location
+    public class LocationCar
     {
         //----------------------------------------------------------------------------------------------
         //Const
         //----------------------------------------------------------------------------------------------
         #region const
-        private const string TABLE = "InstaCar.loction";
+        private const string TABLE = "InstaCar.location";
         private const string COLUMN = "location_id, name, street, housenr, postcode, city";
         #endregion
 
@@ -28,12 +28,12 @@ namespace InstaCarManagement.Data
         //Constructor
         //----------------------------------------------------------------------------------------------
         #region constructor
-        public Location()
+        public LocationCar()
         {
 
         }
 
-        public Location(NpgsqlConnection connection)
+        public LocationCar(NpgsqlConnection connection)
         {
             this.connection = connection;
         }
@@ -56,10 +56,10 @@ namespace InstaCarManagement.Data
         //Static
         //----------------------------------------------------------------------------------------------
         #region static
-        static List<Location> GetAllLocation(NpgsqlConnection connection)
+        public static List<LocationCar> GetAllLocation(NpgsqlConnection connection)
         {
-            List<Location> allLocations = new List<Location>();
-            Location location = null;
+            List<LocationCar> allLocations = new List<LocationCar>();
+            LocationCar location = null;
             NpgsqlCommand command = new NpgsqlCommand();
             command.Connection = connection;
             command.CommandText = $"Select * from {TABLE};";
@@ -69,7 +69,7 @@ namespace InstaCarManagement.Data
             while (reader.Read())
             {
                 allLocations.Add(
-                    location = new Location(connection)
+                    location = new LocationCar(connection)
                     {
                         LocationId = reader.GetInt64(0),
                         Name = reader.IsDBNull(1) ? null : reader.GetString(1),
@@ -84,9 +84,9 @@ namespace InstaCarManagement.Data
             return allLocations;
         }
 
-        static Location GetSpecificLocation(NpgsqlConnection connection, int key)
+        static LocationCar GetSpecificLocation(NpgsqlConnection connection, int key)
         {
-            Location location = null;
+            LocationCar location = null;
             NpgsqlCommand command = new NpgsqlCommand();
             command.Connection = connection;
             command.CommandText = $"Select * from {TABLE} where location_id = :id;";
@@ -95,7 +95,7 @@ namespace InstaCarManagement.Data
 
             while (reader.Read())
             {
-                location = new Location(connection)
+                location = new LocationCar(connection)
                 {
                     LocationId = reader.GetInt64(0),
                     Name = reader.IsDBNull(1) ? null : reader.GetString(1),

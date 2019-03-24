@@ -13,8 +13,8 @@ namespace InstaCarManagement.Data
         //Const
         //----------------------------------------------------------------------------------------------
         #region const
-        private const string TABLE = "InstaCar.consumer";
-        private const string COLUMN = "consumer_id, name, familyname, street, housenr, postcode, city";
+        private const string TABLE = "InstaCar.customer";
+        private const string COLUMN = "customer_id, name, familyname, street, housenr, postcode, city";
         #endregion
         //----------------------------------------------------------------------------------------------
         //PrivateMember
@@ -56,7 +56,7 @@ namespace InstaCarManagement.Data
         //----------------------------------------------------------------------------------------------
         #region static
 
-        static List<Customer> GetAllCustomer(NpgsqlConnection connection)
+        public static List<Customer> GetAllCustomer(NpgsqlConnection connection)
         {
             List<Customer> allCustomers = new List<Customer>();
             Customer customer = null;

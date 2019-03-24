@@ -52,5 +52,25 @@ namespace InstaCarManagement.GUI
 
             }
         }
+
+        
+
+        private void MenuItemEditCustomer_Click(object sender, EventArgs e)
+        {
+            FormEditing formEditing = new FormEditing(this.connection, 1);
+            formEditing.Show();
+        }
+
+        private void MenuItemEditCar_Click(object sender, EventArgs e)
+        {
+            FormEditing formEditing = new FormEditing(this.connection, 2);
+            formEditing.Show();
+        }
+
+        private void MenuItemEditLocation_Click(object sender, EventArgs e)
+        {
+            FormEditing formEditing = new FormEditing(this.connection, 3);
+            formEditing.Show();
+        }
     }
 }

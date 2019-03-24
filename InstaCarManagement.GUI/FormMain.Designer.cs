@@ -124,7 +124,7 @@
             // 
             this.MenuItemExit.Name = "MenuItemExit";
             this.MenuItemExit.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
-            this.MenuItemExit.Size = new System.Drawing.Size(180, 22);
+            this.MenuItemExit.Size = new System.Drawing.Size(134, 22);
             this.MenuItemExit.Text = "Exit";
             // 
             // MenuItemEdit
@@ -143,18 +143,21 @@
             this.MenuItemEditCar.Name = "MenuItemEditCar";
             this.MenuItemEditCar.Size = new System.Drawing.Size(234, 22);
             this.MenuItemEditCar.Text = "Fahrzeuge anlegen/bearbeiten";
+            this.MenuItemEditCar.Click += new System.EventHandler(this.MenuItemEditCar_Click);
             // 
             // MenuItemEditCustomer
             // 
             this.MenuItemEditCustomer.Name = "MenuItemEditCustomer";
             this.MenuItemEditCustomer.Size = new System.Drawing.Size(234, 22);
             this.MenuItemEditCustomer.Text = "Kunden anlegen/bearbeiten";
+            this.MenuItemEditCustomer.Click += new System.EventHandler(this.MenuItemEditCustomer_Click);
             // 
             // MenuItemEditLocation
             // 
             this.MenuItemEditLocation.Name = "MenuItemEditLocation";
             this.MenuItemEditLocation.Size = new System.Drawing.Size(234, 22);
             this.MenuItemEditLocation.Text = "Standorte anlegen/bearbeiten";
+            this.MenuItemEditLocation.Click += new System.EventHandler(this.MenuItemEditLocation_Click);
             // 
             // MenuItemRentCar
             // 

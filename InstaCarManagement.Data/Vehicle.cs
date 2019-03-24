@@ -57,7 +57,7 @@ namespace InstaCarManagement.Data
         //Static
         //----------------------------------------------------------------------------------------------
         #region static
-        static List<Vehicle> GetAllVehicles(NpgsqlConnection connection)
+        public static List<Vehicle> GetAllVehicles(NpgsqlConnection connection)
         {
             List<Vehicle> allVehicles = new List<Vehicle>();
             Vehicle vehicle = null;
@@ -77,10 +77,10 @@ namespace InstaCarManagement.Data
                         Brand = reader.IsDBNull(2) ? null : reader.GetString(2),
                         HP = reader.IsDBNull(3) ? 0 : reader.GetInt64(3),
                         Price = reader.IsDBNull(4) ? 0 : reader.GetDouble(4),
-                        Feature1 = reader.IsDBNull(5) ? null : reader.GetString(5),
-                        Feature2 = reader.IsDBNull(6) ? null : reader.GetString(6),
-                        Feature3 = reader.IsDBNull(7) ? null : reader.GetString(7),
-                        Feature4 = reader.IsDBNull(8) ? null : reader.GetString(8),
+                        Feature1 = reader.IsDBNull(5) ? 0 : reader.GetInt64(5),
+                        Feature2 = reader.IsDBNull(6) ? 0 : reader.GetInt64(6),
+                        Feature3 = reader.IsDBNull(7) ? 0 : reader.GetInt64(7),
+                        Feature4 = reader.IsDBNull(8) ? 0 : reader.GetInt64(8),
                         NotAvailable = reader.IsDBNull(9) ? true : reader.GetBoolean(9)
                     }
                 );
@@ -108,10 +108,10 @@ namespace InstaCarManagement.Data
                     Brand = reader.IsDBNull(2) ? null : reader.GetString(2),
                     HP = reader.IsDBNull(3) ? 0 : reader.GetInt64(3),
                     Price = reader.IsDBNull(4) ? 0 : reader.GetDouble(4),
-                    Feature1 = reader.IsDBNull(5) ? null : reader.GetString(5),
-                    Feature2 = reader.IsDBNull(6) ? null : reader.GetString(6),
-                    Feature3 = reader.IsDBNull(7) ? null : reader.GetString(7),
-                    Feature4 = reader.IsDBNull(8) ? null : reader.GetString(8),
+                    Feature1 = reader.IsDBNull(5) ? 0 : reader.GetInt64(5),
+                    Feature2 = reader.IsDBNull(6) ? 0 : reader.GetInt64(6),
+                    Feature3 = reader.IsDBNull(7) ? 0 : reader.GetInt64(7),
+                    Feature4 = reader.IsDBNull(8) ? 0 : reader.GetInt64(8),
                     NotAvailable = reader.IsDBNull(9) ? true : reader.GetBoolean(9)
                 };
             }
@@ -148,10 +148,10 @@ namespace InstaCarManagement.Data
             command.Parameters.AddWithValue("br", String.IsNullOrEmpty(this.Brand) ? (object)DBNull.Value : this.Brand);
             command.Parameters.AddWithValue("hp", this.HP.HasValue ? (object)this.HP.Value : 0);
             command.Parameters.AddWithValue("pr", this.Price.HasValue ? (object)this.Price.Value : 0);
-            command.Parameters.AddWithValue("f1", String.IsNullOrEmpty(this.Feature1) ? (object)DBNull.Value : this.Feature1);
-            command.Parameters.AddWithValue("f2", String.IsNullOrEmpty(this.Feature2) ? (object)DBNull.Value : this.Feature2);
-            command.Parameters.AddWithValue("f3", String.IsNullOrEmpty(this.Feature3) ? (object)DBNull.Value : this.Feature3);
-            command.Parameters.AddWithValue("f4", String.IsNullOrEmpty(this.Feature4) ? (object)DBNull.Value : this.Feature4);
+            command.Parameters.AddWithValue("f1", this.Feature1.HasValue ? (object)this.Feature1.Value : 0);
+            command.Parameters.AddWithValue("f2", this.Feature2.HasValue ? (object)this.Feature2.Value : 0);
+            command.Parameters.AddWithValue("f3", this.Feature3.HasValue ? (object)this.Feature3.Value : 0);
+            command.Parameters.AddWithValue("f4", this.Feature4.HasValue ? (object)this.Feature4.Value : 0);
             command.Parameters.AddWithValue("no", this.NotAvailable);
 
             return command.ExecuteNonQuery();

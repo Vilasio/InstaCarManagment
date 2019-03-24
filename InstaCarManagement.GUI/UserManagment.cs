@@ -18,6 +18,7 @@ namespace InstaCarManagement.GUI
         private Account actualUser = null;
         private List<Account> allUsers = null;
         private Account editUser = null;
+        
 
         enum EnumRole
         {

@@ -65,7 +65,7 @@
   <ItemGroup>
     <Compile Include="Account.cs" />
     <Compile Include="Customer.cs" />
-    <Compile Include="Location.cs" />
+    <Compile Include="LocationCar.cs" />
     <Compile Include="Rent.cs" />
     <Compile Include="Vehicle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
