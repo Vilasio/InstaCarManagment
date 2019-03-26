@@ -39,7 +39,7 @@ namespace InstaCarManagement.GUI
             this.customers = Customer.GetAllCustomer(this.connection);
             this.vehicles = Vehicle.GetAllVehicles(this.connection);
             this.locations = LocationCar.GetAllLocation(this.connection);
-
+            this.groupBoxHeader.Paint += PaintBorderlessGroupBox;
             switch (this.preselect)
             {
                 case 0:
@@ -55,6 +55,13 @@ namespace InstaCarManagement.GUI
                     this.tabControlBaseData.SelectedTab = tabPageLocation;
                     break;
             }
+        }
+
+        private void PaintBorderlessGroupBox(object sender, PaintEventArgs p)
+        {
+            GroupBox box = (GroupBox)sender;
+            p.Graphics.Clear(Color.FromArgb(00,00,255));
+            p.Graphics.DrawString(box.Text, box.Font, Brushes.Black, 0, 0);
         }
         #endregion
 
@@ -95,6 +102,13 @@ namespace InstaCarManagement.GUI
             this.textBoxCustomerHouseNr.Text = this.customer.HouseNr.ToString();
             this.textBoxCustomerPostcode.Text = this.customer.Postcode;
             this.textBoxCustomerCity.Text = this.customer.City;
+            this.textBoxCustomerIban.Text = this.customer.Iban;
+            this.textBoxCustomerBic.Text = this.customer.Bic;
+            this.textBoxCustomerEmail.Text = this.customer.Email;
+            this.textBoxCustomerTelefon.Text = this.customer.Telefon;
+            this.textBoxCustomerNickname.Text = this.customer.Nickname;
+            
+           
         }
     
 
@@ -185,6 +199,17 @@ namespace InstaCarManagement.GUI
                 return result;
             }
 
+            this.customer.Iban = this.textBoxCustomerIban.Text;
+            this.customer.Bic = this.textBoxCustomerBic.Text;
+            this.customer.Email = this.textBoxCustomerEmail.Text;
+            this.customer.Telefon = this.textBoxCustomerTelefon.Text;
+            this.customer.Nickname = this.textBoxCustomerNickname.Text;
+
+            if (this.textBoxCustomerPasswort.Text != "")
+            {
+                this.customer.Password = this.textBoxCustomerPasswort.Text;
+            }
+
             return result;
         }
 
@@ -197,6 +222,14 @@ namespace InstaCarManagement.GUI
             this.textBoxCustomerHouseNr.Text = string.Empty;
             this.textBoxCustomerPostcode.Text = string.Empty;
             this.textBoxCustomerCity.Text = string.Empty;
+            this.textBoxCustomerIban.Text = string.Empty;
+            this.textBoxCustomerBic.Text = string.Empty;
+            this.textBoxCustomerTelefon.Text = string.Empty;
+            this.textBoxCustomerEmail.Text = string.Empty;
+            this.textBoxCustomerNickname.Text = string.Empty;
+            this.textBoxCustomerPasswort.Text = string.Empty;
+
+           
 
         }
 
@@ -234,6 +267,11 @@ namespace InstaCarManagement.GUI
             ClearCustomer();
         }
 
+        private void buttonCustomerClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
         private void listViewCustomer_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             ListViewItem item = this.listViewCustomer.GetItemAt(e.X, e.Y);
@@ -258,7 +296,8 @@ namespace InstaCarManagement.GUI
             Kein = 0,
             Klimaanlage = 1,
             Multifunktionslenkrad = 2,
-            Freispreckeinrichtung = 3
+            Freispreckeinrichtung = 3,
+            Tempomat = 4
         }
 
         #region Methods Vehicle
@@ -301,6 +340,7 @@ namespace InstaCarManagement.GUI
             {
                 this.checkBoxVehicleNotAvailable.Checked = false;
             }
+            this.comboBoxVehicleLocation.SelectedValue = this.vehicle.LocationId;
         }
 
         private bool ValidateVehicle()
@@ -354,6 +394,8 @@ namespace InstaCarManagement.GUI
             this.vehicle.Feature3 = Convert.ToInt64(this.comboBoxVehicleFeature3.SelectedValue);
             this.vehicle.Feature4 = Convert.ToInt64(this.comboBoxVehicleFeature4.SelectedValue);
 
+            this.vehicle.LocationId = (long)this.comboBoxVehicleLocation.SelectedValue;
+
             this.vehicle.NotAvailable =  this.checkBoxVehicleNotAvailable.Checked;
             return result;
         }
@@ -370,8 +412,11 @@ namespace InstaCarManagement.GUI
             this.comboBoxVehicleFeature2.DataSource = Enum.GetValues(typeof(enumFeatures));
             this.comboBoxVehicleFeature3.DataSource = Enum.GetValues(typeof(enumFeatures));
             this.comboBoxVehicleFeature4.DataSource = Enum.GetValues(typeof(enumFeatures));
+            this.comboBoxVehicleLocation.SelectedValue = (long)1;
 
             this.groupBoxVehicles.Text = "Neues Fahrzeug anlegen";
+
+
 
             this.labelVehicleStatus.Visible = false;
         }
@@ -381,6 +426,9 @@ namespace InstaCarManagement.GUI
         {
             FillListViewVehicle();
             ClearVehicle();
+            this.comboBoxVehicleLocation.DataSource = this.locations;
+            this.comboBoxVehicleLocation.DisplayMember = "Name";
+            this.comboBoxVehicleLocation.ValueMember = "LocationId";
         }
 
         private void tabPageVehicle_Leave(object sender, EventArgs e)
@@ -410,7 +458,7 @@ namespace InstaCarManagement.GUI
             ClearVehicle();
         }
 
-        private void buttonCustomerClose_Click(object sender, EventArgs e)
+        private void buttonVehicleClose_Click(object sender, EventArgs e)
         {
             this.Close();
         }
@@ -605,10 +653,10 @@ namespace InstaCarManagement.GUI
             FillLocation();
         }
 
+
+
         #endregion
 
         #endregion
-
-
     }
 }

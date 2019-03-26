@@ -14,7 +14,7 @@ namespace InstaCarManagement.Data
         //----------------------------------------------------------------------------------------------
         #region const
         private const string TABLE = "InstaCar.car";
-        private const string COLUMN = "car_id, modell, brand, hp, price, feature1, feature2, feature3, feature4, notavailable";
+        private const string COLUMN = "car_id, location_id, modell, brand, hp, price, feature1, feature2, feature3, feature4, notavailable";
         #endregion
 
         //----------------------------------------------------------------------------------------------
@@ -43,6 +43,7 @@ namespace InstaCarManagement.Data
         //----------------------------------------------------------------------------------------------
         #region property
         public long? CarId { get; set; }
+        public long? LocationId { get; set; }
         public string Modell { get; set; }
         public string Brand { get; set; }
         public long? HP { get; set; }
@@ -73,15 +74,16 @@ namespace InstaCarManagement.Data
                     vehicle = new Vehicle(connection)
                     {
                         CarId = reader.GetInt64(0),
-                        Modell = reader.IsDBNull(1) ? null : reader.GetString(1),
-                        Brand = reader.IsDBNull(2) ? null : reader.GetString(2),
-                        HP = reader.IsDBNull(3) ? 0 : reader.GetInt64(3),
-                        Price = reader.IsDBNull(4) ? 0 : reader.GetDouble(4),
-                        Feature1 = reader.IsDBNull(5) ? 0 : reader.GetInt64(5),
-                        Feature2 = reader.IsDBNull(6) ? 0 : reader.GetInt64(6),
-                        Feature3 = reader.IsDBNull(7) ? 0 : reader.GetInt64(7),
-                        Feature4 = reader.IsDBNull(8) ? 0 : reader.GetInt64(8),
-                        NotAvailable = reader.IsDBNull(9) ? true : reader.GetBoolean(9)
+                        LocationId = reader.GetInt64(1),
+                        Modell = reader.IsDBNull(2) ? null : reader.GetString(2),
+                        Brand = reader.IsDBNull(3) ? null : reader.GetString(3),
+                        HP = reader.IsDBNull(4) ? 0 : reader.GetInt64(4),
+                        Price = reader.IsDBNull(5) ? 0 : reader.GetDouble(5),
+                        Feature1 = reader.IsDBNull(6) ? 0 : reader.GetInt64(6),
+                        Feature2 = reader.IsDBNull(7) ? 0 : reader.GetInt64(7),
+                        Feature3 = reader.IsDBNull(8) ? 0 : reader.GetInt64(8),
+                        Feature4 = reader.IsDBNull(9) ? 0 : reader.GetInt64(9),
+                        NotAvailable = reader.IsDBNull(10) ? true : reader.GetBoolean(10)
                     }
                 );
             }
@@ -104,15 +106,16 @@ namespace InstaCarManagement.Data
                 vehicle = new Vehicle(connection)
                 {
                     CarId = reader.GetInt64(0),
-                    Modell = reader.IsDBNull(1) ? null : reader.GetString(1),
-                    Brand = reader.IsDBNull(2) ? null : reader.GetString(2),
-                    HP = reader.IsDBNull(3) ? 0 : reader.GetInt64(3),
-                    Price = reader.IsDBNull(4) ? 0 : reader.GetDouble(4),
-                    Feature1 = reader.IsDBNull(5) ? 0 : reader.GetInt64(5),
-                    Feature2 = reader.IsDBNull(6) ? 0 : reader.GetInt64(6),
-                    Feature3 = reader.IsDBNull(7) ? 0 : reader.GetInt64(7),
-                    Feature4 = reader.IsDBNull(8) ? 0 : reader.GetInt64(8),
-                    NotAvailable = reader.IsDBNull(9) ? true : reader.GetBoolean(9)
+                    LocationId = reader.GetInt64(1),
+                    Modell = reader.IsDBNull(2) ? null : reader.GetString(2),
+                    Brand = reader.IsDBNull(3) ? null : reader.GetString(3),
+                    HP = reader.IsDBNull(4) ? 0 : reader.GetInt64(4),
+                    Price = reader.IsDBNull(5) ? 0 : reader.GetDouble(5),
+                    Feature1 = reader.IsDBNull(6) ? 0 : reader.GetInt64(6),
+                    Feature2 = reader.IsDBNull(7) ? 0 : reader.GetInt64(7),
+                    Feature3 = reader.IsDBNull(8) ? 0 : reader.GetInt64(8),
+                    Feature4 = reader.IsDBNull(9) ? 0 : reader.GetInt64(9),
+                    NotAvailable = reader.IsDBNull(10) ? true : reader.GetBoolean(10)
                 };
             }
             reader.Close();
@@ -131,7 +134,7 @@ namespace InstaCarManagement.Data
             {
 
                 command.CommandText =
-                $"update {TABLE} set  modell = :mo, brand = :br, hp = :hp, price = :pr, feature1 = :f1, feature2 = :f2," +
+                $"update {TABLE} set location_id = :lid, modell = :mo, brand = :br, hp = :hp, price = :pr, feature1 = :f1, feature2 = :f2," +
                 $"feature3 = :f3, feature4 = :f4, notavailable = :no where car_id = :cid";
 
 
@@ -140,10 +143,11 @@ namespace InstaCarManagement.Data
             {
                 command.CommandText = $"select nextval('{TABLE}_seq')";
                 this.CarId = (long?)command.ExecuteScalar();
-                command.CommandText = $" insert into {TABLE} ( car_id, modell , brand, hp, price, feature1, feature2,feature3, feature4, notavailable )" +
-                    $" values(:cid, :mo, :br, :hp, :pr, :f1, :f2, :f3, :f4, :no)";
+                command.CommandText = $" insert into {TABLE} ( car_id,location_id, modell , brand, hp, price, feature1, feature2,feature3, feature4, notavailable )" +
+                    $" values(:cid,:lid, :mo, :br, :hp, :pr, :f1, :f2, :f3, :f4, :no)";
             }
             command.Parameters.AddWithValue("cid", this.CarId.Value);
+            command.Parameters.AddWithValue("lid", this.LocationId.Value);
             command.Parameters.AddWithValue("mo", String.IsNullOrEmpty(this.Modell) ? (object)DBNull.Value : this.Modell);
             command.Parameters.AddWithValue("br", String.IsNullOrEmpty(this.Brand) ? (object)DBNull.Value : this.Brand);
             command.Parameters.AddWithValue("hp", this.HP.HasValue ? (object)this.HP.Value : 0);

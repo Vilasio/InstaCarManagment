@@ -32,6 +32,19 @@
             this.tabPageCustomer = new System.Windows.Forms.TabPage();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.groupBoxCustomer = new System.Windows.Forms.GroupBox();
+            this.labelCustomerTelefon = new System.Windows.Forms.Label();
+            this.textBoxCustomerTelefon = new System.Windows.Forms.TextBox();
+            this.labelCustomerEmail = new System.Windows.Forms.Label();
+            this.textBoxCustomerEmail = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.textBoxCustomerPasswort = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textBoxCustomerNickname = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.textBoxCustomerBic = new System.Windows.Forms.TextBox();
+            this.labelCustomerIban = new System.Windows.Forms.Label();
+            this.textBoxCustomerIban = new System.Windows.Forms.TextBox();
+            this.labelCustomerStatus = new System.Windows.Forms.Label();
             this.buttonCustomerClose = new System.Windows.Forms.Button();
             this.buttonCustomerCancel = new System.Windows.Forms.Button();
             this.buttonCustomerSave = new System.Windows.Forms.Button();
@@ -57,8 +70,9 @@
             this.tabPageVehicle = new System.Windows.Forms.TabPage();
             this.splitContainerVehicle = new System.Windows.Forms.SplitContainer();
             this.groupBoxVehicles = new System.Windows.Forms.GroupBox();
+            this.labelVehicleLocation = new System.Windows.Forms.Label();
+            this.comboBoxVehicleLocation = new System.Windows.Forms.ComboBox();
             this.labelVehicleStatus = new System.Windows.Forms.Label();
-            this.pictureBoxVehicleImage = new System.Windows.Forms.PictureBox();
             this.buttonVehicleClose = new System.Windows.Forms.Button();
             this.buttonVehicleCancel = new System.Windows.Forms.Button();
             this.buttonVehicleSave = new System.Windows.Forms.Button();
@@ -90,6 +104,7 @@
             this.tabPageLocation = new System.Windows.Forms.TabPage();
             this.splitContainerLocation = new System.Windows.Forms.SplitContainer();
             this.groupBoxLocation = new System.Windows.Forms.GroupBox();
+            this.labelLocationStatus = new System.Windows.Forms.Label();
             this.buttonLocationClose = new System.Windows.Forms.Button();
             this.buttonLocationCancel = new System.Windows.Forms.Button();
             this.buttonLocationSave = new System.Windows.Forms.Button();
@@ -109,8 +124,11 @@
             this.columnHeaderLocationHouseNr = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderLocationPostCode = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderLocationCity = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.labelCustomerStatus = new System.Windows.Forms.Label();
-            this.labelLocationStatus = new System.Windows.Forms.Label();
+            this.groupBoxHeader = new System.Windows.Forms.GroupBox();
+            this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
+            this.pictureBoxVehicleImage = new System.Windows.Forms.PictureBox();
+            this.labelHeader = new System.Windows.Forms.Label();
+            this.labelTopic = new System.Windows.Forms.Label();
             this.tabControlBaseData.SuspendLayout();
             this.tabPageCustomer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
@@ -124,13 +142,15 @@
             this.splitContainerVehicle.Panel2.SuspendLayout();
             this.splitContainerVehicle.SuspendLayout();
             this.groupBoxVehicles.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxVehicleImage)).BeginInit();
             this.tabPageLocation.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerLocation)).BeginInit();
             this.splitContainerLocation.Panel1.SuspendLayout();
             this.splitContainerLocation.Panel2.SuspendLayout();
             this.splitContainerLocation.SuspendLayout();
             this.groupBoxLocation.SuspendLayout();
+            this.groupBoxHeader.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxVehicleImage)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControlBaseData
@@ -138,11 +158,11 @@
             this.tabControlBaseData.Controls.Add(this.tabPageCustomer);
             this.tabControlBaseData.Controls.Add(this.tabPageVehicle);
             this.tabControlBaseData.Controls.Add(this.tabPageLocation);
-            this.tabControlBaseData.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControlBaseData.Location = new System.Drawing.Point(0, 0);
+            this.tabControlBaseData.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.tabControlBaseData.Location = new System.Drawing.Point(0, 106);
             this.tabControlBaseData.Name = "tabControlBaseData";
             this.tabControlBaseData.SelectedIndex = 0;
-            this.tabControlBaseData.Size = new System.Drawing.Size(1138, 613);
+            this.tabControlBaseData.Size = new System.Drawing.Size(1184, 655);
             this.tabControlBaseData.TabIndex = 0;
             // 
             // tabPageCustomer
@@ -151,7 +171,7 @@
             this.tabPageCustomer.Location = new System.Drawing.Point(4, 22);
             this.tabPageCustomer.Name = "tabPageCustomer";
             this.tabPageCustomer.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageCustomer.Size = new System.Drawing.Size(1130, 587);
+            this.tabPageCustomer.Size = new System.Drawing.Size(1176, 629);
             this.tabPageCustomer.TabIndex = 0;
             this.tabPageCustomer.Text = "Kunde";
             this.tabPageCustomer.UseVisualStyleBackColor = true;
@@ -171,12 +191,24 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.listViewCustomer);
-            this.splitContainer2.Size = new System.Drawing.Size(1124, 581);
-            this.splitContainer2.SplitterDistance = 258;
+            this.splitContainer2.Size = new System.Drawing.Size(1170, 623);
+            this.splitContainer2.SplitterDistance = 268;
             this.splitContainer2.TabIndex = 0;
             // 
             // groupBoxCustomer
             // 
+            this.groupBoxCustomer.Controls.Add(this.labelCustomerTelefon);
+            this.groupBoxCustomer.Controls.Add(this.textBoxCustomerTelefon);
+            this.groupBoxCustomer.Controls.Add(this.labelCustomerEmail);
+            this.groupBoxCustomer.Controls.Add(this.textBoxCustomerEmail);
+            this.groupBoxCustomer.Controls.Add(this.label1);
+            this.groupBoxCustomer.Controls.Add(this.textBoxCustomerPasswort);
+            this.groupBoxCustomer.Controls.Add(this.label3);
+            this.groupBoxCustomer.Controls.Add(this.textBoxCustomerNickname);
+            this.groupBoxCustomer.Controls.Add(this.label2);
+            this.groupBoxCustomer.Controls.Add(this.textBoxCustomerBic);
+            this.groupBoxCustomer.Controls.Add(this.labelCustomerIban);
+            this.groupBoxCustomer.Controls.Add(this.textBoxCustomerIban);
             this.groupBoxCustomer.Controls.Add(this.labelCustomerStatus);
             this.groupBoxCustomer.Controls.Add(this.buttonCustomerClose);
             this.groupBoxCustomer.Controls.Add(this.buttonCustomerCancel);
@@ -196,14 +228,120 @@
             this.groupBoxCustomer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxCustomer.Location = new System.Drawing.Point(0, 0);
             this.groupBoxCustomer.Name = "groupBoxCustomer";
-            this.groupBoxCustomer.Size = new System.Drawing.Size(258, 581);
+            this.groupBoxCustomer.Size = new System.Drawing.Size(268, 623);
             this.groupBoxCustomer.TabIndex = 0;
             this.groupBoxCustomer.TabStop = false;
             this.groupBoxCustomer.Text = "Kunde";
             // 
+            // labelCustomerTelefon
+            // 
+            this.labelCustomerTelefon.AutoSize = true;
+            this.labelCustomerTelefon.Location = new System.Drawing.Point(2, 349);
+            this.labelCustomerTelefon.Name = "labelCustomerTelefon";
+            this.labelCustomerTelefon.Size = new System.Drawing.Size(43, 13);
+            this.labelCustomerTelefon.TabIndex = 27;
+            this.labelCustomerTelefon.Text = "Telefon";
+            // 
+            // textBoxCustomerTelefon
+            // 
+            this.textBoxCustomerTelefon.Location = new System.Drawing.Point(5, 365);
+            this.textBoxCustomerTelefon.Name = "textBoxCustomerTelefon";
+            this.textBoxCustomerTelefon.Size = new System.Drawing.Size(200, 20);
+            this.textBoxCustomerTelefon.TabIndex = 26;
+            // 
+            // labelCustomerEmail
+            // 
+            this.labelCustomerEmail.AutoSize = true;
+            this.labelCustomerEmail.Location = new System.Drawing.Point(5, 310);
+            this.labelCustomerEmail.Name = "labelCustomerEmail";
+            this.labelCustomerEmail.Size = new System.Drawing.Size(32, 13);
+            this.labelCustomerEmail.TabIndex = 25;
+            this.labelCustomerEmail.Text = "Email";
+            // 
+            // textBoxCustomerEmail
+            // 
+            this.textBoxCustomerEmail.Location = new System.Drawing.Point(5, 326);
+            this.textBoxCustomerEmail.Name = "textBoxCustomerEmail";
+            this.textBoxCustomerEmail.Size = new System.Drawing.Size(200, 20);
+            this.textBoxCustomerEmail.TabIndex = 24;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(2, 428);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(50, 13);
+            this.label1.TabIndex = 23;
+            this.label1.Text = "Passwort";
+            // 
+            // textBoxCustomerPasswort
+            // 
+            this.textBoxCustomerPasswort.Enabled = false;
+            this.textBoxCustomerPasswort.Location = new System.Drawing.Point(5, 444);
+            this.textBoxCustomerPasswort.Name = "textBoxCustomerPasswort";
+            this.textBoxCustomerPasswort.Size = new System.Drawing.Size(200, 20);
+            this.textBoxCustomerPasswort.TabIndex = 22;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(2, 388);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(55, 13);
+            this.label3.TabIndex = 21;
+            this.label3.Text = "Nickname";
+            // 
+            // textBoxCustomerNickname
+            // 
+            this.textBoxCustomerNickname.Location = new System.Drawing.Point(5, 404);
+            this.textBoxCustomerNickname.Name = "textBoxCustomerNickname";
+            this.textBoxCustomerNickname.Size = new System.Drawing.Size(200, 20);
+            this.textBoxCustomerNickname.TabIndex = 20;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(3, 252);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(22, 13);
+            this.label2.TabIndex = 19;
+            this.label2.Text = "Bic";
+            // 
+            // textBoxCustomerBic
+            // 
+            this.textBoxCustomerBic.Location = new System.Drawing.Point(6, 268);
+            this.textBoxCustomerBic.Name = "textBoxCustomerBic";
+            this.textBoxCustomerBic.Size = new System.Drawing.Size(200, 20);
+            this.textBoxCustomerBic.TabIndex = 18;
+            // 
+            // labelCustomerIban
+            // 
+            this.labelCustomerIban.AutoSize = true;
+            this.labelCustomerIban.Location = new System.Drawing.Point(3, 212);
+            this.labelCustomerIban.Name = "labelCustomerIban";
+            this.labelCustomerIban.Size = new System.Drawing.Size(28, 13);
+            this.labelCustomerIban.TabIndex = 17;
+            this.labelCustomerIban.Text = "Iban";
+            // 
+            // textBoxCustomerIban
+            // 
+            this.textBoxCustomerIban.Location = new System.Drawing.Point(6, 228);
+            this.textBoxCustomerIban.Name = "textBoxCustomerIban";
+            this.textBoxCustomerIban.Size = new System.Drawing.Size(200, 20);
+            this.textBoxCustomerIban.TabIndex = 16;
+            // 
+            // labelCustomerStatus
+            // 
+            this.labelCustomerStatus.AutoSize = true;
+            this.labelCustomerStatus.Location = new System.Drawing.Point(4, 475);
+            this.labelCustomerStatus.Name = "labelCustomerStatus";
+            this.labelCustomerStatus.Size = new System.Drawing.Size(37, 13);
+            this.labelCustomerStatus.TabIndex = 15;
+            this.labelCustomerStatus.Text = "Status";
+            // 
             // buttonCustomerClose
             // 
-            this.buttonCustomerClose.Location = new System.Drawing.Point(181, 392);
+            this.buttonCustomerClose.Location = new System.Drawing.Point(180, 549);
             this.buttonCustomerClose.Name = "buttonCustomerClose";
             this.buttonCustomerClose.Size = new System.Drawing.Size(75, 23);
             this.buttonCustomerClose.TabIndex = 8;
@@ -213,7 +351,7 @@
             // 
             // buttonCustomerCancel
             // 
-            this.buttonCustomerCancel.Location = new System.Drawing.Point(87, 255);
+            this.buttonCustomerCancel.Location = new System.Drawing.Point(86, 509);
             this.buttonCustomerCancel.Name = "buttonCustomerCancel";
             this.buttonCustomerCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCustomerCancel.TabIndex = 7;
@@ -223,7 +361,7 @@
             // 
             // buttonCustomerSave
             // 
-            this.buttonCustomerSave.Location = new System.Drawing.Point(6, 255);
+            this.buttonCustomerSave.Location = new System.Drawing.Point(5, 509);
             this.buttonCustomerSave.Name = "buttonCustomerSave";
             this.buttonCustomerSave.Size = new System.Drawing.Size(75, 23);
             this.buttonCustomerSave.TabIndex = 6;
@@ -341,7 +479,7 @@
             this.listViewCustomer.GridLines = true;
             this.listViewCustomer.Location = new System.Drawing.Point(0, 0);
             this.listViewCustomer.Name = "listViewCustomer";
-            this.listViewCustomer.Size = new System.Drawing.Size(862, 581);
+            this.listViewCustomer.Size = new System.Drawing.Size(898, 623);
             this.listViewCustomer.TabIndex = 0;
             this.listViewCustomer.UseCompatibleStateImageBehavior = false;
             this.listViewCustomer.View = System.Windows.Forms.View.Details;
@@ -383,7 +521,7 @@
             this.tabPageVehicle.Location = new System.Drawing.Point(4, 22);
             this.tabPageVehicle.Name = "tabPageVehicle";
             this.tabPageVehicle.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageVehicle.Size = new System.Drawing.Size(1130, 587);
+            this.tabPageVehicle.Size = new System.Drawing.Size(1176, 629);
             this.tabPageVehicle.TabIndex = 1;
             this.tabPageVehicle.Text = "Fahrzeuge";
             this.tabPageVehicle.UseVisualStyleBackColor = true;
@@ -403,12 +541,14 @@
             // splitContainerVehicle.Panel2
             // 
             this.splitContainerVehicle.Panel2.Controls.Add(this.listViewVehicle);
-            this.splitContainerVehicle.Size = new System.Drawing.Size(1124, 581);
-            this.splitContainerVehicle.SplitterDistance = 335;
+            this.splitContainerVehicle.Size = new System.Drawing.Size(1170, 623);
+            this.splitContainerVehicle.SplitterDistance = 348;
             this.splitContainerVehicle.TabIndex = 0;
             // 
             // groupBoxVehicles
             // 
+            this.groupBoxVehicles.Controls.Add(this.labelVehicleLocation);
+            this.groupBoxVehicles.Controls.Add(this.comboBoxVehicleLocation);
             this.groupBoxVehicles.Controls.Add(this.labelVehicleStatus);
             this.groupBoxVehicles.Controls.Add(this.pictureBoxVehicleImage);
             this.groupBoxVehicles.Controls.Add(this.buttonVehicleClose);
@@ -434,28 +574,37 @@
             this.groupBoxVehicles.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxVehicles.Location = new System.Drawing.Point(0, 0);
             this.groupBoxVehicles.Name = "groupBoxVehicles";
-            this.groupBoxVehicles.Size = new System.Drawing.Size(335, 581);
+            this.groupBoxVehicles.Size = new System.Drawing.Size(348, 623);
             this.groupBoxVehicles.TabIndex = 0;
             this.groupBoxVehicles.TabStop = false;
             this.groupBoxVehicles.Text = "Fahrzeuge";
             // 
+            // labelVehicleLocation
+            // 
+            this.labelVehicleLocation.AutoSize = true;
+            this.labelVehicleLocation.Location = new System.Drawing.Point(1, 213);
+            this.labelVehicleLocation.Name = "labelVehicleLocation";
+            this.labelVehicleLocation.Size = new System.Drawing.Size(89, 13);
+            this.labelVehicleLocation.TabIndex = 23;
+            this.labelVehicleLocation.Text = "Fahrzeugstandort";
+            // 
+            // comboBoxVehicleLocation
+            // 
+            this.comboBoxVehicleLocation.FormattingEnabled = true;
+            this.comboBoxVehicleLocation.Location = new System.Drawing.Point(4, 229);
+            this.comboBoxVehicleLocation.Name = "comboBoxVehicleLocation";
+            this.comboBoxVehicleLocation.Size = new System.Drawing.Size(200, 21);
+            this.comboBoxVehicleLocation.TabIndex = 1;
+            // 
             // labelVehicleStatus
             // 
             this.labelVehicleStatus.AutoSize = true;
-            this.labelVehicleStatus.Location = new System.Drawing.Point(6, 244);
+            this.labelVehicleStatus.Location = new System.Drawing.Point(6, 289);
             this.labelVehicleStatus.Name = "labelVehicleStatus";
             this.labelVehicleStatus.Size = new System.Drawing.Size(37, 13);
             this.labelVehicleStatus.TabIndex = 22;
             this.labelVehicleStatus.Text = "Status";
             this.labelVehicleStatus.Visible = false;
-            // 
-            // pictureBoxVehicleImage
-            // 
-            this.pictureBoxVehicleImage.Location = new System.Drawing.Point(215, 19);
-            this.pictureBoxVehicleImage.Name = "pictureBoxVehicleImage";
-            this.pictureBoxVehicleImage.Size = new System.Drawing.Size(100, 100);
-            this.pictureBoxVehicleImage.TabIndex = 21;
-            this.pictureBoxVehicleImage.TabStop = false;
             // 
             // buttonVehicleClose
             // 
@@ -465,10 +614,11 @@
             this.buttonVehicleClose.TabIndex = 11;
             this.buttonVehicleClose.Text = "Schließen";
             this.buttonVehicleClose.UseVisualStyleBackColor = true;
+            this.buttonVehicleClose.Click += new System.EventHandler(this.buttonVehicleClose_Click);
             // 
             // buttonVehicleCancel
             // 
-            this.buttonVehicleCancel.Location = new System.Drawing.Point(88, 272);
+            this.buttonVehicleCancel.Location = new System.Drawing.Point(88, 317);
             this.buttonVehicleCancel.Name = "buttonVehicleCancel";
             this.buttonVehicleCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonVehicleCancel.TabIndex = 10;
@@ -478,7 +628,7 @@
             // 
             // buttonVehicleSave
             // 
-            this.buttonVehicleSave.Location = new System.Drawing.Point(7, 272);
+            this.buttonVehicleSave.Location = new System.Drawing.Point(7, 317);
             this.buttonVehicleSave.Name = "buttonVehicleSave";
             this.buttonVehicleSave.Size = new System.Drawing.Size(75, 23);
             this.buttonVehicleSave.TabIndex = 9;
@@ -594,7 +744,7 @@
             // checkBoxVehicleNotAvailable
             // 
             this.checkBoxVehicleNotAvailable.AutoSize = true;
-            this.checkBoxVehicleNotAvailable.Location = new System.Drawing.Point(4, 214);
+            this.checkBoxVehicleNotAvailable.Location = new System.Drawing.Point(4, 259);
             this.checkBoxVehicleNotAvailable.Name = "checkBoxVehicleNotAvailable";
             this.checkBoxVehicleNotAvailable.Size = new System.Drawing.Size(99, 17);
             this.checkBoxVehicleNotAvailable.TabIndex = 5;
@@ -645,7 +795,7 @@
             this.listViewVehicle.GridLines = true;
             this.listViewVehicle.Location = new System.Drawing.Point(0, 0);
             this.listViewVehicle.Name = "listViewVehicle";
-            this.listViewVehicle.Size = new System.Drawing.Size(785, 581);
+            this.listViewVehicle.Size = new System.Drawing.Size(818, 623);
             this.listViewVehicle.TabIndex = 0;
             this.listViewVehicle.UseCompatibleStateImageBehavior = false;
             this.listViewVehicle.View = System.Windows.Forms.View.Details;
@@ -692,7 +842,7 @@
             this.tabPageLocation.Location = new System.Drawing.Point(4, 22);
             this.tabPageLocation.Name = "tabPageLocation";
             this.tabPageLocation.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageLocation.Size = new System.Drawing.Size(1130, 587);
+            this.tabPageLocation.Size = new System.Drawing.Size(1176, 629);
             this.tabPageLocation.TabIndex = 2;
             this.tabPageLocation.Text = "Standort";
             this.tabPageLocation.UseVisualStyleBackColor = true;
@@ -712,8 +862,8 @@
             // splitContainerLocation.Panel2
             // 
             this.splitContainerLocation.Panel2.Controls.Add(this.listViewLocation);
-            this.splitContainerLocation.Size = new System.Drawing.Size(1124, 581);
-            this.splitContainerLocation.SplitterDistance = 261;
+            this.splitContainerLocation.Size = new System.Drawing.Size(1170, 623);
+            this.splitContainerLocation.SplitterDistance = 271;
             this.splitContainerLocation.TabIndex = 0;
             // 
             // groupBoxLocation
@@ -735,10 +885,20 @@
             this.groupBoxLocation.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxLocation.Location = new System.Drawing.Point(0, 0);
             this.groupBoxLocation.Name = "groupBoxLocation";
-            this.groupBoxLocation.Size = new System.Drawing.Size(261, 581);
+            this.groupBoxLocation.Size = new System.Drawing.Size(271, 623);
             this.groupBoxLocation.TabIndex = 0;
             this.groupBoxLocation.TabStop = false;
             this.groupBoxLocation.Text = "Location";
+            // 
+            // labelLocationStatus
+            // 
+            this.labelLocationStatus.AutoSize = true;
+            this.labelLocationStatus.Location = new System.Drawing.Point(3, 222);
+            this.labelLocationStatus.Name = "labelLocationStatus";
+            this.labelLocationStatus.Size = new System.Drawing.Size(37, 13);
+            this.labelLocationStatus.TabIndex = 12;
+            this.labelLocationStatus.Text = "Status";
+            this.labelLocationStatus.Visible = false;
             // 
             // buttonLocationClose
             // 
@@ -863,7 +1023,7 @@
             this.listViewLocation.GridLines = true;
             this.listViewLocation.Location = new System.Drawing.Point(0, 0);
             this.listViewLocation.Name = "listViewLocation";
-            this.listViewLocation.Size = new System.Drawing.Size(859, 581);
+            this.listViewLocation.Size = new System.Drawing.Size(895, 623);
             this.listViewLocation.TabIndex = 0;
             this.listViewLocation.UseCompatibleStateImageBehavior = false;
             this.listViewLocation.View = System.Windows.Forms.View.Details;
@@ -894,30 +1054,65 @@
             this.columnHeaderLocationCity.Text = "Stadt";
             this.columnHeaderLocationCity.Width = 100;
             // 
-            // labelCustomerStatus
+            // groupBoxHeader
             // 
-            this.labelCustomerStatus.AutoSize = true;
-            this.labelCustomerStatus.Location = new System.Drawing.Point(5, 221);
-            this.labelCustomerStatus.Name = "labelCustomerStatus";
-            this.labelCustomerStatus.Size = new System.Drawing.Size(37, 13);
-            this.labelCustomerStatus.TabIndex = 15;
-            this.labelCustomerStatus.Text = "Status";
+            this.groupBoxHeader.BackColor = System.Drawing.Color.Blue;
+            this.groupBoxHeader.Controls.Add(this.labelTopic);
+            this.groupBoxHeader.Controls.Add(this.labelHeader);
+            this.groupBoxHeader.Controls.Add(this.pictureBoxLogo);
+            this.groupBoxHeader.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBoxHeader.Location = new System.Drawing.Point(0, 0);
+            this.groupBoxHeader.Name = "groupBoxHeader";
+            this.groupBoxHeader.Size = new System.Drawing.Size(1184, 103);
+            this.groupBoxHeader.TabIndex = 1;
+            this.groupBoxHeader.TabStop = false;
             // 
-            // labelLocationStatus
+            // pictureBoxLogo
             // 
-            this.labelLocationStatus.AutoSize = true;
-            this.labelLocationStatus.Location = new System.Drawing.Point(3, 222);
-            this.labelLocationStatus.Name = "labelLocationStatus";
-            this.labelLocationStatus.Size = new System.Drawing.Size(37, 13);
-            this.labelLocationStatus.TabIndex = 12;
-            this.labelLocationStatus.Text = "Status";
-            this.labelLocationStatus.Visible = false;
+            this.pictureBoxLogo.BackgroundImage = global::InstaCarManagement.GUI.Properties.Resources.Logo;
+            this.pictureBoxLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pictureBoxLogo.Location = new System.Drawing.Point(4, 12);
+            this.pictureBoxLogo.Name = "pictureBoxLogo";
+            this.pictureBoxLogo.Size = new System.Drawing.Size(141, 85);
+            this.pictureBoxLogo.TabIndex = 0;
+            this.pictureBoxLogo.TabStop = false;
+            // 
+            // pictureBoxVehicleImage
+            // 
+            this.pictureBoxVehicleImage.Location = new System.Drawing.Point(215, 19);
+            this.pictureBoxVehicleImage.Name = "pictureBoxVehicleImage";
+            this.pictureBoxVehicleImage.Size = new System.Drawing.Size(100, 100);
+            this.pictureBoxVehicleImage.TabIndex = 21;
+            this.pictureBoxVehicleImage.TabStop = false;
+            // 
+            // labelHeader
+            // 
+            this.labelHeader.AutoSize = true;
+            this.labelHeader.Font = new System.Drawing.Font("Calibri", 40F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Italic | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelHeader.ForeColor = System.Drawing.Color.White;
+            this.labelHeader.Location = new System.Drawing.Point(151, 16);
+            this.labelHeader.Name = "labelHeader";
+            this.labelHeader.Size = new System.Drawing.Size(210, 66);
+            this.labelHeader.TabIndex = 1;
+            this.labelHeader.Text = "InstaCar";
+            // 
+            // labelTopic
+            // 
+            this.labelTopic.AutoSize = true;
+            this.labelTopic.Font = new System.Drawing.Font("Calibri", 30F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Italic | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTopic.ForeColor = System.Drawing.Color.White;
+            this.labelTopic.Location = new System.Drawing.Point(377, 48);
+            this.labelTopic.Name = "labelTopic";
+            this.labelTopic.Size = new System.Drawing.Size(417, 49);
+            this.labelTopic.TabIndex = 2;
+            this.labelTopic.Text = "Stammdatenverwaltung";
             // 
             // FormEditing
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1138, 613);
+            this.ClientSize = new System.Drawing.Size(1184, 761);
+            this.Controls.Add(this.groupBoxHeader);
             this.Controls.Add(this.tabControlBaseData);
             this.Name = "FormEditing";
             this.Text = "Stammdaten";
@@ -937,7 +1132,6 @@
             this.splitContainerVehicle.ResumeLayout(false);
             this.groupBoxVehicles.ResumeLayout(false);
             this.groupBoxVehicles.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxVehicleImage)).EndInit();
             this.tabPageLocation.ResumeLayout(false);
             this.splitContainerLocation.Panel1.ResumeLayout(false);
             this.splitContainerLocation.Panel2.ResumeLayout(false);
@@ -945,6 +1139,10 @@
             this.splitContainerLocation.ResumeLayout(false);
             this.groupBoxLocation.ResumeLayout(false);
             this.groupBoxLocation.PerformLayout();
+            this.groupBoxHeader.ResumeLayout(false);
+            this.groupBoxHeader.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxVehicleImage)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1034,5 +1232,23 @@
         private System.Windows.Forms.Label labelVehicleStatus;
         private System.Windows.Forms.Label labelCustomerStatus;
         private System.Windows.Forms.Label labelLocationStatus;
+        private System.Windows.Forms.Label labelVehicleLocation;
+        private System.Windows.Forms.ComboBox comboBoxVehicleLocation;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox textBoxCustomerPasswort;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox textBoxCustomerNickname;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox textBoxCustomerBic;
+        private System.Windows.Forms.Label labelCustomerIban;
+        private System.Windows.Forms.TextBox textBoxCustomerIban;
+        private System.Windows.Forms.Label labelCustomerTelefon;
+        private System.Windows.Forms.TextBox textBoxCustomerTelefon;
+        private System.Windows.Forms.Label labelCustomerEmail;
+        private System.Windows.Forms.TextBox textBoxCustomerEmail;
+        private System.Windows.Forms.GroupBox groupBoxHeader;
+        private System.Windows.Forms.PictureBox pictureBoxLogo;
+        private System.Windows.Forms.Label labelHeader;
+        private System.Windows.Forms.Label labelTopic;
     }
 }

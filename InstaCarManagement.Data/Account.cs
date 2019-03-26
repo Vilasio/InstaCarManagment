@@ -224,6 +224,31 @@ namespace InstaCarManagement.Data
             return command.ExecuteNonQuery();
         }
 
+        public int ChangePassword(string password, string newPassword)
+        {
+            int result = 0; ;
+            NpgsqlCommand command = new NpgsqlCommand();
+            command.Connection = this.connection;
+            command.CommandText = $"Select {COLUMN} from {TABLE} where username = :us and password = crypt(:pa, password);";
+            command.Parameters.AddWithValue(":us", String.IsNullOrEmpty(this.Username) ? "" : this.Username);
+            command.Parameters.AddWithValue(":pa", String.IsNullOrEmpty(password) ? "" : password);
+            NpgsqlDataReader reader = command.ExecuteReader();
+            if (reader.HasRows && newPassword != "")
+            {
+                reader.Close();
+                command.CommandText = $"update {TABLE} set password = CRYPT(:npa, GEN_SALT('bf')) where account_id = :aid";
+                command.Parameters.AddWithValue("aid", this.AccountId.Value);
+                command.Parameters.AddWithValue("npa", newPassword);
+                result = command.ExecuteNonQuery();
+            }
+            else
+            {
+                reader.Close();
+
+            }
+            return result;
+        }
+
         #endregion
         //------------------------------------------
         private List<Account> GetAllUsers()

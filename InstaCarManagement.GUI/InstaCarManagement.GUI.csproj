@@ -87,6 +87,12 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormPasswordChange.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPasswordChange.Designer.cs">
+      <DependentUpon>FormPasswordChange.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormRent.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -110,6 +116,9 @@
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormPasswordChange.resx">
+      <DependentUpon>FormPasswordChange.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormRent.resx">
       <DependentUpon>FormRent.cs</DependentUpon>
     </EmbeddedResource>
@@ -121,6 +130,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="UserManagment.resx">
       <DependentUpon>UserManagment.cs</DependentUpon>
@@ -144,6 +154,15 @@
       <Project>{17711e0b-abdf-4abd-b355-18b9475aea3e}</Project>
       <Name>InstaCarManagement.Data</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Checkmark_green_12x_16x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Cancel_16x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Logo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

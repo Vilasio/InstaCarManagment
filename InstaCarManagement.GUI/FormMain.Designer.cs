@@ -51,6 +51,8 @@
             this.columnHeaderModell = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderDateBegin = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderDateEnd = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.MenuItemExtras = new System.Windows.Forms.ToolStripMenuItem();
+            this.passwortÄndernToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -105,7 +107,8 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MenuItemData,
             this.MenuItemEdit,
-            this.MenuItemAdministration});
+            this.MenuItemAdministration,
+            this.MenuItemExtras});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(800, 24);
@@ -230,6 +233,21 @@
             this.columnHeaderDateEnd.Text = "Ende";
             this.columnHeaderDateEnd.Width = 100;
             // 
+            // MenuItemExtras
+            // 
+            this.MenuItemExtras.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.passwortÄndernToolStripMenuItem});
+            this.MenuItemExtras.Name = "MenuItemExtras";
+            this.MenuItemExtras.Size = new System.Drawing.Size(49, 20);
+            this.MenuItemExtras.Text = "Extras";
+            // 
+            // passwortÄndernToolStripMenuItem
+            // 
+            this.passwortÄndernToolStripMenuItem.Name = "passwortÄndernToolStripMenuItem";
+            this.passwortÄndernToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.passwortÄndernToolStripMenuItem.Text = "Passwort ändern";
+            this.passwortÄndernToolStripMenuItem.Click += new System.EventHandler(this.passwortÄndernToolStripMenuItem_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -276,5 +294,7 @@
         private System.Windows.Forms.ColumnHeader columnHeaderModell;
         private System.Windows.Forms.ColumnHeader columnHeaderDateBegin;
         private System.Windows.Forms.ColumnHeader columnHeaderDateEnd;
+        private System.Windows.Forms.ToolStripMenuItem MenuItemExtras;
+        private System.Windows.Forms.ToolStripMenuItem passwortÄndernToolStripMenuItem;
     }
 }

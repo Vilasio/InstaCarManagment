@@ -72,5 +72,11 @@ namespace InstaCarManagement.GUI
             FormEditing formEditing = new FormEditing(this.connection, 3);
             formEditing.Show();
         }
+
+        private void passwortÄndernToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormPasswordChange formPasswordChange = new FormPasswordChange(this.actualUser);
+            formPasswordChange.ShowDialog();
+        }
     }
 }
