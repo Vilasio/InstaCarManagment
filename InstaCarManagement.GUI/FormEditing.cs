@@ -82,7 +82,8 @@ namespace InstaCarManagement.GUI
             foreach (Customer customer in customers)
             {
                 item = new ListViewItem();
-                item.Text = customer.Name;
+                item.Text = customer.CustomerNo;
+                item.SubItems.Add(customer.Name);
                 item.SubItems.Add(customer.Familyname);
                 item.SubItems.Add(customer.Street);
                 item.SubItems.Add(customer.HouseNr.ToString());
@@ -96,6 +97,7 @@ namespace InstaCarManagement.GUI
         private void FillCustomer()
         {
             this.groupBoxCustomer.Text = $"Kunde {this.customer.Name} {this.customer.Familyname} bearbeiten.";
+            this.textBoxCustomerCustomerNo.Text = this.customer.CustomerNo;
             this.textBoxCustomerName.Text = this.customer.Name;
             this.textBoxCustomerFamilyName.Text = this.customer.Familyname;
             this.textBoxCustomerStreet.Text = this.customer.Street;
@@ -217,6 +219,7 @@ namespace InstaCarManagement.GUI
         {
             this.customer = new Customer(this.connection);
             this.textBoxCustomerName.Text = string.Empty;
+            this.textBoxCustomerCustomerNo.Text = string.Empty;
             this.textBoxCustomerFamilyName.Text = string.Empty;
             this.textBoxCustomerStreet.Text = string.Empty;
             this.textBoxCustomerHouseNr.Text = string.Empty;
@@ -327,6 +330,7 @@ namespace InstaCarManagement.GUI
             this.textBoxVehicleModell.Text = this.vehicle.Modell;
             this.textBoxVehicleBrand.Text = this.vehicle.Brand;
             this.textBoxVehicleHP.Text = this.vehicle.HP.ToString();
+            this.textBoxVehiclePrice.Text = this.vehicle.Price.ToString();
             this.comboBoxVehicleFeature1.SelectedIndex = Convert.ToInt32( this.vehicle.Feature1);
             this.comboBoxVehicleFeature2.SelectedIndex = Convert.ToInt32(this.vehicle.Feature2);
             this.comboBoxVehicleFeature3.SelectedIndex = Convert.ToInt32(this.vehicle.Feature3);

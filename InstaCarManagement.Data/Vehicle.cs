@@ -91,7 +91,7 @@ namespace InstaCarManagement.Data
             return allVehicles;
         }
 
-        static Vehicle GetSpecificVehicles(NpgsqlConnection connection, int key)
+        public static Vehicle GetSpecificVehicles(NpgsqlConnection connection, int key)
         {
             
             Vehicle vehicle = null;
@@ -120,6 +120,35 @@ namespace InstaCarManagement.Data
             }
             reader.Close();
             return vehicle;
+        }
+
+        public static double Getprice(NpgsqlConnection connection)
+        {
+
+            double result = 0;
+            NpgsqlCommand command = new NpgsqlCommand();
+            command.Connection = connection;
+            command.CommandText = $"Select price from {TABLE}";
+            NpgsqlDataReader reader = command.ExecuteReader();
+
+            reader.Read();
+            result = reader.IsDBNull(0) ? 0 : reader.GetDouble(0);
+
+            reader.Close();
+            return result;
+        }
+
+        public static int Changeprice(NpgsqlConnection connection, double price)
+        {
+            NpgsqlCommand command = new NpgsqlCommand();
+            command.Connection = connection;
+            
+                command.CommandText =
+                $"update {TABLE} set price = :pr";
+            
+            command.Parameters.AddWithValue("pr", price);
+
+            return command.ExecuteNonQuery();
         }
         #endregion
         //----------------------------------------------------------------------------------------------

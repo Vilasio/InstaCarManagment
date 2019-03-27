@@ -44,17 +44,29 @@
             this.MenuItemRentCar = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuItemAdministration = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuItemUserManagment = new System.Windows.Forms.ToolStripMenuItem();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.MenuItemExtras = new System.Windows.Forms.ToolStripMenuItem();
+            this.passwortÄndernToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.listViewRent = new System.Windows.Forms.ListView();
             this.columnHeaderName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderFamilyName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderBrand = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderModell = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderDateBegin = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderDateEnd = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.MenuItemExtras = new System.Windows.Forms.ToolStripMenuItem();
-            this.passwortÄndernToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuItemPricing = new System.Windows.Forms.ToolStripMenuItem();
+            this.splitContainerMain = new System.Windows.Forms.SplitContainer();
+            this.groupBoxHeader = new System.Windows.Forms.GroupBox();
+            this.labelTopic = new System.Windows.Forms.Label();
+            this.labelHeader = new System.Windows.Forms.Label();
+            this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerMain)).BeginInit();
+            this.splitContainerMain.Panel1.SuspendLayout();
+            this.splitContainerMain.Panel2.SuspendLayout();
+            this.splitContainerMain.SuspendLayout();
+            this.groupBoxHeader.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -65,9 +77,9 @@
             this.StatusLabelSpace,
             this.StatusLabelDescrip2,
             this.StatusLabelDbName});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 428);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 530);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(800, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(935, 22);
             this.statusStrip1.TabIndex = 0;
             this.statusStrip1.Text = "statusStrip1";
             this.statusStrip1.UseWaitCursor = true;
@@ -111,7 +123,7 @@
             this.MenuItemExtras});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(935, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -171,7 +183,8 @@
             // MenuItemAdministration
             // 
             this.MenuItemAdministration.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.MenuItemUserManagment});
+            this.MenuItemUserManagment,
+            this.MenuItemPricing});
             this.MenuItemAdministration.Enabled = false;
             this.MenuItemAdministration.Name = "MenuItemAdministration";
             this.MenuItemAdministration.Size = new System.Drawing.Size(98, 20);
@@ -181,27 +194,42 @@
             // MenuItemUserManagment
             // 
             this.MenuItemUserManagment.Name = "MenuItemUserManagment";
-            this.MenuItemUserManagment.Size = new System.Drawing.Size(174, 22);
+            this.MenuItemUserManagment.Size = new System.Drawing.Size(180, 22);
             this.MenuItemUserManagment.Text = "Benutzer verwalten";
             this.MenuItemUserManagment.Click += new System.EventHandler(this.MenuItemUserManagment_Click);
             // 
-            // listView1
+            // MenuItemExtras
             // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.MenuItemExtras.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.passwortÄndernToolStripMenuItem});
+            this.MenuItemExtras.Name = "MenuItemExtras";
+            this.MenuItemExtras.Size = new System.Drawing.Size(49, 20);
+            this.MenuItemExtras.Text = "Extras";
+            // 
+            // passwortÄndernToolStripMenuItem
+            // 
+            this.passwortÄndernToolStripMenuItem.Name = "passwortÄndernToolStripMenuItem";
+            this.passwortÄndernToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.passwortÄndernToolStripMenuItem.Text = "Passwort ändern";
+            this.passwortÄndernToolStripMenuItem.Click += new System.EventHandler(this.passwortÄndernToolStripMenuItem_Click);
+            // 
+            // listViewRent
+            // 
+            this.listViewRent.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeaderName,
             this.columnHeaderFamilyName,
             this.columnHeaderBrand,
             this.columnHeaderModell,
             this.columnHeaderDateBegin,
             this.columnHeaderDateEnd});
-            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView1.GridLines = true;
-            this.listView1.Location = new System.Drawing.Point(0, 24);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(800, 404);
-            this.listView1.TabIndex = 2;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
+            this.listViewRent.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listViewRent.GridLines = true;
+            this.listViewRent.Location = new System.Drawing.Point(0, 0);
+            this.listViewRent.Name = "listViewRent";
+            this.listViewRent.Size = new System.Drawing.Size(935, 397);
+            this.listViewRent.TabIndex = 2;
+            this.listViewRent.UseCompatibleStateImageBehavior = false;
+            this.listViewRent.View = System.Windows.Forms.View.Details;
             // 
             // columnHeaderName
             // 
@@ -233,27 +261,84 @@
             this.columnHeaderDateEnd.Text = "Ende";
             this.columnHeaderDateEnd.Width = 100;
             // 
-            // MenuItemExtras
+            // MenuItemPricing
             // 
-            this.MenuItemExtras.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.passwortÄndernToolStripMenuItem});
-            this.MenuItemExtras.Name = "MenuItemExtras";
-            this.MenuItemExtras.Size = new System.Drawing.Size(49, 20);
-            this.MenuItemExtras.Text = "Extras";
+            this.MenuItemPricing.Name = "MenuItemPricing";
+            this.MenuItemPricing.Size = new System.Drawing.Size(180, 22);
+            this.MenuItemPricing.Text = "Preis anpassen";
+            this.MenuItemPricing.Click += new System.EventHandler(this.MenuItemPricing_Click);
             // 
-            // passwortÄndernToolStripMenuItem
+            // splitContainerMain
             // 
-            this.passwortÄndernToolStripMenuItem.Name = "passwortÄndernToolStripMenuItem";
-            this.passwortÄndernToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.passwortÄndernToolStripMenuItem.Text = "Passwort ändern";
-            this.passwortÄndernToolStripMenuItem.Click += new System.EventHandler(this.passwortÄndernToolStripMenuItem_Click);
+            this.splitContainerMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerMain.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.splitContainerMain.IsSplitterFixed = true;
+            this.splitContainerMain.Location = new System.Drawing.Point(0, 24);
+            this.splitContainerMain.Name = "splitContainerMain";
+            this.splitContainerMain.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainerMain.Panel1
+            // 
+            this.splitContainerMain.Panel1.Controls.Add(this.groupBoxHeader);
+            // 
+            // splitContainerMain.Panel2
+            // 
+            this.splitContainerMain.Panel2.Controls.Add(this.listViewRent);
+            this.splitContainerMain.Size = new System.Drawing.Size(935, 506);
+            this.splitContainerMain.SplitterDistance = 105;
+            this.splitContainerMain.TabIndex = 3;
+            // 
+            // groupBoxHeader
+            // 
+            this.groupBoxHeader.BackColor = System.Drawing.Color.Blue;
+            this.groupBoxHeader.Controls.Add(this.labelTopic);
+            this.groupBoxHeader.Controls.Add(this.labelHeader);
+            this.groupBoxHeader.Controls.Add(this.pictureBoxLogo);
+            this.groupBoxHeader.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBoxHeader.Location = new System.Drawing.Point(0, 0);
+            this.groupBoxHeader.Name = "groupBoxHeader";
+            this.groupBoxHeader.Size = new System.Drawing.Size(935, 500);
+            this.groupBoxHeader.TabIndex = 2;
+            this.groupBoxHeader.TabStop = false;
+            // 
+            // labelTopic
+            // 
+            this.labelTopic.AutoSize = true;
+            this.labelTopic.Font = new System.Drawing.Font("Calibri", 30F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Italic | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTopic.ForeColor = System.Drawing.Color.White;
+            this.labelTopic.Location = new System.Drawing.Point(377, 48);
+            this.labelTopic.Name = "labelTopic";
+            this.labelTopic.Size = new System.Drawing.Size(307, 49);
+            this.labelTopic.TabIndex = 2;
+            this.labelTopic.Text = "Managementtool";
+            // 
+            // labelHeader
+            // 
+            this.labelHeader.AutoSize = true;
+            this.labelHeader.Font = new System.Drawing.Font("Calibri", 40F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Italic | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelHeader.ForeColor = System.Drawing.Color.White;
+            this.labelHeader.Location = new System.Drawing.Point(151, 16);
+            this.labelHeader.Name = "labelHeader";
+            this.labelHeader.Size = new System.Drawing.Size(210, 66);
+            this.labelHeader.TabIndex = 1;
+            this.labelHeader.Text = "InstaCar";
+            // 
+            // pictureBoxLogo
+            // 
+            this.pictureBoxLogo.BackgroundImage = global::InstaCarManagement.GUI.Properties.Resources.Logo;
+            this.pictureBoxLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pictureBoxLogo.Location = new System.Drawing.Point(4, 12);
+            this.pictureBoxLogo.Name = "pictureBoxLogo";
+            this.pictureBoxLogo.Size = new System.Drawing.Size(141, 85);
+            this.pictureBoxLogo.TabIndex = 0;
+            this.pictureBoxLogo.TabStop = false;
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.listView1);
+            this.ClientSize = new System.Drawing.Size(935, 552);
+            this.Controls.Add(this.splitContainerMain);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -264,6 +349,13 @@
             this.statusStrip1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.splitContainerMain.Panel1.ResumeLayout(false);
+            this.splitContainerMain.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerMain)).EndInit();
+            this.splitContainerMain.ResumeLayout(false);
+            this.groupBoxHeader.ResumeLayout(false);
+            this.groupBoxHeader.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -287,7 +379,7 @@
         private System.Windows.Forms.ToolStripMenuItem MenuItemRentCar;
         private System.Windows.Forms.ToolStripMenuItem MenuItemAdministration;
         private System.Windows.Forms.ToolStripMenuItem MenuItemUserManagment;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView listViewRent;
         private System.Windows.Forms.ColumnHeader columnHeaderName;
         private System.Windows.Forms.ColumnHeader columnHeaderFamilyName;
         private System.Windows.Forms.ColumnHeader columnHeaderBrand;
@@ -296,5 +388,11 @@
         private System.Windows.Forms.ColumnHeader columnHeaderDateEnd;
         private System.Windows.Forms.ToolStripMenuItem MenuItemExtras;
         private System.Windows.Forms.ToolStripMenuItem passwortÄndernToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem MenuItemPricing;
+        private System.Windows.Forms.SplitContainer splitContainerMain;
+        private System.Windows.Forms.GroupBox groupBoxHeader;
+        private System.Windows.Forms.Label labelTopic;
+        private System.Windows.Forms.Label labelHeader;
+        private System.Windows.Forms.PictureBox pictureBoxLogo;
     }
 }

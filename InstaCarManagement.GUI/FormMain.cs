@@ -17,6 +17,7 @@ namespace InstaCarManagement.GUI
     {
         private NpgsqlConnection connection = null;
         private Account actualUser = null;
+        private List<Rent> rents = null;
 
         public FormMain()
         {
@@ -28,6 +29,7 @@ namespace InstaCarManagement.GUI
             InitializeComponent();
             this.connection = connection;
             this.actualUser = actualUser;
+            FilllistviewRent();
         }
 
         private void FormMain_Load(object sender, EventArgs e)
@@ -41,7 +43,47 @@ namespace InstaCarManagement.GUI
                 this.MenuItemAdministration.Visible = true;
 
             }
+
+            this.groupBoxHeader.Paint += PaintBorderlessGroupBox;
         }
+
+        private void PaintBorderlessGroupBox(object sender, PaintEventArgs p)
+        {
+            GroupBox box = (GroupBox)sender;
+            p.Graphics.Clear(Color.FromArgb(00, 00, 255));
+            p.Graphics.DrawString(box.Text, box.Font, Brushes.Black, 0, 0);
+        }
+
+
+        private void FilllistviewRent()
+        {
+            this.listViewRent.Items.Clear();
+            this.rents = Rent.GetCurrentRents(this.connection);
+            ListViewItem item = null;
+            foreach (Rent rent in rents)
+            {
+                item = new ListViewItem();
+                item.Text = rent.Name;
+                item.SubItems.Add(rent.FamilyName);
+                item.SubItems.Add(rent.Modell);
+                item.SubItems.Add(rent.Brand);
+                item.SubItems.Add(rent.Begin.Value.ToShortDateString());
+                if(rent.End.HasValue)item.SubItems.Add(rent.End.Value.ToShortDateString());
+                item.Tag = rent;
+                this.listViewRent.Items.Add(item);
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
 
         private void MenuItemUserManagment_Click(object sender, EventArgs e)
         {
@@ -77,6 +119,12 @@ namespace InstaCarManagement.GUI
         {
             FormPasswordChange formPasswordChange = new FormPasswordChange(this.actualUser);
             formPasswordChange.ShowDialog();
+        }
+
+        private void MenuItemPricing_Click(object sender, EventArgs e)
+        {
+            FormAdminOptions formAdminOptions = new FormAdminOptions(this.connection);
+            formAdminOptions.ShowDialog();
         }
     }
 }

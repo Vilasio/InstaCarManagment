@@ -105,10 +105,10 @@ CREATE TABLE InstaCar.car
 	modell				VARCHAR(250),
 	brand				VARCHAR(250),
 	hp					NUMERIC(4),
-	feature1			VARCHAR(250),
-	feature2			VARCHAR(250),
-	feature3			VARCHAR(250),
-	feature4			VARCHAR(250),
+	feature1			NUMERIC(10),
+	feature2			NUMERIC(10),
+	feature3			NUMERIC(10),
+	feature4			NUMERIC(10),
 	notavailable		BOOLEAN,
 	deleted				BOOLEAN,
 	
@@ -209,6 +209,8 @@ GRANT SELECT, USAGE ON SEQUENCE InstaCar.feature_seq to clerk;
 --*************************************************
 
 --Features
+INSERT INTO InstaCar.feature (feature_id, feature, deleted) 
+values((SELECT NEXTVAL('InstaCar.feature_seq')), "Keine", false);
 INSERT INTO InstaCar.feature (feature_id, feature, deleted) 
 values((SELECT NEXTVAL('InstaCar.feature_seq')), "Klimanalage", false);
 INSERT INTO InstaCar.feature (feature_id, feature, deleted) 
