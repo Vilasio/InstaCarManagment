@@ -122,6 +122,36 @@ namespace InstaCarManagement.Data
             return vehicle;
         }
 
+        public static Vehicle GetAvailableVehicles(NpgsqlConnection connection)
+        {
+
+            Vehicle vehicle = null;
+            NpgsqlCommand command = new NpgsqlCommand();
+            command.Connection = connection;
+            command.CommandText = $"Select * from {TABLE} where in_use = false and (reserved < (current_timestamp + interval '1h') or reserved is null);";
+            NpgsqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                vehicle = new Vehicle(connection)
+                {
+                    CarId = reader.GetInt64(0),
+                    LocationId = reader.GetInt64(1),
+                    Modell = reader.IsDBNull(2) ? null : reader.GetString(2),
+                    Brand = reader.IsDBNull(3) ? null : reader.GetString(3),
+                    HP = reader.IsDBNull(4) ? 0 : reader.GetInt64(4),
+                    Price = reader.IsDBNull(5) ? 0 : reader.GetDouble(5),
+                    Feature1 = reader.IsDBNull(6) ? 0 : reader.GetInt64(6),
+                    Feature2 = reader.IsDBNull(7) ? 0 : reader.GetInt64(7),
+                    Feature3 = reader.IsDBNull(8) ? 0 : reader.GetInt64(8),
+                    Feature4 = reader.IsDBNull(9) ? 0 : reader.GetInt64(9),
+                    NotAvailable = reader.IsDBNull(10) ? true : reader.GetBoolean(10)
+                };
+            }
+            reader.Close();
+            return vehicle;
+        }
+
         public static double Getprice(NpgsqlConnection connection)
         {
 
@@ -188,6 +218,34 @@ namespace InstaCarManagement.Data
             command.Parameters.AddWithValue("no", this.NotAvailable);
 
             return command.ExecuteNonQuery();
+        }
+
+        public int Reserve()
+        {
+            NpgsqlCommand command = new NpgsqlCommand();
+            command.Connection = this.connection;
+            if (this.CarId.HasValue)
+            {
+
+                command.CommandText =
+                $"update {TABLE} set location_id = :lid, modell = :mo, brand = :br, hp = :hp, price = :pr, feature1 = :f1, feature2 = :f2," +
+                $"feature3 = :f3, feature4 = :f4, notavailable = :no where car_id = :cid";
+
+
+            }
+            else
+            {
+                command.CommandText = $"select nextval('{TABLE}_seq')";
+                this.CarId = (long?)command.ExecuteScalar();
+                command.CommandText = $" insert into {TABLE} ( car_id,location_id, modell , brand, hp, price, feature1, feature2,feature3, feature4, notavailable )" +
+                    $" values(:cid,:lid, :mo, :br, :hp, :pr, :f1, :f2, :f3, :f4, :no)";
+            }
+            command.Parameters.AddWithValue("cid", this.CarId.Value);
+            command.Parameters.AddWithValue("lid", this.LocationId.Value);
+
+            int result = 0;
+
+
         }
         #endregion
         //----------------------------------------------------------------------------------------------
