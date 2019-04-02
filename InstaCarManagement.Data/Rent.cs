@@ -56,6 +56,7 @@ namespace InstaCarManagement.Data
         public string FamilyName { get; set; }
         public string Modell { get; set; }
         public string Brand { get; set; }
+        
 
         public Customer customer = null;
         public Vehicle Vehicle = null;

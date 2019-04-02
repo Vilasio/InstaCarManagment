@@ -10,6 +10,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Media;
+using System.IO;
+using System.Drawing.Imaging;
 
 namespace InstaCarManagement.GUI
 {
@@ -20,11 +22,12 @@ namespace InstaCarManagement.GUI
             InitializeComponent();
         }
 
-        public FormEditing(NpgsqlConnection connection, int preselect)
+        public FormEditing(NpgsqlConnection connection, int preselect, Account actualUser)
         {
             InitializeComponent();
             this.connection = connection;
             this.preselect = preselect;
+            this.actualUser = actualUser;
         }
 
         //----------------------------------------------------------------------------------------------
@@ -32,6 +35,7 @@ namespace InstaCarManagement.GUI
         //----------------------------------------------------------------------------------------------
         #region Shared
         private NpgsqlConnection connection = null;
+        private Account actualUser = null;
         private int preselect = 0;
 
         private void FormEditing_Load(object sender, EventArgs e)
@@ -55,6 +59,9 @@ namespace InstaCarManagement.GUI
                     this.tabControlBaseData.SelectedTab = tabPageLocation;
                     break;
             }
+
+            this.pictureBoxVehicleImage.AllowDrop = true;
+
         }
 
         private void PaintBorderlessGroupBox(object sender, PaintEventArgs p)
@@ -326,6 +333,8 @@ namespace InstaCarManagement.GUI
 
         private void FillVehicle()
         {
+            
+
             this.groupBoxVehicles.Text = $"Fahrzeug {this.vehicle.Brand} {this.vehicle.Modell} bearbeiten";
             this.textBoxVehicleModell.Text = this.vehicle.Modell;
             this.textBoxVehicleBrand.Text = this.vehicle.Brand;
@@ -344,7 +353,32 @@ namespace InstaCarManagement.GUI
             {
                 this.checkBoxVehicleNotAvailable.Checked = false;
             }
+            if (this.vehicle.CarId.HasValue && this.actualUser.Admin)
+            {
+                this.buttonLock.Enabled = true;
+                this.buttonLock.Visible = true;
+                if (this.vehicle.Locked)
+                {
+                    this.labelVehicleStatusLocked.Text = "Aktueller Status: Zugesperrt";
+                    this.buttonLock.Text = "Aufsperren";
+                }
+                else
+                {
+                    this.labelVehicleStatusLocked.Text = "Aktueller Status: Aufgesperrt";
+                    this.buttonLock.Text = "Zusperren";
+                }
+            }
+            else
+            {
+                this.buttonLock.Enabled = false;
+                this.buttonLock.Visible = false;
+            }
+            
+            
+
             this.comboBoxVehicleLocation.SelectedValue = this.vehicle.LocationId;
+
+
         }
 
         private bool ValidateVehicle()
@@ -352,6 +386,9 @@ namespace InstaCarManagement.GUI
             bool result = false;
             int hp;
             this.labelVehicleStatus.Visible = false;
+
+            
+
             if (this.textBoxVehicleModell.Text.Length >= 2)
             {
                 this.vehicle.Modell = this.textBoxVehicleModell.Text;
@@ -408,6 +445,7 @@ namespace InstaCarManagement.GUI
         {
             this.vehicle = new Vehicle(this.connection);
             this.editVehic = false;
+            
             this.textBoxVehicleModell.Text = string.Empty;
             this.textBoxVehicleBrand.Text = string.Empty;
             this.textBoxVehicleHP.Text = string.Empty;
@@ -426,6 +464,22 @@ namespace InstaCarManagement.GUI
         }
         #endregion
         #region VehiclePageEvents
+        private void pictureBoxVehicleImage_MouseClick(object sender, MouseEventArgs e)
+        {
+            FormImages formImages = new FormImages(this.connection, this.vehicle);
+            formImages.ShowDialog();
+        }
+
+        private void pictureBoxVehicleImage_DragEnter(object sender, DragEventArgs e)
+        {
+            
+        }
+
+        private void pictureBoxVehicleImage_DragDrop(object sender, DragEventArgs e)
+        {
+            
+        }
+
         private void tabPageVehicle_Enter(object sender, EventArgs e)
         {
             FillListViewVehicle();
@@ -460,6 +514,29 @@ namespace InstaCarManagement.GUI
         private void buttonVehicleCancel_Click(object sender, EventArgs e)
         {
             ClearVehicle();
+        }
+
+        private void buttonLock_Click(object sender, EventArgs e)
+        {
+            int result = 0;
+            if (this.vehicle.Locked)
+            {
+                result = this.vehicle.Unlock();
+                if (result == 1)
+                {
+                    this.buttonLock.Text = "Zusperren";
+                    this.labelVehicleStatusLocked.Text = "Aktueller Status: Aufgesperrt";
+                }
+            }
+            else
+            {
+                result = this.vehicle.Lock();
+                if (result == 1)
+                {
+                    this.buttonLock.Text = "Aufsperren";
+                    this.labelVehicleStatusLocked.Text = "Aktueller Status: Zugesperrt";
+                }
+            }
         }
 
         private void buttonVehicleClose_Click(object sender, EventArgs e)
@@ -659,8 +736,12 @@ namespace InstaCarManagement.GUI
 
 
 
+
+
         #endregion
 
         #endregion
+
+        
     }
 }

@@ -13,6 +13,7 @@ DROP SEQUENCE InstaCar.customer_seq;
 DROP SEQUENCE InstaCar.account_seq;
 DROP SEQUENCE InstaCar.rent_seq;
 DROP SEQUENCE InstaCar.car_seq;
+DROP SEQUENCE InstaCar.image_seq;
 DROP SEQUENCE InstaCar.location_seq;
 
 
@@ -20,6 +21,7 @@ DROP TABLE InstaCar.customer;
 DROP TABLE InstaCar.account;
 DROP TABLE InstaCar.rent;
 DROP TABLE InstaCar.car;
+DROP TABLE InstaCar.image;
 DROP TABLE InstaCar.location;
 
 --*************************************************
@@ -44,7 +46,6 @@ CREATE TABLE InstaCar.customer
 	nickname			VARCHAR(250),
 	
 	CONSTRAINT customer_no_uk UNIQUE (customer_no),
-	CONSTRAINT customer_nickname_uk UNIQUE (nickname),
 	CONSTRAINT costumer_pk PRIMARY KEY (customer_id)
 	
 
@@ -115,6 +116,7 @@ CREATE TABLE InstaCar.car
 	notavailable		BOOLEAN,
 	reserved			TIMESTAMP with time zone,
 	in_use				BOOLEAN,
+	locked				BOOLEAN,
 	
 	CONSTRAINT car_pk PRIMARY KEY (car_id)
 	
@@ -123,6 +125,24 @@ CREATE TABLE InstaCar.car
 
 CREATE SEQUENCE InstaCar.car_seq START WITH 1 INCREMENT BY 1;
 
+--*************************************************
+-- Images
+--*************************************************
+CREATE TABLE InstaCar.image
+(
+	image_id			NUMERIC(10) not null,
+	car_id				NUMERIC(10) not null,
+	picture				Bytea,
+	kind				VARCHAR(250),
+	main				BOOLEAN,
+	description			VARCHAR(1000),
+	
+	CONSTRAINT image_pk PRIMARY KEY (image_id)
+	
+
+);
+
+CREATE SEQUENCE InstaCar.image_seq START WITH 1 INCREMENT BY 1;
 
 --*************************************************
 -- Locations
@@ -152,6 +172,7 @@ CREATE SEQUENCE InstaCar.location_seq START WITH 1 INCREMENT BY 1;
 alter table InstaCar.car add constraint	  car_location_fk      foreign key (location_id) references InstaCar.location (location_id);
 alter table InstaCar.rent add constraint	  rent_customer_fk      foreign key (customer_id) references InstaCar.customer (customer_id);
 alter table InstaCar.rent add constraint	  rent_car_fk    foreign key (car_id) references InstaCar.car (car_id);
+alter table InstaCar.image add constraint	  image_car_fk    foreign key (car_id) references InstaCar.car (car_id);
 
 --*************************************************
 -- Grants
@@ -160,6 +181,7 @@ GRANT USAGE ON SCHEMA InstaCar TO clerk;
 grant select, insert, update, delete on InstaCar.customer to clerk;
 grant select, insert, update, delete on InstaCar.account to clerk;
 grant select, insert, update, delete on InstaCar.car to clerk;
+grant select, insert, update, delete on InstaCar.image to clerk;
 grant select, insert, update, delete on InstaCar.location to clerk;
 grant select, insert, update, delete on InstaCar.rent to clerk;
 
@@ -167,6 +189,7 @@ grant select, insert, update, delete on InstaCar.rent to clerk;
 GRANT SELECT, USAGE ON SEQUENCE InstaCar.customer_seq to clerk;
 GRANT SELECT, USAGE ON SEQUENCE InstaCar.account_seq to clerk;
 GRANT SELECT, USAGE ON SEQUENCE InstaCar.car_seq to clerk;
+GRANT SELECT, USAGE ON SEQUENCE InstaCar.image_seq to clerk;
 GRANT SELECT, USAGE ON SEQUENCE InstaCar.location_seq to clerk;
 GRANT SELECT, USAGE ON SEQUENCE InstaCar.rent_seq to clerk;
 
@@ -202,16 +225,16 @@ values((SELECT NEXTVAL('InstaCar.location_seq')), 'Altstadt', 'Hildmannplatz', 1
 INSERT INTO InstaCar.location (location_id, name, street, housenr, postcode, city) 
 values((SELECT NEXTVAL('InstaCar.location_seq')), 'Alpenstraße', 'Alpenstraße', 67, '5020', 'Salzburg');
 -- Car
-INSERT INTO InstaCar.car (car_id, location_id, modell, brand, hp, price, feature1, feature2, feature3, feature4, notavailable, in_use) values((SELECT NEXTVAL('InstaCar.car_seq')),1 , '320i', 'BMW', 125, 20.00, 1,2,3,4, false, true);                                 
-INSERT INTO InstaCar.car (car_id, location_id, modell, brand, hp, price, feature1, feature2, feature3, feature4, notavailable, in_use) values((SELECT NEXTVAL('InstaCar.car_seq')),2 , '520e', 'BMW', 200, 20.00, 1,2,3,4, false, true);                                 
-INSERT INTO InstaCar.car (car_id, location_id, modell, brand, hp, price, feature1, feature2, feature3, feature4, notavailable, in_use) values((SELECT NEXTVAL('InstaCar.car_seq')),3 , 'A3', 'Audi', 130, 20.00, 1,2,3,4, false, true);                                  
-INSERT INTO InstaCar.car (car_id, location_id, modell, brand, hp, price, feature1, feature2, feature3, feature4, notavailable, in_use) values((SELECT NEXTVAL('InstaCar.car_seq')),4 , 'Ocatvia', 'Skoda', 150, 20.00, 1,2,3,4, false, false);                           
-INSERT INTO InstaCar.car (car_id, location_id, modell, brand, hp, price, feature1, feature2, feature3, feature4, notavailable, in_use) values((SELECT NEXTVAL('InstaCar.car_seq')),5 , 'Passat', 'Vw', 145, 20.00, 1,2,3,4, false, false);                               
-INSERT INTO InstaCar.car (car_id, location_id, modell, brand, hp, price, feature1, feature2, feature3, feature4, notavailable, in_use) values((SELECT NEXTVAL('InstaCar.car_seq')),6 , 'A6', 'Audi', 175, 20.00, 1,2,3,4, false, false);                                 
-INSERT INTO InstaCar.car (car_id, location_id, modell, brand, hp, price, feature1, feature2, feature3, feature4, notavailable, in_use) values((SELECT NEXTVAL('InstaCar.car_seq')),7 , 'Golf Kombi', 'Vw', 140, 20.00, 1,2,3,4, false, false);                           
-INSERT INTO InstaCar.car (car_id, location_id, modell, brand, hp, price, feature1, feature2, feature3, feature4, notavailable, in_use) values((SELECT NEXTVAL('InstaCar.car_seq')),8 , 'Focus Kombi', 'Ford', 130, 20.00, 1,2,3,4, false, false);                        
-INSERT INTO InstaCar.car (car_id, location_id, modell, brand, hp, price, feature1, feature2, feature3, feature4, notavailable, in_use) values((SELECT NEXTVAL('InstaCar.car_seq')),9 , 'Astra Kombi', 'Opel', 120, 20.00, 1,2,3,4, false, false);                        
-INSERT INTO InstaCar.car (car_id, location_id, modell, brand, hp, price, feature1, feature2, feature3, feature4, notavailable, in_use) values((SELECT NEXTVAL('InstaCar.car_seq')),10 , 'E300', 'Mercedes Benz', 125, 20.00, 1,2,3,4, false, false);
+INSERT INTO InstaCar.car (car_id, location_id, modell, brand, hp, price, feature1, feature2, feature3, feature4, notavailable, in_use, locked) values((SELECT NEXTVAL('InstaCar.car_seq')),1 , '320i', 'BMW', 125, 20.00, 1,2,3,4, false, true, true);                                 
+INSERT INTO InstaCar.car (car_id, location_id, modell, brand, hp, price, feature1, feature2, feature3, feature4, notavailable, in_use, locked) values((SELECT NEXTVAL('InstaCar.car_seq')),2 , '520e', 'BMW', 200, 20.00, 1,2,3,4, false, true, true);                                 
+INSERT INTO InstaCar.car (car_id, location_id, modell, brand, hp, price, feature1, feature2, feature3, feature4, notavailable, in_use, locked) values((SELECT NEXTVAL('InstaCar.car_seq')),3 , 'A3', 'Audi', 130, 20.00, 1,2,3,4, false, true, true);                                  
+INSERT INTO InstaCar.car (car_id, location_id, modell, brand, hp, price, feature1, feature2, feature3, feature4, notavailable, in_use, locked) values((SELECT NEXTVAL('InstaCar.car_seq')),4 , 'Ocatvia', 'Skoda', 150, 20.00, 1,2,3,4, false, false, true);                           
+INSERT INTO InstaCar.car (car_id, location_id, modell, brand, hp, price, feature1, feature2, feature3, feature4, notavailable, in_use, locked) values((SELECT NEXTVAL('InstaCar.car_seq')),5 , 'Passat', 'Vw', 145, 20.00, 1,2,3,4, false, false, true);                               
+INSERT INTO InstaCar.car (car_id, location_id, modell, brand, hp, price, feature1, feature2, feature3, feature4, notavailable, in_use, locked) values((SELECT NEXTVAL('InstaCar.car_seq')),6 , 'A6', 'Audi', 175, 20.00, 1,2,3,4, false, false, true);                                 
+INSERT INTO InstaCar.car (car_id, location_id, modell, brand, hp, price, feature1, feature2, feature3, feature4, notavailable, in_use, locked) values((SELECT NEXTVAL('InstaCar.car_seq')),7 , 'Golf Kombi', 'Vw', 140, 20.00, 1,2,3,4, false, false, true);                           
+INSERT INTO InstaCar.car (car_id, location_id, modell, brand, hp, price, feature1, feature2, feature3, feature4, notavailable, in_use, locked) values((SELECT NEXTVAL('InstaCar.car_seq')),8 , 'Focus Kombi', 'Ford', 130, 20.00, 1,2,3,4, false, false, true);                        
+INSERT INTO InstaCar.car (car_id, location_id, modell, brand, hp, price, feature1, feature2, feature3, feature4, notavailable, in_use, locked) values((SELECT NEXTVAL('InstaCar.car_seq')),9 , 'Astra Kombi', 'Opel', 120, 20.00, 1,2,3,4, false, false, true);                        
+INSERT INTO InstaCar.car (car_id, location_id, modell, brand, hp, price, feature1, feature2, feature3, feature4, notavailable, in_use, locked) values((SELECT NEXTVAL('InstaCar.car_seq')),10 , 'E300', 'Mercedes Benz', 125, 20.00, 1,2,3,4, false, false, true);
 -- Customer
 INSERT INTO InstaCar.customer (customer_id, customer_no, name, familyname, street, housenr, postcode, city, email, telefon, iban, bic, password, nickname) values((SELECT NEXTVAL('InstaCar.customer_seq')), '2019/000001','Thomas', 'Müller', 'Mayerstraße', 1, '5020', 'Salzburg', 'Example@gmail.com', '0664/1234567', 'AT1234456789', 'Bank123',CRYPT('1234', GEN_SALT('bf')), 'Tmueller' );
 INSERT INTO InstaCar.customer (customer_id, customer_no, name, familyname, street, housenr, postcode, city, email, telefon, iban, bic, password, nickname) values((SELECT NEXTVAL('InstaCar.customer_seq')), '2019/000002','Herbert', 'Maier', 'Müllerstraße', 23, '5020', 'Salzburg', 'Example@gmail.com', '0664/1234567','AT1234456789', 'Bank123',CRYPT('1234', GEN_SALT('bf')), 'Hmaier' );

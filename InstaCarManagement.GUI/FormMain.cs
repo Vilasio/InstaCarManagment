@@ -99,19 +99,19 @@ namespace InstaCarManagement.GUI
 
         private void MenuItemEditCustomer_Click(object sender, EventArgs e)
         {
-            FormEditing formEditing = new FormEditing(this.connection, 1);
+            FormEditing formEditing = new FormEditing(this.connection, 1, this.actualUser);
             formEditing.Show();
         }
 
         private void MenuItemEditCar_Click(object sender, EventArgs e)
         {
-            FormEditing formEditing = new FormEditing(this.connection, 2);
+            FormEditing formEditing = new FormEditing(this.connection, 2, this.actualUser);
             formEditing.Show();
         }
 
         private void MenuItemEditLocation_Click(object sender, EventArgs e)
         {
-            FormEditing formEditing = new FormEditing(this.connection, 3);
+            FormEditing formEditing = new FormEditing(this.connection, 3, this.actualUser);
             formEditing.Show();
         }
 

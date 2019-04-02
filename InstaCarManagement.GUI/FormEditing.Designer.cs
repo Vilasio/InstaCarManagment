@@ -32,6 +32,8 @@
             this.tabPageCustomer = new System.Windows.Forms.TabPage();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.groupBoxCustomer = new System.Windows.Forms.GroupBox();
+            this.labelCustomerCustomerNo = new System.Windows.Forms.Label();
+            this.textBoxCustomerCustomerNo = new System.Windows.Forms.TextBox();
             this.labelCustomerTelefon = new System.Windows.Forms.Label();
             this.textBoxCustomerTelefon = new System.Windows.Forms.TextBox();
             this.labelCustomerEmail = new System.Windows.Forms.Label();
@@ -61,6 +63,7 @@
             this.textBoxCustomerFamilyName = new System.Windows.Forms.TextBox();
             this.textBoxCustomerName = new System.Windows.Forms.TextBox();
             this.listViewCustomer = new System.Windows.Forms.ListView();
+            this.columnHeaderCustomerNo = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderFamilyName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderStreet = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -73,7 +76,6 @@
             this.labelVehicleLocation = new System.Windows.Forms.Label();
             this.comboBoxVehicleLocation = new System.Windows.Forms.ComboBox();
             this.labelVehicleStatus = new System.Windows.Forms.Label();
-            this.pictureBoxVehicleImage = new System.Windows.Forms.PictureBox();
             this.buttonVehicleClose = new System.Windows.Forms.Button();
             this.buttonVehicleCancel = new System.Windows.Forms.Button();
             this.buttonVehicleSave = new System.Windows.Forms.Button();
@@ -129,9 +131,10 @@
             this.labelTopic = new System.Windows.Forms.Label();
             this.labelHeader = new System.Windows.Forms.Label();
             this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
-            this.labelCustomerCustomerNo = new System.Windows.Forms.Label();
-            this.textBoxCustomerCustomerNo = new System.Windows.Forms.TextBox();
-            this.columnHeaderCustomerNo = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.pictureBoxVehicleImage = new System.Windows.Forms.PictureBox();
+            this.buttonLock = new System.Windows.Forms.Button();
+            this.labelVehicleStatusLocked = new System.Windows.Forms.Label();
+            this.splitContainerFormEditing = new System.Windows.Forms.SplitContainer();
             this.tabControlBaseData.SuspendLayout();
             this.tabPageCustomer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
@@ -145,7 +148,6 @@
             this.splitContainerVehicle.Panel2.SuspendLayout();
             this.splitContainerVehicle.SuspendLayout();
             this.groupBoxVehicles.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxVehicleImage)).BeginInit();
             this.tabPageLocation.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerLocation)).BeginInit();
             this.splitContainerLocation.Panel1.SuspendLayout();
@@ -154,6 +156,11 @@
             this.groupBoxLocation.SuspendLayout();
             this.groupBoxHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxVehicleImage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerFormEditing)).BeginInit();
+            this.splitContainerFormEditing.Panel1.SuspendLayout();
+            this.splitContainerFormEditing.Panel2.SuspendLayout();
+            this.splitContainerFormEditing.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControlBaseData
@@ -161,8 +168,8 @@
             this.tabControlBaseData.Controls.Add(this.tabPageCustomer);
             this.tabControlBaseData.Controls.Add(this.tabPageVehicle);
             this.tabControlBaseData.Controls.Add(this.tabPageLocation);
-            this.tabControlBaseData.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tabControlBaseData.Location = new System.Drawing.Point(0, 106);
+            this.tabControlBaseData.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControlBaseData.Location = new System.Drawing.Point(0, 0);
             this.tabControlBaseData.Name = "tabControlBaseData";
             this.tabControlBaseData.SelectedIndex = 0;
             this.tabControlBaseData.Size = new System.Drawing.Size(1184, 655);
@@ -184,6 +191,8 @@
             // splitContainer2
             // 
             this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer2.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.splitContainer2.IsSplitterFixed = true;
             this.splitContainer2.Location = new System.Drawing.Point(3, 3);
             this.splitContainer2.Name = "splitContainer2";
             // 
@@ -237,6 +246,23 @@
             this.groupBoxCustomer.TabIndex = 0;
             this.groupBoxCustomer.TabStop = false;
             this.groupBoxCustomer.Text = "Kunde";
+            // 
+            // labelCustomerCustomerNo
+            // 
+            this.labelCustomerCustomerNo.AutoSize = true;
+            this.labelCustomerCustomerNo.Location = new System.Drawing.Point(4, 10);
+            this.labelCustomerCustomerNo.Name = "labelCustomerCustomerNo";
+            this.labelCustomerCustomerNo.Size = new System.Drawing.Size(61, 13);
+            this.labelCustomerCustomerNo.TabIndex = 29;
+            this.labelCustomerCustomerNo.Text = "Kunden Nr.";
+            // 
+            // textBoxCustomerCustomerNo
+            // 
+            this.textBoxCustomerCustomerNo.Enabled = false;
+            this.textBoxCustomerCustomerNo.Location = new System.Drawing.Point(7, 26);
+            this.textBoxCustomerCustomerNo.Name = "textBoxCustomerCustomerNo";
+            this.textBoxCustomerCustomerNo.Size = new System.Drawing.Size(200, 20);
+            this.textBoxCustomerCustomerNo.TabIndex = 28;
             // 
             // labelCustomerTelefon
             // 
@@ -502,6 +528,11 @@
             this.listViewCustomer.View = System.Windows.Forms.View.Details;
             this.listViewCustomer.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listViewCustomer_MouseDoubleClick);
             // 
+            // columnHeaderCustomerNo
+            // 
+            this.columnHeaderCustomerNo.Text = "Kunden Nr.";
+            this.columnHeaderCustomerNo.Width = 100;
+            // 
             // columnHeaderName
             // 
             this.columnHeaderName.Text = "Vorname";
@@ -564,6 +595,8 @@
             // 
             // groupBoxVehicles
             // 
+            this.groupBoxVehicles.Controls.Add(this.labelVehicleStatusLocked);
+            this.groupBoxVehicles.Controls.Add(this.buttonLock);
             this.groupBoxVehicles.Controls.Add(this.labelVehicleLocation);
             this.groupBoxVehicles.Controls.Add(this.comboBoxVehicleLocation);
             this.groupBoxVehicles.Controls.Add(this.labelVehicleStatus);
@@ -622,14 +655,6 @@
             this.labelVehicleStatus.TabIndex = 22;
             this.labelVehicleStatus.Text = "Status";
             this.labelVehicleStatus.Visible = false;
-            // 
-            // pictureBoxVehicleImage
-            // 
-            this.pictureBoxVehicleImage.Location = new System.Drawing.Point(215, 19);
-            this.pictureBoxVehicleImage.Name = "pictureBoxVehicleImage";
-            this.pictureBoxVehicleImage.Size = new System.Drawing.Size(100, 100);
-            this.pictureBoxVehicleImage.TabIndex = 21;
-            this.pictureBoxVehicleImage.TabStop = false;
             // 
             // buttonVehicleClose
             // 
@@ -1085,10 +1110,10 @@
             this.groupBoxHeader.Controls.Add(this.labelTopic);
             this.groupBoxHeader.Controls.Add(this.labelHeader);
             this.groupBoxHeader.Controls.Add(this.pictureBoxLogo);
-            this.groupBoxHeader.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBoxHeader.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxHeader.Location = new System.Drawing.Point(0, 0);
             this.groupBoxHeader.Name = "groupBoxHeader";
-            this.groupBoxHeader.Size = new System.Drawing.Size(1184, 103);
+            this.groupBoxHeader.Size = new System.Drawing.Size(1184, 102);
             this.groupBoxHeader.TabIndex = 1;
             this.groupBoxHeader.TabStop = false;
             // 
@@ -1124,35 +1149,66 @@
             this.pictureBoxLogo.TabIndex = 0;
             this.pictureBoxLogo.TabStop = false;
             // 
-            // labelCustomerCustomerNo
+            // pictureBoxVehicleImage
             // 
-            this.labelCustomerCustomerNo.AutoSize = true;
-            this.labelCustomerCustomerNo.Location = new System.Drawing.Point(4, 10);
-            this.labelCustomerCustomerNo.Name = "labelCustomerCustomerNo";
-            this.labelCustomerCustomerNo.Size = new System.Drawing.Size(61, 13);
-            this.labelCustomerCustomerNo.TabIndex = 29;
-            this.labelCustomerCustomerNo.Text = "Kunden Nr.";
+            this.pictureBoxVehicleImage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBoxVehicleImage.Location = new System.Drawing.Point(215, 19);
+            this.pictureBoxVehicleImage.Name = "pictureBoxVehicleImage";
+            this.pictureBoxVehicleImage.Size = new System.Drawing.Size(100, 100);
+            this.pictureBoxVehicleImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxVehicleImage.TabIndex = 21;
+            this.pictureBoxVehicleImage.TabStop = false;
+            this.pictureBoxVehicleImage.DragDrop += new System.Windows.Forms.DragEventHandler(this.pictureBoxVehicleImage_DragDrop);
+            this.pictureBoxVehicleImage.DragEnter += new System.Windows.Forms.DragEventHandler(this.pictureBoxVehicleImage_DragEnter);
+            this.pictureBoxVehicleImage.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBoxVehicleImage_MouseClick);
             // 
-            // textBoxCustomerCustomerNo
+            // buttonLock
             // 
-            this.textBoxCustomerCustomerNo.Enabled = false;
-            this.textBoxCustomerCustomerNo.Location = new System.Drawing.Point(7, 26);
-            this.textBoxCustomerCustomerNo.Name = "textBoxCustomerCustomerNo";
-            this.textBoxCustomerCustomerNo.Size = new System.Drawing.Size(200, 20);
-            this.textBoxCustomerCustomerNo.TabIndex = 28;
+            this.buttonLock.Enabled = false;
+            this.buttonLock.Location = new System.Drawing.Point(9, 383);
+            this.buttonLock.Name = "buttonLock";
+            this.buttonLock.Size = new System.Drawing.Size(75, 23);
+            this.buttonLock.TabIndex = 1;
+            this.buttonLock.Text = "Sperren";
+            this.buttonLock.UseVisualStyleBackColor = true;
+            this.buttonLock.Visible = false;
+            this.buttonLock.Click += new System.EventHandler(this.buttonLock_Click);
             // 
-            // columnHeaderCustomerNo
+            // labelVehicleStatusLocked
             // 
-            this.columnHeaderCustomerNo.Text = "Kunden Nr.";
-            this.columnHeaderCustomerNo.Width = 100;
+            this.labelVehicleStatusLocked.AutoSize = true;
+            this.labelVehicleStatusLocked.Location = new System.Drawing.Point(11, 367);
+            this.labelVehicleStatusLocked.Name = "labelVehicleStatusLocked";
+            this.labelVehicleStatusLocked.Size = new System.Drawing.Size(73, 13);
+            this.labelVehicleStatusLocked.TabIndex = 24;
+            this.labelVehicleStatusLocked.Text = "StatusLocked";
+            // 
+            // splitContainerFormEditing
+            // 
+            this.splitContainerFormEditing.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerFormEditing.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.splitContainerFormEditing.IsSplitterFixed = true;
+            this.splitContainerFormEditing.Location = new System.Drawing.Point(0, 0);
+            this.splitContainerFormEditing.Name = "splitContainerFormEditing";
+            this.splitContainerFormEditing.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainerFormEditing.Panel1
+            // 
+            this.splitContainerFormEditing.Panel1.Controls.Add(this.groupBoxHeader);
+            // 
+            // splitContainerFormEditing.Panel2
+            // 
+            this.splitContainerFormEditing.Panel2.Controls.Add(this.tabControlBaseData);
+            this.splitContainerFormEditing.Size = new System.Drawing.Size(1184, 761);
+            this.splitContainerFormEditing.SplitterDistance = 102;
+            this.splitContainerFormEditing.TabIndex = 0;
             // 
             // FormEditing
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1184, 761);
-            this.Controls.Add(this.groupBoxHeader);
-            this.Controls.Add(this.tabControlBaseData);
+            this.Controls.Add(this.splitContainerFormEditing);
             this.Name = "FormEditing";
             this.Text = "Stammdaten";
             this.Load += new System.EventHandler(this.FormEditing_Load);
@@ -1171,7 +1227,6 @@
             this.splitContainerVehicle.ResumeLayout(false);
             this.groupBoxVehicles.ResumeLayout(false);
             this.groupBoxVehicles.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxVehicleImage)).EndInit();
             this.tabPageLocation.ResumeLayout(false);
             this.splitContainerLocation.Panel1.ResumeLayout(false);
             this.splitContainerLocation.Panel2.ResumeLayout(false);
@@ -1182,6 +1237,11 @@
             this.groupBoxHeader.ResumeLayout(false);
             this.groupBoxHeader.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxVehicleImage)).EndInit();
+            this.splitContainerFormEditing.Panel1.ResumeLayout(false);
+            this.splitContainerFormEditing.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerFormEditing)).EndInit();
+            this.splitContainerFormEditing.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1292,5 +1352,8 @@
         private System.Windows.Forms.Label labelCustomerCustomerNo;
         private System.Windows.Forms.TextBox textBoxCustomerCustomerNo;
         private System.Windows.Forms.ColumnHeader columnHeaderCustomerNo;
+        private System.Windows.Forms.Button buttonLock;
+        private System.Windows.Forms.Label labelVehicleStatusLocked;
+        private System.Windows.Forms.SplitContainer splitContainerFormEditing;
     }
 }

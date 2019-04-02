@@ -53,6 +53,16 @@ namespace InstaCarManagement.Data
         public long? Feature3 { get; set; }
         public long? Feature4 { get; set; }
         public bool NotAvailable { get; set; }
+        public DateTime? Reserved { get; set; }
+        public bool InUse { get; set; }
+        public bool Locked { get; set; }
+
+        /*public List<ImageCar> Images
+        {
+            get { return myVar; }
+            set { myVar = value; }
+        }*/
+
         #endregion
         //----------------------------------------------------------------------------------------------
         //Static
@@ -83,7 +93,10 @@ namespace InstaCarManagement.Data
                         Feature2 = reader.IsDBNull(7) ? 0 : reader.GetInt64(7),
                         Feature3 = reader.IsDBNull(8) ? 0 : reader.GetInt64(8),
                         Feature4 = reader.IsDBNull(9) ? 0 : reader.GetInt64(9),
-                        NotAvailable = reader.IsDBNull(10) ? true : reader.GetBoolean(10)
+                        NotAvailable = reader.IsDBNull(10) ? true : reader.GetBoolean(10),
+                        Reserved = reader.IsDBNull(11) ? null : (DateTime?)reader.GetDateTime(11),
+                        InUse = reader.IsDBNull(12) ? true : reader.GetBoolean(12),
+                        Locked = reader.IsDBNull(13) ? true : reader.GetBoolean(13)
                     }
                 );
             }
@@ -93,7 +106,7 @@ namespace InstaCarManagement.Data
 
         public static Vehicle GetSpecificVehicles(NpgsqlConnection connection, int key)
         {
-            
+
             Vehicle vehicle = null;
             NpgsqlCommand command = new NpgsqlCommand();
             command.Connection = connection;
@@ -115,7 +128,10 @@ namespace InstaCarManagement.Data
                     Feature2 = reader.IsDBNull(7) ? 0 : reader.GetInt64(7),
                     Feature3 = reader.IsDBNull(8) ? 0 : reader.GetInt64(8),
                     Feature4 = reader.IsDBNull(9) ? 0 : reader.GetInt64(9),
-                    NotAvailable = reader.IsDBNull(10) ? true : reader.GetBoolean(10)
+                    NotAvailable = reader.IsDBNull(10) ? true : reader.GetBoolean(10),
+                    Reserved = reader.IsDBNull(11) ? null : (DateTime?)reader.GetDateTime(11),
+                    InUse = reader.IsDBNull(12) ? true : reader.GetBoolean(12),
+                    Locked = reader.IsDBNull(13) ? true : reader.GetBoolean(13)
                 };
             }
             reader.Close();
@@ -145,7 +161,10 @@ namespace InstaCarManagement.Data
                     Feature2 = reader.IsDBNull(7) ? 0 : reader.GetInt64(7),
                     Feature3 = reader.IsDBNull(8) ? 0 : reader.GetInt64(8),
                     Feature4 = reader.IsDBNull(9) ? 0 : reader.GetInt64(9),
-                    NotAvailable = reader.IsDBNull(10) ? true : reader.GetBoolean(10)
+                    NotAvailable = reader.IsDBNull(10) ? true : reader.GetBoolean(10),
+                    Reserved = reader.IsDBNull(11) ? null : (DateTime?)reader.GetDateTime(11),
+                    InUse = reader.IsDBNull(12) ? true : reader.GetBoolean(12),
+                    Locked = reader.IsDBNull(13) ? true : reader.GetBoolean(13)
                 };
             }
             reader.Close();
@@ -172,14 +191,16 @@ namespace InstaCarManagement.Data
         {
             NpgsqlCommand command = new NpgsqlCommand();
             command.Connection = connection;
-            
-                command.CommandText =
-                $"update {TABLE} set price = :pr";
-            
+
+            command.CommandText =
+            $"update {TABLE} set price = :pr";
+
             command.Parameters.AddWithValue("pr", price);
 
             return command.ExecuteNonQuery();
         }
+
+        
         #endregion
         //----------------------------------------------------------------------------------------------
         //Public
@@ -202,8 +223,8 @@ namespace InstaCarManagement.Data
             {
                 command.CommandText = $"select nextval('{TABLE}_seq')";
                 this.CarId = (long?)command.ExecuteScalar();
-                command.CommandText = $" insert into {TABLE} ( car_id,location_id, modell , brand, hp, price, feature1, feature2,feature3, feature4, notavailable )" +
-                    $" values(:cid,:lid, :mo, :br, :hp, :pr, :f1, :f2, :f3, :f4, :no)";
+                command.CommandText = $" insert into {TABLE} ( car_id,location_id, modell , brand, hp, price, feature1, feature2,feature3, feature4, notavailable, in_use, locked )" +
+                    $" values(:cid,:lid, :mo, :br, :hp, :pr, :f1, :f2, :f3, :f4, :no, :iu, :lo)";
             }
             command.Parameters.AddWithValue("cid", this.CarId.Value);
             command.Parameters.AddWithValue("lid", this.LocationId.Value);
@@ -216,11 +237,46 @@ namespace InstaCarManagement.Data
             command.Parameters.AddWithValue("f3", this.Feature3.HasValue ? (object)this.Feature3.Value : 0);
             command.Parameters.AddWithValue("f4", this.Feature4.HasValue ? (object)this.Feature4.Value : 0);
             command.Parameters.AddWithValue("no", this.NotAvailable);
+            command.Parameters.AddWithValue("lo", true);
+            command.Parameters.AddWithValue("iu", false);
 
             return command.ExecuteNonQuery();
         }
 
-        
+        public int Lock()
+        {
+            int result = 0;
+            NpgsqlCommand command = new NpgsqlCommand();
+            command.Connection = this.connection;
+            command.CommandText =
+                $"update {TABLE} set locked = :lo where car_id = :cid";
+            command.Parameters.AddWithValue("cid", this.CarId.Value);
+            command.Parameters.AddWithValue("lo", true);
+            result = command.ExecuteNonQuery();
+            if (result == 1)
+            {
+                Locked = true;
+            }
+            return result;
+        }
+
+        public int Unlock()
+        {
+            int result = 0;
+            NpgsqlCommand command = new NpgsqlCommand();
+            command.Connection = this.connection;
+            command.CommandText =
+                $"update {TABLE} set locked = :lo where car_id = :cid";
+            command.Parameters.AddWithValue("cid", this.CarId.Value);
+            command.Parameters.AddWithValue("lo", false);
+            result =  command.ExecuteNonQuery();
+            if (result == 1)
+            {
+                Locked = false;
+            }
+            return result;
+        }
+
         #endregion
         //----------------------------------------------------------------------------------------------
         //Private
