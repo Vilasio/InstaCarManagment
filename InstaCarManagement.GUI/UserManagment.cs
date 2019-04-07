@@ -47,8 +47,18 @@ namespace InstaCarManagement.GUI
             InitializeComponent();
         }
 
+        private void PaintBorderlessGroupBox(object sender, PaintEventArgs p)
+        {
+            GroupBox box = (GroupBox)sender;
+            p.Graphics.Clear(Color.FromArgb(00, 00, 255));
+            p.Graphics.DrawString(box.Text, box.Font, Brushes.Black, 0, 0);
+        }
+
+
         private void UserManagment_Load(object sender, EventArgs e)
         {
+            this.groupBoxHeader.Paint += PaintBorderlessGroupBox;
+
             if (actualUser.Admin)
             {
                 this.allUsers = this.actualUser.AllUsers;

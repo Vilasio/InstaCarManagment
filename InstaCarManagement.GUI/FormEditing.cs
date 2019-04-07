@@ -333,8 +333,22 @@ namespace InstaCarManagement.GUI
 
         private void FillVehicle()
         {
-            
 
+            if (this.vehicle.Pictures.Count != 0)
+            {
+                foreach (ImageCar imageCar in this.vehicle.Pictures)
+                {
+                    if (imageCar.Main)
+                    {
+                        this.pictureBoxVehicleImage.Image = imageCar.Image;
+
+                    }
+                }
+            }
+            else
+            {
+                this.pictureBoxVehicleImage.Image = null;
+            }
             this.groupBoxVehicles.Text = $"Fahrzeug {this.vehicle.Brand} {this.vehicle.Modell} bearbeiten";
             this.textBoxVehicleModell.Text = this.vehicle.Modell;
             this.textBoxVehicleBrand.Text = this.vehicle.Brand;
@@ -455,6 +469,7 @@ namespace InstaCarManagement.GUI
             this.comboBoxVehicleFeature3.DataSource = Enum.GetValues(typeof(enumFeatures));
             this.comboBoxVehicleFeature4.DataSource = Enum.GetValues(typeof(enumFeatures));
             this.comboBoxVehicleLocation.SelectedValue = (long)1;
+            this.pictureBoxVehicleImage.Image = null;
 
             this.groupBoxVehicles.Text = "Neues Fahrzeug anlegen";
 
@@ -462,22 +477,37 @@ namespace InstaCarManagement.GUI
 
             this.labelVehicleStatus.Visible = false;
         }
+
+        private void FormImageOpen()
+        {
+            FormImages formImages = new FormImages(this.connection, this.vehicle);
+            if (formImages.ShowDialog() == DialogResult.OK)
+            {
+                if (this.vehicle.Pictures.Count != 0)
+                {
+                    foreach (ImageCar imageCar in this.vehicle.Pictures)
+                    {
+                        if (imageCar.Main)
+                        {
+                            this.pictureBoxVehicleImage.Image = imageCar.Image;
+
+                        }
+                    }
+
+                }
+            }
+        }
         #endregion
         #region VehiclePageEvents
         private void pictureBoxVehicleImage_MouseClick(object sender, MouseEventArgs e)
         {
-            FormImages formImages = new FormImages(this.connection, this.vehicle);
-            formImages.ShowDialog();
+            FormImageOpen();
         }
 
-        private void pictureBoxVehicleImage_DragEnter(object sender, DragEventArgs e)
+        private void buttonImage_Click(object sender, EventArgs e)
         {
-            
-        }
+            FormImageOpen();
 
-        private void pictureBoxVehicleImage_DragDrop(object sender, DragEventArgs e)
-        {
-            
         }
 
         private void tabPageVehicle_Enter(object sender, EventArgs e)
@@ -733,6 +763,7 @@ namespace InstaCarManagement.GUI
             this.editLocat = true;
             FillLocation();
         }
+
 
 
 

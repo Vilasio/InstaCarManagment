@@ -28,6 +28,14 @@ namespace InstaCarManagement.GUI
 
         }
 
+        private void PaintBorderlessGroupBox(object sender, PaintEventArgs p)
+        {
+            GroupBox box = (GroupBox)sender;
+            p.Graphics.Clear(Color.FromArgb(00, 00, 255));
+            p.Graphics.DrawString(box.Text, box.Font, Brushes.Black, 0, 0);
+        }
+
+
         public Account actualUser { get; set; }
 
         private void buttonCancel_Click(object sender, EventArgs e)
@@ -86,6 +94,12 @@ namespace InstaCarManagement.GUI
                 MessageBox.Show("Musst schon was eingeben");
             }
             
+        }
+
+        private void FormLogin_Load(object sender, EventArgs e)
+        {
+            this.groupBoxHeader.Paint += PaintBorderlessGroupBox;
+
         }
     }
 }

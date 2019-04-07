@@ -31,7 +31,6 @@
             this.pictureBoxImage = new System.Windows.Forms.PictureBox();
             this.checkBoxMainImage = new System.Windows.Forms.CheckBox();
             this.checkBoxOfficial = new System.Windows.Forms.CheckBox();
-            this.buttonDelete = new System.Windows.Forms.Button();
             this.textBoxDescription = new System.Windows.Forms.TextBox();
             this.labelDescription = new System.Windows.Forms.Label();
             this.labelDragAndDrop = new System.Windows.Forms.Label();
@@ -40,9 +39,12 @@
             // 
             // pictureBoxImage
             // 
+            this.pictureBoxImage.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.pictureBoxImage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBoxImage.Location = new System.Drawing.Point(3, 3);
             this.pictureBoxImage.Name = "pictureBoxImage";
             this.pictureBoxImage.Size = new System.Drawing.Size(100, 100);
+            this.pictureBoxImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxImage.TabIndex = 0;
             this.pictureBoxImage.TabStop = false;
             this.pictureBoxImage.DragDrop += new System.Windows.Forms.DragEventHandler(this.pictureBoxImage_DragDrop);
@@ -68,22 +70,13 @@
             this.checkBoxOfficial.Text = "Für Kunden anzeigen";
             this.checkBoxOfficial.UseVisualStyleBackColor = true;
             // 
-            // buttonDelete
-            // 
-            this.buttonDelete.Location = new System.Drawing.Point(308, 115);
-            this.buttonDelete.Name = "buttonDelete";
-            this.buttonDelete.Size = new System.Drawing.Size(75, 23);
-            this.buttonDelete.TabIndex = 3;
-            this.buttonDelete.Text = "Löschen";
-            this.buttonDelete.UseVisualStyleBackColor = true;
-            // 
             // textBoxDescription
             // 
             this.textBoxDescription.Location = new System.Drawing.Point(109, 22);
             this.textBoxDescription.Multiline = true;
             this.textBoxDescription.Name = "textBoxDescription";
             this.textBoxDescription.Size = new System.Drawing.Size(274, 87);
-            this.textBoxDescription.TabIndex = 4;
+            this.textBoxDescription.TabIndex = 0;
             // 
             // labelDescription
             // 
@@ -111,12 +104,12 @@
             this.Controls.Add(this.labelDragAndDrop);
             this.Controls.Add(this.labelDescription);
             this.Controls.Add(this.textBoxDescription);
-            this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.checkBoxOfficial);
             this.Controls.Add(this.checkBoxMainImage);
             this.Controls.Add(this.pictureBoxImage);
             this.Name = "ImageUS";
             this.Size = new System.Drawing.Size(398, 148);
+            this.Load += new System.EventHandler(this.ImageUS_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxImage)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -128,7 +121,6 @@
         private System.Windows.Forms.PictureBox pictureBoxImage;
         private System.Windows.Forms.CheckBox checkBoxMainImage;
         private System.Windows.Forms.CheckBox checkBoxOfficial;
-        private System.Windows.Forms.Button buttonDelete;
         private System.Windows.Forms.TextBox textBoxDescription;
         private System.Windows.Forms.Label labelDescription;
         private System.Windows.Forms.Label labelDragAndDrop;

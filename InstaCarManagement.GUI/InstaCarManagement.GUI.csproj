@@ -191,5 +191,38 @@
   <ItemGroup>
     <None Include="Resources\Logo.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ChangePassword_16x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Account_16x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Currency_16x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-traffic-jam-filled-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-car-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-sedan-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-customer-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-marker-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-car-rental-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-key-2-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-multiply-32.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

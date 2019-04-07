@@ -28,11 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.splitContainerUsermanagement2 = new System.Windows.Forms.SplitContainer();
             this.listViewUser = new System.Windows.Forms.ListView();
             this.columnHeaderUser = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderBlocked = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.buttonClose = new System.Windows.Forms.Button();
             this.groupBoxUserEditing = new System.Windows.Forms.GroupBox();
+            this.checkBoxPasswordVisibility = new System.Windows.Forms.CheckBox();
             this.labelResult = new System.Windows.Forms.Label();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonSave = new System.Windows.Forms.Button();
@@ -45,32 +47,41 @@
             this.textBoxPassword = new System.Windows.Forms.TextBox();
             this.labelPassword = new System.Windows.Forms.Label();
             this.comboBoxTried = new System.Windows.Forms.ComboBox();
-            this.checkBoxPasswordVisibility = new System.Windows.Forms.CheckBox();
-            this.buttonClose = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
-            this.splitContainer1.Panel1.SuspendLayout();
-            this.splitContainer1.Panel2.SuspendLayout();
-            this.splitContainer1.SuspendLayout();
+            this.splitContainerUsermanagement1 = new System.Windows.Forms.SplitContainer();
+            this.groupBoxHeader = new System.Windows.Forms.GroupBox();
+            this.labelTopic = new System.Windows.Forms.Label();
+            this.labelHeader = new System.Windows.Forms.Label();
+            this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerUsermanagement2)).BeginInit();
+            this.splitContainerUsermanagement2.Panel1.SuspendLayout();
+            this.splitContainerUsermanagement2.Panel2.SuspendLayout();
+            this.splitContainerUsermanagement2.SuspendLayout();
             this.groupBoxUserEditing.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerUsermanagement1)).BeginInit();
+            this.splitContainerUsermanagement1.Panel1.SuspendLayout();
+            this.splitContainerUsermanagement1.Panel2.SuspendLayout();
+            this.splitContainerUsermanagement1.SuspendLayout();
+            this.groupBoxHeader.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
             this.SuspendLayout();
             // 
-            // splitContainer1
+            // splitContainerUsermanagement2
             // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer1.Name = "splitContainer1";
+            this.splitContainerUsermanagement2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerUsermanagement2.Location = new System.Drawing.Point(0, 0);
+            this.splitContainerUsermanagement2.Name = "splitContainerUsermanagement2";
             // 
-            // splitContainer1.Panel1
+            // splitContainerUsermanagement2.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.listViewUser);
+            this.splitContainerUsermanagement2.Panel1.Controls.Add(this.listViewUser);
             // 
-            // splitContainer1.Panel2
+            // splitContainerUsermanagement2.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.buttonClose);
-            this.splitContainer1.Panel2.Controls.Add(this.groupBoxUserEditing);
-            this.splitContainer1.Size = new System.Drawing.Size(800, 450);
-            this.splitContainer1.SplitterDistance = 266;
-            this.splitContainer1.TabIndex = 0;
+            this.splitContainerUsermanagement2.Panel2.Controls.Add(this.buttonClose);
+            this.splitContainerUsermanagement2.Panel2.Controls.Add(this.groupBoxUserEditing);
+            this.splitContainerUsermanagement2.Size = new System.Drawing.Size(800, 450);
+            this.splitContainerUsermanagement2.SplitterDistance = 266;
+            this.splitContainerUsermanagement2.TabIndex = 0;
             // 
             // listViewUser
             // 
@@ -97,6 +108,16 @@
             // 
             this.columnHeaderBlocked.Text = "Gesperrt";
             // 
+            // buttonClose
+            // 
+            this.buttonClose.Location = new System.Drawing.Point(443, 415);
+            this.buttonClose.Name = "buttonClose";
+            this.buttonClose.Size = new System.Drawing.Size(75, 23);
+            this.buttonClose.TabIndex = 0;
+            this.buttonClose.Text = "Schließen";
+            this.buttonClose.UseVisualStyleBackColor = true;
+            this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
+            // 
             // groupBoxUserEditing
             // 
             this.groupBoxUserEditing.Controls.Add(this.checkBoxPasswordVisibility);
@@ -119,6 +140,19 @@
             this.groupBoxUserEditing.TabIndex = 0;
             this.groupBoxUserEditing.TabStop = false;
             // 
+            // checkBoxPasswordVisibility
+            // 
+            this.checkBoxPasswordVisibility.AutoSize = true;
+            this.checkBoxPasswordVisibility.Checked = true;
+            this.checkBoxPasswordVisibility.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxPasswordVisibility.Location = new System.Drawing.Point(215, 83);
+            this.checkBoxPasswordVisibility.Name = "checkBoxPasswordVisibility";
+            this.checkBoxPasswordVisibility.Size = new System.Drawing.Size(132, 21);
+            this.checkBoxPasswordVisibility.TabIndex = 11;
+            this.checkBoxPasswordVisibility.Text = "Passwort anzeigen";
+            this.checkBoxPasswordVisibility.UseVisualStyleBackColor = true;
+            this.checkBoxPasswordVisibility.CheckedChanged += new System.EventHandler(this.checkBoxPasswordVisibility_CheckedChanged);
+            // 
             // labelResult
             // 
             this.labelResult.AutoSize = true;
@@ -136,7 +170,7 @@
             this.buttonCancel.Location = new System.Drawing.Point(87, 217);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
-            this.buttonCancel.TabIndex = 9;
+            this.buttonCancel.TabIndex = 6;
             this.buttonCancel.Text = "Abbrechen";
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
@@ -146,7 +180,7 @@
             this.buttonSave.Location = new System.Drawing.Point(6, 217);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(75, 23);
-            this.buttonSave.TabIndex = 1;
+            this.buttonSave.TabIndex = 5;
             this.buttonSave.Text = "Speichern";
             this.buttonSave.UseVisualStyleBackColor = true;
             this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
@@ -229,51 +263,100 @@
             this.comboBoxTried.Size = new System.Drawing.Size(121, 23);
             this.comboBoxTried.TabIndex = 2;
             // 
-            // checkBoxPasswordVisibility
+            // splitContainerUsermanagement1
             // 
-            this.checkBoxPasswordVisibility.AutoSize = true;
-            this.checkBoxPasswordVisibility.Checked = true;
-            this.checkBoxPasswordVisibility.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxPasswordVisibility.Location = new System.Drawing.Point(215, 83);
-            this.checkBoxPasswordVisibility.Name = "checkBoxPasswordVisibility";
-            this.checkBoxPasswordVisibility.Size = new System.Drawing.Size(132, 21);
-            this.checkBoxPasswordVisibility.TabIndex = 11;
-            this.checkBoxPasswordVisibility.Text = "Passwort anzeigen";
-            this.checkBoxPasswordVisibility.UseVisualStyleBackColor = true;
-            this.checkBoxPasswordVisibility.CheckedChanged += new System.EventHandler(this.checkBoxPasswordVisibility_CheckedChanged);
+            this.splitContainerUsermanagement1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerUsermanagement1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.splitContainerUsermanagement1.IsSplitterFixed = true;
+            this.splitContainerUsermanagement1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainerUsermanagement1.Name = "splitContainerUsermanagement1";
+            this.splitContainerUsermanagement1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
-            // buttonClose
+            // splitContainerUsermanagement1.Panel1
             // 
-            this.buttonClose.Location = new System.Drawing.Point(443, 415);
-            this.buttonClose.Name = "buttonClose";
-            this.buttonClose.Size = new System.Drawing.Size(75, 23);
-            this.buttonClose.TabIndex = 12;
-            this.buttonClose.Text = "Schließen";
-            this.buttonClose.UseVisualStyleBackColor = true;
-            this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
+            this.splitContainerUsermanagement1.Panel1.Controls.Add(this.groupBoxHeader);
+            // 
+            // splitContainerUsermanagement1.Panel2
+            // 
+            this.splitContainerUsermanagement1.Panel2.Controls.Add(this.splitContainerUsermanagement2);
+            this.splitContainerUsermanagement1.Size = new System.Drawing.Size(800, 559);
+            this.splitContainerUsermanagement1.SplitterDistance = 105;
+            this.splitContainerUsermanagement1.TabIndex = 4;
+            // 
+            // groupBoxHeader
+            // 
+            this.groupBoxHeader.BackColor = System.Drawing.Color.Blue;
+            this.groupBoxHeader.Controls.Add(this.labelTopic);
+            this.groupBoxHeader.Controls.Add(this.labelHeader);
+            this.groupBoxHeader.Controls.Add(this.pictureBoxLogo);
+            this.groupBoxHeader.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBoxHeader.Location = new System.Drawing.Point(0, 0);
+            this.groupBoxHeader.Name = "groupBoxHeader";
+            this.groupBoxHeader.Size = new System.Drawing.Size(800, 500);
+            this.groupBoxHeader.TabIndex = 2;
+            this.groupBoxHeader.TabStop = false;
+            // 
+            // labelTopic
+            // 
+            this.labelTopic.AutoSize = true;
+            this.labelTopic.Font = new System.Drawing.Font("Calibri", 30F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Italic | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTopic.ForeColor = System.Drawing.Color.White;
+            this.labelTopic.Location = new System.Drawing.Point(377, 48);
+            this.labelTopic.Name = "labelTopic";
+            this.labelTopic.Size = new System.Drawing.Size(386, 49);
+            this.labelTopic.TabIndex = 2;
+            this.labelTopic.Text = "Benutzermanagement";
+            // 
+            // labelHeader
+            // 
+            this.labelHeader.AutoSize = true;
+            this.labelHeader.Font = new System.Drawing.Font("Calibri", 40F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Italic | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelHeader.ForeColor = System.Drawing.Color.White;
+            this.labelHeader.Location = new System.Drawing.Point(151, 16);
+            this.labelHeader.Name = "labelHeader";
+            this.labelHeader.Size = new System.Drawing.Size(210, 66);
+            this.labelHeader.TabIndex = 1;
+            this.labelHeader.Text = "InstaCar";
+            // 
+            // pictureBoxLogo
+            // 
+            this.pictureBoxLogo.BackgroundImage = global::InstaCarManagement.GUI.Properties.Resources.Logo;
+            this.pictureBoxLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pictureBoxLogo.Location = new System.Drawing.Point(4, 12);
+            this.pictureBoxLogo.Name = "pictureBoxLogo";
+            this.pictureBoxLogo.Size = new System.Drawing.Size(141, 85);
+            this.pictureBoxLogo.TabIndex = 0;
+            this.pictureBoxLogo.TabStop = false;
             // 
             // UserManagment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.splitContainer1);
+            this.ClientSize = new System.Drawing.Size(800, 559);
+            this.Controls.Add(this.splitContainerUsermanagement1);
             this.Name = "UserManagment";
-            this.Text = "UserManagment";
+            this.Text = "Benutzermanagment";
             this.Load += new System.EventHandler(this.UserManagment_Load);
-            this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
-            this.splitContainer1.ResumeLayout(false);
+            this.splitContainerUsermanagement2.Panel1.ResumeLayout(false);
+            this.splitContainerUsermanagement2.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerUsermanagement2)).EndInit();
+            this.splitContainerUsermanagement2.ResumeLayout(false);
             this.groupBoxUserEditing.ResumeLayout(false);
             this.groupBoxUserEditing.PerformLayout();
+            this.splitContainerUsermanagement1.Panel1.ResumeLayout(false);
+            this.splitContainerUsermanagement1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerUsermanagement1)).EndInit();
+            this.splitContainerUsermanagement1.ResumeLayout(false);
+            this.groupBoxHeader.ResumeLayout(false);
+            this.groupBoxHeader.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.SplitContainer splitContainerUsermanagement2;
         private System.Windows.Forms.ListView listViewUser;
         private System.Windows.Forms.ColumnHeader columnHeaderUser;
         private System.Windows.Forms.ColumnHeader columnHeaderBlocked;
@@ -292,5 +375,10 @@
         private System.Windows.Forms.Label labelResult;
         private System.Windows.Forms.CheckBox checkBoxPasswordVisibility;
         private System.Windows.Forms.Button buttonClose;
+        private System.Windows.Forms.SplitContainer splitContainerUsermanagement1;
+        private System.Windows.Forms.GroupBox groupBoxHeader;
+        private System.Windows.Forms.Label labelTopic;
+        private System.Windows.Forms.Label labelHeader;
+        private System.Windows.Forms.PictureBox pictureBoxLogo;
     }
 }

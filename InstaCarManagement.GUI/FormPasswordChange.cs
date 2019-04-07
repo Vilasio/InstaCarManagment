@@ -27,6 +27,13 @@ namespace InstaCarManagement.GUI
             this.actualUser = actualUser;
         }
 
+        private void PaintBorderlessGroupBox(object sender, PaintEventArgs p)
+        {
+            GroupBox box = (GroupBox)sender;
+            p.Graphics.Clear(Color.FromArgb(00, 00, 255));
+            p.Graphics.DrawString(box.Text, box.Font, Brushes.Black, 0, 0);
+        }
+
         private void textBoxNewPasswordRep_Leave(object sender, EventArgs e)
         {
             if (this.textBoxNewPassword.Text == this.textBoxNewPasswordRep.Text)
@@ -106,6 +113,11 @@ namespace InstaCarManagement.GUI
         private void buttonCancel_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void FormPasswordChange_Load(object sender, EventArgs e)
+        {
+            this.groupBoxHeader.Paint += PaintBorderlessGroupBox;
         }
     }
 }

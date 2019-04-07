@@ -38,14 +38,8 @@
             this.MenuItemData = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuItemExit = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuItemEdit = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuItemEditCar = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuItemEditCustomer = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuItemEditLocation = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuItemRentCar = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuItemAdministration = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuItemUserManagment = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuItemExtras = new System.Windows.Forms.ToolStripMenuItem();
-            this.passwortÄndernToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listViewRent = new System.Windows.Forms.ListView();
             this.columnHeaderName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderFamilyName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -53,12 +47,18 @@
             this.columnHeaderModell = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderDateBegin = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderDateEnd = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.MenuItemPricing = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainerMain = new System.Windows.Forms.SplitContainer();
             this.groupBoxHeader = new System.Windows.Forms.GroupBox();
             this.labelTopic = new System.Windows.Forms.Label();
             this.labelHeader = new System.Windows.Forms.Label();
             this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
+            this.MenuItemEditCar = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuItemEditCustomer = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuItemEditLocation = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuItemRentCar = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuItemUserManagment = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuItemPricing = new System.Windows.Forms.ToolStripMenuItem();
+            this.passwortÄndernToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerMain)).BeginInit();
@@ -124,7 +124,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(935, 24);
-            this.menuStrip1.TabIndex = 1;
+            this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // MenuItemData
@@ -137,9 +137,10 @@
             // 
             // MenuItemExit
             // 
+            this.MenuItemExit.Image = global::InstaCarManagement.GUI.Properties.Resources.icons8_multiply_32;
             this.MenuItemExit.Name = "MenuItemExit";
             this.MenuItemExit.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
-            this.MenuItemExit.Size = new System.Drawing.Size(134, 22);
+            this.MenuItemExit.Size = new System.Drawing.Size(180, 22);
             this.MenuItemExit.Text = "Exit";
             // 
             // MenuItemEdit
@@ -153,33 +154,6 @@
             this.MenuItemEdit.Size = new System.Drawing.Size(75, 20);
             this.MenuItemEdit.Text = "Bearbeiten";
             // 
-            // MenuItemEditCar
-            // 
-            this.MenuItemEditCar.Name = "MenuItemEditCar";
-            this.MenuItemEditCar.Size = new System.Drawing.Size(234, 22);
-            this.MenuItemEditCar.Text = "Fahrzeuge anlegen/bearbeiten";
-            this.MenuItemEditCar.Click += new System.EventHandler(this.MenuItemEditCar_Click);
-            // 
-            // MenuItemEditCustomer
-            // 
-            this.MenuItemEditCustomer.Name = "MenuItemEditCustomer";
-            this.MenuItemEditCustomer.Size = new System.Drawing.Size(234, 22);
-            this.MenuItemEditCustomer.Text = "Kunden anlegen/bearbeiten";
-            this.MenuItemEditCustomer.Click += new System.EventHandler(this.MenuItemEditCustomer_Click);
-            // 
-            // MenuItemEditLocation
-            // 
-            this.MenuItemEditLocation.Name = "MenuItemEditLocation";
-            this.MenuItemEditLocation.Size = new System.Drawing.Size(234, 22);
-            this.MenuItemEditLocation.Text = "Standorte anlegen/bearbeiten";
-            this.MenuItemEditLocation.Click += new System.EventHandler(this.MenuItemEditLocation_Click);
-            // 
-            // MenuItemRentCar
-            // 
-            this.MenuItemRentCar.Name = "MenuItemRentCar";
-            this.MenuItemRentCar.Size = new System.Drawing.Size(234, 22);
-            this.MenuItemRentCar.Text = "Fahrzeug vermieten";
-            // 
             // MenuItemAdministration
             // 
             this.MenuItemAdministration.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -191,13 +165,6 @@
             this.MenuItemAdministration.Text = "Administration";
             this.MenuItemAdministration.Visible = false;
             // 
-            // MenuItemUserManagment
-            // 
-            this.MenuItemUserManagment.Name = "MenuItemUserManagment";
-            this.MenuItemUserManagment.Size = new System.Drawing.Size(180, 22);
-            this.MenuItemUserManagment.Text = "Benutzer verwalten";
-            this.MenuItemUserManagment.Click += new System.EventHandler(this.MenuItemUserManagment_Click);
-            // 
             // MenuItemExtras
             // 
             this.MenuItemExtras.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -205,13 +172,6 @@
             this.MenuItemExtras.Name = "MenuItemExtras";
             this.MenuItemExtras.Size = new System.Drawing.Size(49, 20);
             this.MenuItemExtras.Text = "Extras";
-            // 
-            // passwortÄndernToolStripMenuItem
-            // 
-            this.passwortÄndernToolStripMenuItem.Name = "passwortÄndernToolStripMenuItem";
-            this.passwortÄndernToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
-            this.passwortÄndernToolStripMenuItem.Text = "Passwort ändern";
-            this.passwortÄndernToolStripMenuItem.Click += new System.EventHandler(this.passwortÄndernToolStripMenuItem_Click);
             // 
             // listViewRent
             // 
@@ -260,13 +220,6 @@
             // 
             this.columnHeaderDateEnd.Text = "Ende";
             this.columnHeaderDateEnd.Width = 100;
-            // 
-            // MenuItemPricing
-            // 
-            this.MenuItemPricing.Name = "MenuItemPricing";
-            this.MenuItemPricing.Size = new System.Drawing.Size(180, 22);
-            this.MenuItemPricing.Text = "Preis anpassen";
-            this.MenuItemPricing.Click += new System.EventHandler(this.MenuItemPricing_Click);
             // 
             // splitContainerMain
             // 
@@ -332,6 +285,68 @@
             this.pictureBoxLogo.Size = new System.Drawing.Size(141, 85);
             this.pictureBoxLogo.TabIndex = 0;
             this.pictureBoxLogo.TabStop = false;
+            // 
+            // MenuItemEditCar
+            // 
+            this.MenuItemEditCar.Image = global::InstaCarManagement.GUI.Properties.Resources.icons8_sedan_32;
+            this.MenuItemEditCar.Name = "MenuItemEditCar";
+            this.MenuItemEditCar.ShortcutKeys = System.Windows.Forms.Keys.F1;
+            this.MenuItemEditCar.Size = new System.Drawing.Size(253, 22);
+            this.MenuItemEditCar.Text = "Fahrzeuge anlegen/bearbeiten";
+            this.MenuItemEditCar.Click += new System.EventHandler(this.MenuItemEditCar_Click);
+            // 
+            // MenuItemEditCustomer
+            // 
+            this.MenuItemEditCustomer.Image = global::InstaCarManagement.GUI.Properties.Resources.icons8_customer_32;
+            this.MenuItemEditCustomer.Name = "MenuItemEditCustomer";
+            this.MenuItemEditCustomer.ShortcutKeys = System.Windows.Forms.Keys.F2;
+            this.MenuItemEditCustomer.Size = new System.Drawing.Size(253, 22);
+            this.MenuItemEditCustomer.Text = "Kunden anlegen/bearbeiten";
+            this.MenuItemEditCustomer.Click += new System.EventHandler(this.MenuItemEditCustomer_Click);
+            // 
+            // MenuItemEditLocation
+            // 
+            this.MenuItemEditLocation.Image = global::InstaCarManagement.GUI.Properties.Resources.icons8_marker_32;
+            this.MenuItemEditLocation.Name = "MenuItemEditLocation";
+            this.MenuItemEditLocation.ShortcutKeys = System.Windows.Forms.Keys.F3;
+            this.MenuItemEditLocation.Size = new System.Drawing.Size(253, 22);
+            this.MenuItemEditLocation.Text = "Standorte anlegen/bearbeiten";
+            this.MenuItemEditLocation.Click += new System.EventHandler(this.MenuItemEditLocation_Click);
+            // 
+            // MenuItemRentCar
+            // 
+            this.MenuItemRentCar.Image = global::InstaCarManagement.GUI.Properties.Resources.icons8_key_2_32;
+            this.MenuItemRentCar.Name = "MenuItemRentCar";
+            this.MenuItemRentCar.ShortcutKeys = System.Windows.Forms.Keys.F4;
+            this.MenuItemRentCar.Size = new System.Drawing.Size(253, 22);
+            this.MenuItemRentCar.Text = "Fahrzeug vermieten";
+            // 
+            // MenuItemUserManagment
+            // 
+            this.MenuItemUserManagment.Image = global::InstaCarManagement.GUI.Properties.Resources.Account_16x;
+            this.MenuItemUserManagment.Name = "MenuItemUserManagment";
+            this.MenuItemUserManagment.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.U)));
+            this.MenuItemUserManagment.Size = new System.Drawing.Size(216, 22);
+            this.MenuItemUserManagment.Text = "Benutzer verwalten";
+            this.MenuItemUserManagment.Click += new System.EventHandler(this.MenuItemUserManagment_Click);
+            // 
+            // MenuItemPricing
+            // 
+            this.MenuItemPricing.Image = global::InstaCarManagement.GUI.Properties.Resources.Currency_16x;
+            this.MenuItemPricing.Name = "MenuItemPricing";
+            this.MenuItemPricing.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
+            this.MenuItemPricing.Size = new System.Drawing.Size(216, 22);
+            this.MenuItemPricing.Text = "Preis anpassen";
+            this.MenuItemPricing.Click += new System.EventHandler(this.MenuItemPricing_Click);
+            // 
+            // passwortÄndernToolStripMenuItem
+            // 
+            this.passwortÄndernToolStripMenuItem.Image = global::InstaCarManagement.GUI.Properties.Resources.ChangePassword_16x;
+            this.passwortÄndernToolStripMenuItem.Name = "passwortÄndernToolStripMenuItem";
+            this.passwortÄndernToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F12;
+            this.passwortÄndernToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.passwortÄndernToolStripMenuItem.Text = "Passwort ändern";
+            this.passwortÄndernToolStripMenuItem.Click += new System.EventHandler(this.passwortÄndernToolStripMenuItem_Click);
             // 
             // FormMain
             // 

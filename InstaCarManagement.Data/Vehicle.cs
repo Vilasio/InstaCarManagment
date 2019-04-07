@@ -57,11 +57,21 @@ namespace InstaCarManagement.Data
         public bool InUse { get; set; }
         public bool Locked { get; set; }
 
-        /*public List<ImageCar> Images
+        private List<ImageCar> pictures = null;
+
+        public List<ImageCar> Pictures
         {
-            get { return myVar; }
-            set { myVar = value; }
-        }*/
+            get
+            {
+                if (pictures == null)
+                {
+                    pictures = ImageCar.GetList(this.connection, this);
+                }
+                return pictures;
+            }
+            set { pictures = value; }
+        }
+
 
         #endregion
         //----------------------------------------------------------------------------------------------
@@ -240,7 +250,14 @@ namespace InstaCarManagement.Data
             command.Parameters.AddWithValue("lo", true);
             command.Parameters.AddWithValue("iu", false);
 
-            return command.ExecuteNonQuery();
+            int result = command.ExecuteNonQuery();
+
+            foreach (ImageCar pic in this.pictures)
+            {
+                pic.Save();
+            }
+
+            return result;
         }
 
         public int Lock()
