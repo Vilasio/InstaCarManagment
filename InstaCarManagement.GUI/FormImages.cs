@@ -8,6 +8,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -84,6 +85,7 @@ namespace InstaCarManagement.GUI
                     }
                     this.labelStatus.Visible = true;
                     this.labelStatus.Text = "Es kann nur ein Hauptbild definert werden.";
+                    SystemSounds.Asterisk.Play();
                     return false;
                 }
                 if (list.Count == 0)
@@ -91,6 +93,7 @@ namespace InstaCarManagement.GUI
 
                     this.labelStatus.Visible = true;
                     this.labelStatus.Text = "Es wurde kein Hauptbild definiert.";
+                    SystemSounds.Asterisk.Play();
                     return false;
                 }
             }
@@ -182,6 +185,12 @@ namespace InstaCarManagement.GUI
                 this.Close();
             }
             
+        }
+
+        private void buttonCancel_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
         }
     }
 }

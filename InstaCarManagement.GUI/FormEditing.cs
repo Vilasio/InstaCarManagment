@@ -298,6 +298,7 @@ namespace InstaCarManagement.GUI
         //----------------------------------------------------------------------------------------------
         #region Vehicle
         List<Vehicle> vehicles = null;
+        List<Feature> features = null;
         Vehicle vehicle = null;
         bool editVehic = false;
 
@@ -354,7 +355,7 @@ namespace InstaCarManagement.GUI
             this.textBoxVehicleBrand.Text = this.vehicle.Brand;
             this.textBoxVehicleHP.Text = this.vehicle.HP.ToString();
             this.textBoxVehiclePrice.Text = this.vehicle.Price.ToString();
-            this.comboBoxVehicleFeature1.SelectedIndex = Convert.ToInt32( this.vehicle.Feature1);
+            this.comboBoxVehicleFeature1.SelectedIndex = Convert.ToInt32(this.vehicle.Feature1);
             this.comboBoxVehicleFeature2.SelectedIndex = Convert.ToInt32(this.vehicle.Feature2);
             this.comboBoxVehicleFeature3.SelectedIndex = Convert.ToInt32(this.vehicle.Feature3);
             this.comboBoxVehicleFeature4.SelectedIndex = Convert.ToInt32(this.vehicle.Feature4);
@@ -371,6 +372,8 @@ namespace InstaCarManagement.GUI
             {
                 this.buttonLock.Enabled = true;
                 this.buttonLock.Visible = true;
+                this.checkBoxVehicleNotAvailable.Enabled = true;
+                
                 if (this.vehicle.Locked)
                 {
                     this.labelVehicleStatusLocked.Text = "Aktueller Status: Zugesperrt";
@@ -386,6 +389,8 @@ namespace InstaCarManagement.GUI
             {
                 this.buttonLock.Enabled = false;
                 this.buttonLock.Visible = false;
+                this.checkBoxVehicleNotAvailable.Enabled = false;
+                
             }
             
             
@@ -444,6 +449,8 @@ namespace InstaCarManagement.GUI
                
             }
 
+            this.vehicle.Price = Convert.ToDouble(this.textBoxVehiclePrice.Text);
+
             this.vehicle.Feature1 = Convert.ToInt64(this.comboBoxVehicleFeature1.SelectedValue);
             this.vehicle.Feature2 = Convert.ToInt64(this.comboBoxVehicleFeature2.SelectedValue);
             this.vehicle.Feature3 = Convert.ToInt64(this.comboBoxVehicleFeature3.SelectedValue);
@@ -463,12 +470,13 @@ namespace InstaCarManagement.GUI
             this.textBoxVehicleModell.Text = string.Empty;
             this.textBoxVehicleBrand.Text = string.Empty;
             this.textBoxVehicleHP.Text = string.Empty;
-            this.textBoxVehiclePrice.Text = string.Empty;
+            this.textBoxVehiclePrice.Text = Vehicle.Getprice(connection).ToString();
             this.comboBoxVehicleFeature1.DataSource = Enum.GetValues(typeof(enumFeatures));
             this.comboBoxVehicleFeature2.DataSource = Enum.GetValues(typeof(enumFeatures));
             this.comboBoxVehicleFeature3.DataSource = Enum.GetValues(typeof(enumFeatures));
             this.comboBoxVehicleFeature4.DataSource = Enum.GetValues(typeof(enumFeatures));
             this.comboBoxVehicleLocation.SelectedValue = (long)1;
+            
             this.pictureBoxVehicleImage.Image = null;
 
             this.groupBoxVehicles.Text = "Neues Fahrzeug anlegen";
@@ -517,6 +525,7 @@ namespace InstaCarManagement.GUI
             this.comboBoxVehicleLocation.DataSource = this.locations;
             this.comboBoxVehicleLocation.DisplayMember = "Name";
             this.comboBoxVehicleLocation.ValueMember = "LocationId";
+           
         }
 
         private void tabPageVehicle_Leave(object sender, EventArgs e)

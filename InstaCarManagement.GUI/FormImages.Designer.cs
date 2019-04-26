@@ -34,12 +34,12 @@
             this.labelStatus = new System.Windows.Forms.Label();
             this.buttonDelete = new System.Windows.Forms.Button();
             this.groupBoxImages = new System.Windows.Forms.GroupBox();
+            this.buttonCancel = new System.Windows.Forms.Button();
             this.splitContainerImages = new System.Windows.Forms.SplitContainer();
             this.groupBoxHeader = new System.Windows.Forms.GroupBox();
             this.labelTopic = new System.Windows.Forms.Label();
             this.labelHeader = new System.Windows.Forms.Label();
             this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
-            this.buttonCancel = new System.Windows.Forms.Button();
             this.groupBoxImages.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerImages)).BeginInit();
             this.splitContainerImages.Panel1.SuspendLayout();
@@ -63,7 +63,7 @@
             // 
             this.buttonAdd.Location = new System.Drawing.Point(6, 19);
             this.buttonAdd.Name = "buttonAdd";
-            this.buttonAdd.Size = new System.Drawing.Size(75, 23);
+            this.buttonAdd.Size = new System.Drawing.Size(75, 50);
             this.buttonAdd.TabIndex = 0;
             this.buttonAdd.Text = "Hinzufügen";
             this.buttonAdd.UseVisualStyleBackColor = true;
@@ -71,9 +71,9 @@
             // 
             // buttonSave
             // 
-            this.buttonSave.Location = new System.Drawing.Point(6, 486);
+            this.buttonSave.Location = new System.Drawing.Point(6, 465);
             this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(75, 23);
+            this.buttonSave.Size = new System.Drawing.Size(75, 50);
             this.buttonSave.TabIndex = 2;
             this.buttonSave.Text = "Speichern";
             this.buttonSave.UseVisualStyleBackColor = true;
@@ -93,9 +93,9 @@
             // 
             this.buttonDelete.Location = new System.Drawing.Point(6, 237);
             this.buttonDelete.Name = "buttonDelete";
-            this.buttonDelete.Size = new System.Drawing.Size(75, 23);
+            this.buttonDelete.Size = new System.Drawing.Size(75, 50);
             this.buttonDelete.TabIndex = 1;
-            this.buttonDelete.Text = "Löschen";
+            this.buttonDelete.Text = "Markierte Löschen";
             this.buttonDelete.UseVisualStyleBackColor = true;
             this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
             // 
@@ -111,6 +111,16 @@
             this.groupBoxImages.Size = new System.Drawing.Size(200, 521);
             this.groupBoxImages.TabIndex = 5;
             this.groupBoxImages.TabStop = false;
+            // 
+            // buttonCancel
+            // 
+            this.buttonCancel.Location = new System.Drawing.Point(125, 465);
+            this.buttonCancel.Name = "buttonCancel";
+            this.buttonCancel.Size = new System.Drawing.Size(75, 50);
+            this.buttonCancel.TabIndex = 3;
+            this.buttonCancel.Text = "Abbrechen";
+            this.buttonCancel.UseVisualStyleBackColor = true;
+            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // splitContainerImages
             // 
@@ -177,15 +187,6 @@
             this.pictureBoxLogo.Size = new System.Drawing.Size(141, 85);
             this.pictureBoxLogo.TabIndex = 0;
             this.pictureBoxLogo.TabStop = false;
-            // 
-            // buttonCancel
-            // 
-            this.buttonCancel.Location = new System.Drawing.Point(125, 486);
-            this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(75, 23);
-            this.buttonCancel.TabIndex = 3;
-            this.buttonCancel.Text = "Abbrechen";
-            this.buttonCancel.UseVisualStyleBackColor = true;
             // 
             // FormImages
             // 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -247,6 +248,30 @@ namespace InstaCarManagement.Data
 
             }
             return result;
+        }
+
+        public static DataTable GetTable(NpgsqlConnection connection)
+        {
+            DataTable allUsers =  new DataTable("Accounts");
+            allUsers.Columns.Add(new DataColumn("Name"));
+            allUsers.Columns.Add(new DataColumn("Role"));
+
+            NpgsqlCommand command = new NpgsqlCommand();
+                command.Connection = connection;
+                command.CommandText = $"Select username, role from {TABLE};";
+
+                NpgsqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                allUsers.Rows.Add(reader.IsDBNull(0) ? null : reader.GetString(0),
+                    reader.IsDBNull(1) ? 3 : reader.GetInt64(1));
+                            
+                }
+                reader.Close();
+                
+            
+            return allUsers;
         }
 
         #endregion

@@ -29,29 +29,29 @@
         private void InitializeComponent()
         {
             this.splitContainerPricing = new System.Windows.Forms.SplitContainer();
-            this.tabControlAdminOptions = new System.Windows.Forms.TabControl();
-            this.tabPagePricing = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBoxHeader = new System.Windows.Forms.GroupBox();
             this.labelTopic = new System.Windows.Forms.Label();
             this.labelHeader = new System.Windows.Forms.Label();
             this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
-            this.groupBoxPricingVehicle = new System.Windows.Forms.GroupBox();
-            this.labelVehiclePricePerHour = new System.Windows.Forms.Label();
-            this.textBoxVehiclePricePerHour = new System.Windows.Forms.TextBox();
-            this.buttonVehiclePriceSave = new System.Windows.Forms.Button();
-            this.buttonVehiclePriceCancel = new System.Windows.Forms.Button();
-            this.labelEuro = new System.Windows.Forms.Label();
-            this.labelVehiclePriceStatus = new System.Windows.Forms.Label();
+            this.tabControlAdminOptions = new System.Windows.Forms.TabControl();
+            this.tabPagePricing = new System.Windows.Forms.TabPage();
             this.buttonPricingClose = new System.Windows.Forms.Button();
+            this.groupBoxPricingVehicle = new System.Windows.Forms.GroupBox();
+            this.labelVehiclePriceStatus = new System.Windows.Forms.Label();
+            this.labelEuro = new System.Windows.Forms.Label();
+            this.buttonVehiclePriceCancel = new System.Windows.Forms.Button();
+            this.buttonVehiclePriceSave = new System.Windows.Forms.Button();
+            this.textBoxVehiclePricePerHour = new System.Windows.Forms.TextBox();
+            this.labelVehiclePricePerHour = new System.Windows.Forms.Label();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerPricing)).BeginInit();
             this.splitContainerPricing.Panel1.SuspendLayout();
             this.splitContainerPricing.Panel2.SuspendLayout();
             this.splitContainerPricing.SuspendLayout();
-            this.tabControlAdminOptions.SuspendLayout();
-            this.tabPagePricing.SuspendLayout();
             this.groupBoxHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
+            this.tabControlAdminOptions.SuspendLayout();
+            this.tabPagePricing.SuspendLayout();
             this.groupBoxPricingVehicle.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -73,40 +73,6 @@
             this.splitContainerPricing.Size = new System.Drawing.Size(800, 450);
             this.splitContainerPricing.SplitterDistance = 100;
             this.splitContainerPricing.TabIndex = 0;
-            // 
-            // tabControlAdminOptions
-            // 
-            this.tabControlAdminOptions.Controls.Add(this.tabPagePricing);
-            this.tabControlAdminOptions.Controls.Add(this.tabPage2);
-            this.tabControlAdminOptions.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControlAdminOptions.Location = new System.Drawing.Point(0, 0);
-            this.tabControlAdminOptions.Name = "tabControlAdminOptions";
-            this.tabControlAdminOptions.SelectedIndex = 0;
-            this.tabControlAdminOptions.Size = new System.Drawing.Size(800, 346);
-            this.tabControlAdminOptions.TabIndex = 0;
-            // 
-            // tabPagePricing
-            // 
-            this.tabPagePricing.Controls.Add(this.buttonPricingClose);
-            this.tabPagePricing.Controls.Add(this.groupBoxPricingVehicle);
-            this.tabPagePricing.Location = new System.Drawing.Point(4, 22);
-            this.tabPagePricing.Name = "tabPagePricing";
-            this.tabPagePricing.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPagePricing.Size = new System.Drawing.Size(792, 320);
-            this.tabPagePricing.TabIndex = 0;
-            this.tabPagePricing.Text = "Preise";
-            this.tabPagePricing.UseVisualStyleBackColor = true;
-            this.tabPagePricing.Enter += new System.EventHandler(this.tabPagePricing_Enter);
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(792, 295);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // groupBoxHeader
             // 
@@ -153,6 +119,40 @@
             this.pictureBoxLogo.TabIndex = 0;
             this.pictureBoxLogo.TabStop = false;
             // 
+            // tabControlAdminOptions
+            // 
+            this.tabControlAdminOptions.Controls.Add(this.tabPagePricing);
+            this.tabControlAdminOptions.Controls.Add(this.tabPage2);
+            this.tabControlAdminOptions.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControlAdminOptions.Location = new System.Drawing.Point(0, 0);
+            this.tabControlAdminOptions.Name = "tabControlAdminOptions";
+            this.tabControlAdminOptions.SelectedIndex = 0;
+            this.tabControlAdminOptions.Size = new System.Drawing.Size(800, 346);
+            this.tabControlAdminOptions.TabIndex = 0;
+            // 
+            // tabPagePricing
+            // 
+            this.tabPagePricing.Controls.Add(this.buttonPricingClose);
+            this.tabPagePricing.Controls.Add(this.groupBoxPricingVehicle);
+            this.tabPagePricing.Location = new System.Drawing.Point(4, 22);
+            this.tabPagePricing.Name = "tabPagePricing";
+            this.tabPagePricing.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPagePricing.Size = new System.Drawing.Size(792, 320);
+            this.tabPagePricing.TabIndex = 0;
+            this.tabPagePricing.Text = "Preise";
+            this.tabPagePricing.UseVisualStyleBackColor = true;
+            this.tabPagePricing.Enter += new System.EventHandler(this.tabPagePricing_Enter);
+            // 
+            // buttonPricingClose
+            // 
+            this.buttonPricingClose.Location = new System.Drawing.Point(709, 289);
+            this.buttonPricingClose.Name = "buttonPricingClose";
+            this.buttonPricingClose.Size = new System.Drawing.Size(75, 23);
+            this.buttonPricingClose.TabIndex = 6;
+            this.buttonPricingClose.Text = "Schließen";
+            this.buttonPricingClose.UseVisualStyleBackColor = true;
+            this.buttonPricingClose.Click += new System.EventHandler(this.buttonPricingClose_Click);
+            // 
             // groupBoxPricingVehicle
             // 
             this.groupBoxPricingVehicle.Controls.Add(this.labelVehiclePriceStatus);
@@ -168,41 +168,15 @@
             this.groupBoxPricingVehicle.TabStop = false;
             this.groupBoxPricingVehicle.Text = "Fahrzeugpreise";
             // 
-            // labelVehiclePricePerHour
+            // labelVehiclePriceStatus
             // 
-            this.labelVehiclePricePerHour.AutoSize = true;
-            this.labelVehiclePricePerHour.Location = new System.Drawing.Point(3, 29);
-            this.labelVehiclePricePerHour.Name = "labelVehiclePricePerHour";
-            this.labelVehiclePricePerHour.Size = new System.Drawing.Size(69, 13);
-            this.labelVehiclePricePerHour.TabIndex = 0;
-            this.labelVehiclePricePerHour.Text = "Preis/Stunde";
-            // 
-            // textBoxVehiclePricePerHour
-            // 
-            this.textBoxVehiclePricePerHour.Location = new System.Drawing.Point(6, 45);
-            this.textBoxVehiclePricePerHour.Name = "textBoxVehiclePricePerHour";
-            this.textBoxVehiclePricePerHour.Size = new System.Drawing.Size(100, 20);
-            this.textBoxVehiclePricePerHour.TabIndex = 1;
-            // 
-            // buttonVehiclePriceSave
-            // 
-            this.buttonVehiclePriceSave.Location = new System.Drawing.Point(6, 112);
-            this.buttonVehiclePriceSave.Name = "buttonVehiclePriceSave";
-            this.buttonVehiclePriceSave.Size = new System.Drawing.Size(75, 23);
-            this.buttonVehiclePriceSave.TabIndex = 2;
-            this.buttonVehiclePriceSave.Text = "Ändern";
-            this.buttonVehiclePriceSave.UseVisualStyleBackColor = true;
-            this.buttonVehiclePriceSave.Click += new System.EventHandler(this.buttonVehiclePriceSave_Click);
-            // 
-            // buttonVehiclePriceCancel
-            // 
-            this.buttonVehiclePriceCancel.Location = new System.Drawing.Point(87, 112);
-            this.buttonVehiclePriceCancel.Name = "buttonVehiclePriceCancel";
-            this.buttonVehiclePriceCancel.Size = new System.Drawing.Size(75, 23);
-            this.buttonVehiclePriceCancel.TabIndex = 3;
-            this.buttonVehiclePriceCancel.Text = "Abbrechen";
-            this.buttonVehiclePriceCancel.UseVisualStyleBackColor = true;
-            this.buttonVehiclePriceCancel.Click += new System.EventHandler(this.buttonVehiclePriceCancel_Click);
+            this.labelVehiclePriceStatus.AutoSize = true;
+            this.labelVehiclePriceStatus.Location = new System.Drawing.Point(6, 84);
+            this.labelVehiclePriceStatus.Name = "labelVehiclePriceStatus";
+            this.labelVehiclePriceStatus.Size = new System.Drawing.Size(37, 13);
+            this.labelVehiclePriceStatus.TabIndex = 5;
+            this.labelVehiclePriceStatus.Text = "Status";
+            this.labelVehiclePriceStatus.Visible = false;
             // 
             // labelEuro
             // 
@@ -214,25 +188,51 @@
             this.labelEuro.TabIndex = 4;
             this.labelEuro.Text = "€";
             // 
-            // labelVehiclePriceStatus
+            // buttonVehiclePriceCancel
             // 
-            this.labelVehiclePriceStatus.AutoSize = true;
-            this.labelVehiclePriceStatus.Location = new System.Drawing.Point(6, 84);
-            this.labelVehiclePriceStatus.Name = "labelVehiclePriceStatus";
-            this.labelVehiclePriceStatus.Size = new System.Drawing.Size(37, 13);
-            this.labelVehiclePriceStatus.TabIndex = 5;
-            this.labelVehiclePriceStatus.Text = "Status";
-            this.labelVehiclePriceStatus.Visible = false;
+            this.buttonVehiclePriceCancel.Location = new System.Drawing.Point(87, 112);
+            this.buttonVehiclePriceCancel.Name = "buttonVehiclePriceCancel";
+            this.buttonVehiclePriceCancel.Size = new System.Drawing.Size(75, 23);
+            this.buttonVehiclePriceCancel.TabIndex = 3;
+            this.buttonVehiclePriceCancel.Text = "Abbrechen";
+            this.buttonVehiclePriceCancel.UseVisualStyleBackColor = true;
+            this.buttonVehiclePriceCancel.Click += new System.EventHandler(this.buttonVehiclePriceCancel_Click);
             // 
-            // buttonPricingClose
+            // buttonVehiclePriceSave
             // 
-            this.buttonPricingClose.Location = new System.Drawing.Point(709, 289);
-            this.buttonPricingClose.Name = "buttonPricingClose";
-            this.buttonPricingClose.Size = new System.Drawing.Size(75, 23);
-            this.buttonPricingClose.TabIndex = 6;
-            this.buttonPricingClose.Text = "Schließen";
-            this.buttonPricingClose.UseVisualStyleBackColor = true;
-            this.buttonPricingClose.Click += new System.EventHandler(this.buttonPricingClose_Click);
+            this.buttonVehiclePriceSave.Location = new System.Drawing.Point(6, 112);
+            this.buttonVehiclePriceSave.Name = "buttonVehiclePriceSave";
+            this.buttonVehiclePriceSave.Size = new System.Drawing.Size(75, 23);
+            this.buttonVehiclePriceSave.TabIndex = 2;
+            this.buttonVehiclePriceSave.Text = "Ändern";
+            this.buttonVehiclePriceSave.UseVisualStyleBackColor = true;
+            this.buttonVehiclePriceSave.Click += new System.EventHandler(this.buttonVehiclePriceSave_Click);
+            // 
+            // textBoxVehiclePricePerHour
+            // 
+            this.textBoxVehiclePricePerHour.Location = new System.Drawing.Point(6, 45);
+            this.textBoxVehiclePricePerHour.Name = "textBoxVehiclePricePerHour";
+            this.textBoxVehiclePricePerHour.Size = new System.Drawing.Size(100, 20);
+            this.textBoxVehiclePricePerHour.TabIndex = 1;
+            // 
+            // labelVehiclePricePerHour
+            // 
+            this.labelVehiclePricePerHour.AutoSize = true;
+            this.labelVehiclePricePerHour.Location = new System.Drawing.Point(3, 29);
+            this.labelVehiclePricePerHour.Name = "labelVehiclePricePerHour";
+            this.labelVehiclePricePerHour.Size = new System.Drawing.Size(69, 13);
+            this.labelVehiclePricePerHour.TabIndex = 0;
+            this.labelVehiclePricePerHour.Text = "Preis/Stunde";
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(792, 320);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Coming Soon";
+            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // FormAdminOptions
             // 
@@ -241,17 +241,17 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.splitContainerPricing);
             this.Name = "FormAdminOptions";
-            this.Text = "FormPricing";
+            this.Text = "Administrations Optionen";
             this.Load += new System.EventHandler(this.FormAdminOptions_Load);
             this.splitContainerPricing.Panel1.ResumeLayout(false);
             this.splitContainerPricing.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerPricing)).EndInit();
             this.splitContainerPricing.ResumeLayout(false);
-            this.tabControlAdminOptions.ResumeLayout(false);
-            this.tabPagePricing.ResumeLayout(false);
             this.groupBoxHeader.ResumeLayout(false);
             this.groupBoxHeader.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).EndInit();
+            this.tabControlAdminOptions.ResumeLayout(false);
+            this.tabPagePricing.ResumeLayout(false);
             this.groupBoxPricingVehicle.ResumeLayout(false);
             this.groupBoxPricingVehicle.PerformLayout();
             this.ResumeLayout(false);

@@ -8,11 +8,13 @@ CREATE EXTENSION pgcrypto;
 ALTER TABLE InstaCar.rent DROP CONSTRAINT rent_car_fk;
 ALTER TABLE InstaCar.rent DROP CONSTRAINT rent_customer_fk;
 ALTER TABLE InstaCar.car DROP CONSTRAINT car_location_fk;
+ALTER TABLE InstaCar.image DROP CONSTRAINT image_car_fk;
 
 DROP SEQUENCE InstaCar.customer_seq;
 DROP SEQUENCE InstaCar.account_seq;
 DROP SEQUENCE InstaCar.rent_seq;
 DROP SEQUENCE InstaCar.car_seq;
+DROP SEQUENCE InstaCar.feature_seq;
 DROP SEQUENCE InstaCar.image_seq;
 DROP SEQUENCE InstaCar.location_seq;
 
@@ -21,6 +23,7 @@ DROP TABLE InstaCar.customer;
 DROP TABLE InstaCar.account;
 DROP TABLE InstaCar.rent;
 DROP TABLE InstaCar.car;
+DROP TABLE InstaCar.feature;
 DROP TABLE InstaCar.image;
 DROP TABLE InstaCar.location;
 
@@ -126,6 +129,24 @@ CREATE TABLE InstaCar.car
 CREATE SEQUENCE InstaCar.car_seq START WITH 1 INCREMENT BY 1;
 
 --*************************************************
+-- Feature
+--*************************************************
+CREATE TABLE InstaCar.feature
+(
+	feature_id				NUMERIC(10) not null,
+	featurename				VARCHAR(250),
+	
+
+	CONSTRAINT feature_pk PRIMARY KEY (feature_id)
+	
+
+);
+
+CREATE SEQUENCE InstaCar.feature_seq START WITH 1 INCREMENT BY 1;
+
+
+
+--*************************************************
 -- Images
 --*************************************************
 CREATE TABLE InstaCar.image
@@ -181,6 +202,7 @@ GRANT USAGE ON SCHEMA InstaCar TO clerk;
 grant select, insert, update, delete on InstaCar.customer to clerk;
 grant select, insert, update, delete on InstaCar.account to clerk;
 grant select, insert, update, delete on InstaCar.car to clerk;
+grant select, insert, update, delete on InstaCar.feature to clerk;
 grant select, insert, update, delete on InstaCar.image to clerk;
 grant select, insert, update, delete on InstaCar.location to clerk;
 grant select, insert, update, delete on InstaCar.rent to clerk;
@@ -189,6 +211,7 @@ grant select, insert, update, delete on InstaCar.rent to clerk;
 GRANT SELECT, USAGE ON SEQUENCE InstaCar.customer_seq to clerk;
 GRANT SELECT, USAGE ON SEQUENCE InstaCar.account_seq to clerk;
 GRANT SELECT, USAGE ON SEQUENCE InstaCar.car_seq to clerk;
+GRANT SELECT, USAGE ON SEQUENCE InstaCar.feature_seq to clerk;
 GRANT SELECT, USAGE ON SEQUENCE InstaCar.image_seq to clerk;
 GRANT SELECT, USAGE ON SEQUENCE InstaCar.location_seq to clerk;
 GRANT SELECT, USAGE ON SEQUENCE InstaCar.rent_seq to clerk;
@@ -235,6 +258,13 @@ INSERT INTO InstaCar.car (car_id, location_id, modell, brand, hp, price, feature
 INSERT INTO InstaCar.car (car_id, location_id, modell, brand, hp, price, feature1, feature2, feature3, feature4, notavailable, in_use, locked) values((SELECT NEXTVAL('InstaCar.car_seq')),8 , 'Focus Kombi', 'Ford', 130, 20.00, 1,2,3,4, false, false, true);                        
 INSERT INTO InstaCar.car (car_id, location_id, modell, brand, hp, price, feature1, feature2, feature3, feature4, notavailable, in_use, locked) values((SELECT NEXTVAL('InstaCar.car_seq')),9 , 'Astra Kombi', 'Opel', 120, 20.00, 1,2,3,4, false, false, true);                        
 INSERT INTO InstaCar.car (car_id, location_id, modell, brand, hp, price, feature1, feature2, feature3, feature4, notavailable, in_use, locked) values((SELECT NEXTVAL('InstaCar.car_seq')),10 , 'E300', 'Mercedes Benz', 125, 20.00, 1,2,3,4, false, false, true);
+
+-- Feature
+INSERT INTO InstaCar.feature (feature_id, featurename) values((SELECT NEXTVAL('InstaCar.feature_seq')),'Kein');
+INSERT INTO InstaCar.feature (feature_id, featurename) values((SELECT NEXTVAL('InstaCar.feature_seq')),'Klimanlage');
+INSERT INTO InstaCar.feature (feature_id, featurename) values((SELECT NEXTVAL('InstaCar.feature_seq')),'Tempomat');
+INSERT INTO InstaCar.feature (feature_id, featurename) values((SELECT NEXTVAL('InstaCar.feature_seq')),'Mediacaenter');
+INSERT INTO InstaCar.feature (feature_id, featurename) values((SELECT NEXTVAL('InstaCar.feature_seq')),'Ledersitze');
 -- Customer
 INSERT INTO InstaCar.customer (customer_id, customer_no, name, familyname, street, housenr, postcode, city, email, telefon, iban, bic, password, nickname) values((SELECT NEXTVAL('InstaCar.customer_seq')), '2019/000001','Thomas', 'Müller', 'Mayerstraße', 1, '5020', 'Salzburg', 'Example@gmail.com', '0664/1234567', 'AT1234456789', 'Bank123',CRYPT('1234', GEN_SALT('bf')), 'Tmueller' );
 INSERT INTO InstaCar.customer (customer_id, customer_no, name, familyname, street, housenr, postcode, city, email, telefon, iban, bic, password, nickname) values((SELECT NEXTVAL('InstaCar.customer_seq')), '2019/000002','Herbert', 'Maier', 'Müllerstraße', 23, '5020', 'Salzburg', 'Example@gmail.com', '0664/1234567','AT1234456789', 'Bank123',CRYPT('1234', GEN_SALT('bf')), 'Hmaier' );

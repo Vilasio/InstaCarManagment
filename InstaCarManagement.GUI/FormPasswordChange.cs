@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -47,6 +48,7 @@ namespace InstaCarManagement.GUI
                 this.pictureBoxCheck.Visible = false;
                 this.pictureBoxUncheck.Visible = true;
                 this.labelStatus.Visible = true;
+                SystemSounds.Asterisk.Play();
                 this.labelStatus.Text = "Die Passwörter stimmen nicht überein.";
             }
         }

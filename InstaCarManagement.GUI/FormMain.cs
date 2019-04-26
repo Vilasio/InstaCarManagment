@@ -126,5 +126,33 @@ namespace InstaCarManagement.GUI
             FormAdminOptions formAdminOptions = new FormAdminOptions(this.connection);
             formAdminOptions.ShowDialog();
         }
+
+        private void MenuItemPrint_Click(object sender, EventArgs e)
+        {
+            DataTable printAccounts = Account.GetTable(this.connection);
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "PDF-File|*.pdf";
+            saveFileDialog.Title = "Pdf exportieren";
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                ExportPdf.ExportToPdfQuer(printAccounts, saveFileDialog.FileName);
+            }
+        }
+
+        private void timerRents_Tick(object sender, EventArgs e)
+        {
+            FilllistviewRent();
+        }
+
+        private void MenuItemRentCar_Click(object sender, EventArgs e)
+        {
+            FormRent formRent = new FormRent(this.connection);
+
+            if (formRent.ShowDialog() == DialogResult.OK)
+            {
+                FilllistviewRent();
+            }
+        }
     }
 }

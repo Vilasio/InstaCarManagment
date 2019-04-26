@@ -839,6 +839,7 @@
             // checkBoxVehicleNotAvailable
             // 
             this.checkBoxVehicleNotAvailable.AutoSize = true;
+            this.checkBoxVehicleNotAvailable.Enabled = false;
             this.checkBoxVehicleNotAvailable.Location = new System.Drawing.Point(4, 259);
             this.checkBoxVehicleNotAvailable.Name = "checkBoxVehicleNotAvailable";
             this.checkBoxVehicleNotAvailable.Size = new System.Drawing.Size(99, 17);

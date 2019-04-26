@@ -63,6 +63,8 @@ namespace InstaCarManagement.Data
         //Static
         //----------------------------------------------------------------------------------------------
         #region static
+
+
         public static List<ImageCar> GetList(NpgsqlConnection connection, Vehicle vehicle)
         {
             List<ImageCar> images = new List<ImageCar>();
@@ -92,6 +94,37 @@ namespace InstaCarManagement.Data
                 reader.Close();
             }
             return images;
+        }
+
+        public static ImageCar GetMain(NpgsqlConnection connection, long? CarId)
+        {
+            ImageCar image = null;
+            if (CarId.HasValue)
+            {
+                NpgsqlCommand command = new NpgsqlCommand($"Select image_id, picture, kind, main, description from {TABLE} where car_id = :cid and main = true", connection);
+                command.Parameters.AddWithValue("cid", CarId.Value);
+                NpgsqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    image = new ImageCar(connection);
+
+                    image.ImageId = reader.GetInt64(0);
+                    image.Picture = reader.IsDBNull(1) ? null : (byte[])reader.GetValue(1);
+                    image.Kind = reader.IsDBNull(2) ? null : reader.GetString(2);
+                    image.Main = reader.IsDBNull(3) ? false : reader.GetBoolean(3);
+                    image.Description = reader.IsDBNull(4) ? null : reader.GetString(4);
+
+                    MemoryStream memoryStream = new MemoryStream(image.Picture);
+                    image.Image = Image.FromStream(memoryStream);
+                    memoryStream.Close();
+
+                    
+
+                }
+                reader.Close();
+            }
+            return image;
         }
         #endregion
         //----------------------------------------------------------------------------------------------

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Npgsql;
 using InstaCarManagement.Data;
+using System.Media;
 
 namespace InstaCarManagement.GUI
 {
@@ -64,6 +65,7 @@ namespace InstaCarManagement.GUI
                         if (actualUser.Blocked)
                         {
                             this.labelMsg.Text = $"Benutzer {actualUser.Username} wurde gesperrt.\nWenden Sie sich bitte an den Administrator" ;
+                            SystemSounds.Asterisk.Play();
                             this.labelMsg.Visible = true;
                         }
                         else
@@ -72,11 +74,13 @@ namespace InstaCarManagement.GUI
                             {
                                 this.labelMsg.Text = $"Passwort wurde falsch eingegeben!\n" +
                                 $"Noch {(3 - actualUser.Tried)} Versuche";
+                                SystemSounds.Asterisk.Play();
                                 this.labelMsg.Visible = true;
                             }
                             else
                             {
                                 this.labelMsg.Text = $"Passwort wurde falsch eingegeben!";
+                                SystemSounds.Asterisk.Play();
                                 this.labelMsg.Visible = true;
                             }
                             
@@ -86,6 +90,7 @@ namespace InstaCarManagement.GUI
                 else
                 {
                     this.labelMsg.Text = "Benutzername ist falsch!";
+                    SystemSounds.Asterisk.Play();
                     this.labelMsg.Visible = true;
                 }
             }

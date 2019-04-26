@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace InstaCarManagement.Data
 {
-    class Feature
+    public class Feature
     {
         //----------------------------------------------------------------------------------------------
         //Const
@@ -22,7 +22,11 @@ namespace InstaCarManagement.Data
         //----------------------------------------------------------------------------------------------
         #region privateMember
         private NpgsqlConnection connection = null;
-        private static List<Feature> Features = null;
+        public static List<Feature> Features1 = null;
+        public static List<Feature> Features2 = null;
+        public static List<Feature> Features3 = null;
+        public static List<Feature> Features4 = null;
+
         #endregion
 
         //----------------------------------------------------------------------------------------------
@@ -51,15 +55,16 @@ namespace InstaCarManagement.Data
         //Static
         //----------------------------------------------------------------------------------------------
         #region static
-        public static List<Feature> GetList(NpgsqlConnection connection)
+        public static void GetLists(NpgsqlConnection connection)
         {
-            NpgsqlCommand command = new NpgsqlCommand($"Select image_id, picture, kind, main, description from {TABLE} where car_id = :cid", connection);
+           
+            NpgsqlCommand command = new NpgsqlCommand($"Select * from {TABLE}", connection);
             NpgsqlDataReader reader = command.ExecuteReader();
-            Features = new List<Feature>();
+            Features1 = new List<Feature>();
 
             while (reader.Read())
             {
-                Features.Add(new Feature(connection)
+                Features1.Add(new Feature(connection)
                 {
                     FeatureId = reader.GetInt64(0),
                     FeatureName = reader.IsDBNull(1) ? null : reader.GetString(1)
@@ -67,7 +72,12 @@ namespace InstaCarManagement.Data
 
             }
             reader.Close();
-            return Features;
+
+            Features2 = new List<Feature>(Features1);
+            Features3 = new List<Feature>(Features1);
+            Features4 = new List<Feature>(Features1);
+
+
         }
         #endregion
         //----------------------------------------------------------------------------------------------
@@ -90,7 +100,7 @@ namespace InstaCarManagement.Data
                 this.FeatureId = (long?)command.ExecuteScalar();
                 command.CommandText = $" insert into {TABLE} ({COLUMN})" +
                     $" values(:fid, :fe)";
-                Features.Add(this);
+                Features1.Add(this);
             }
 
             command.Parameters.AddWithValue("fid", this.FeatureId.Value);
@@ -113,7 +123,7 @@ namespace InstaCarManagement.Data
                 command.CommandText = $"delete from {TABLE} where feature_id = :fid";
                 command.Parameters.AddWithValue("fid", this.FeatureId.Value);
                 result = command.ExecuteNonQuery();
-                Features.Remove(this);
+                Features1.Remove(this);
                 return result;
             }
             else

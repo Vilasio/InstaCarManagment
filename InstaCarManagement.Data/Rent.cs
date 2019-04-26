@@ -142,7 +142,7 @@ namespace InstaCarManagement.Data
         {
             NpgsqlCommand command = new NpgsqlCommand();
             command.Connection = this.connection;
-            if (this.CarId.HasValue)
+            if (this.RentId.HasValue)
             {
 
                 command.CommandText =
@@ -154,7 +154,7 @@ namespace InstaCarManagement.Data
             {
                 command.CommandText = $"select nextval('{TABLE}_seq')";
                 this.RentId = (long?)command.ExecuteScalar();
-                command.CommandText = $" insert into {TABLE} (rent_id, customer_id, car_id, rent_no, datebegin, dateend, sumprice, units)" +
+                command.CommandText = $" insert into {TABLE} (rent_id, customer_id, car_id, rent_no, datebegin, dateend, sumprice, hours)" +
                     $" values(:rid, :cid, :caid, :rno, :db, :de, :sp, :un)";
             }
             if (this.RentNo == null || this.RentNo == "")// CustomerNO generieren--------------------------
@@ -172,7 +172,7 @@ namespace InstaCarManagement.Data
             command.Parameters.AddWithValue("caid", this.CarId.Value);
             command.Parameters.AddWithValue("rno", this.RentNo);
             command.Parameters.AddWithValue("db", this.Begin.HasValue ? (object)this.Begin.Value : (object)DBNull.Value);
-            command.Parameters.AddWithValue("db", this.End.HasValue ? (object)this.End.Value : (object)DBNull.Value);
+            command.Parameters.AddWithValue("de", this.End.HasValue ? (object)this.End.Value : (object)DBNull.Value);
             command.Parameters.AddWithValue("sp", this.SumPrice.HasValue ? (object)this.SumPrice.Value : 0);
             command.Parameters.AddWithValue("un", this.Units.HasValue ? (object)this.Units.Value : 0);
 

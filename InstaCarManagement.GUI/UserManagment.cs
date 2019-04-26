@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Npgsql;
 using InstaCarManagement.Data;
+using System.Media;
 
 namespace InstaCarManagement.GUI
 {
@@ -79,7 +80,7 @@ namespace InstaCarManagement.GUI
             {
                 item = new ListViewItem();
                 item.Text = user.Username;
-                item.SubItems.Add(user.Blocked.ToString());
+                item.SubItems.Add(user.Blocked ? "Ja" : "Nein");
                 item.Tag = user;
                 this.listViewUser.Items.Add(item);
             }
@@ -204,6 +205,7 @@ namespace InstaCarManagement.GUI
                 else
                 {
                     this.labelResult.Visible = true;
+                    SystemSounds.Asterisk.Play();
                     this.labelResult.Text = "Fehlgeschlagen!!";
                 }
                 FillListViewUser();

@@ -148,10 +148,10 @@ namespace InstaCarManagement.Data
             return vehicle;
         }
 
-        public static Vehicle GetAvailableVehicles(NpgsqlConnection connection)
+        public static List<Vehicle> GetAvailableVehicles(NpgsqlConnection connection)
         {
+            List<Vehicle> allVehicles = new List<Vehicle>();
 
-            Vehicle vehicle = null;
             NpgsqlCommand command = new NpgsqlCommand();
             command.Connection = connection;
             command.CommandText = $"Select * from {TABLE} where in_use = false and (reserved < (current_timestamp + interval '1h') or reserved is null);";
@@ -159,7 +159,7 @@ namespace InstaCarManagement.Data
 
             while (reader.Read())
             {
-                vehicle = new Vehicle(connection)
+                allVehicles.Add(new Vehicle(connection)
                 {
                     CarId = reader.GetInt64(0),
                     LocationId = reader.GetInt64(1),
@@ -175,10 +175,43 @@ namespace InstaCarManagement.Data
                     Reserved = reader.IsDBNull(11) ? null : (DateTime?)reader.GetDateTime(11),
                     InUse = reader.IsDBNull(12) ? true : reader.GetBoolean(12),
                     Locked = reader.IsDBNull(13) ? true : reader.GetBoolean(13)
-                };
+                });
             }
             reader.Close();
-            return vehicle;
+            return allVehicles;
+        }
+
+        public static List<Vehicle> GetAvailableVehicles(NpgsqlConnection connection)
+        {
+            List<Vehicle> allVehicles = new List<Vehicle>();
+
+            NpgsqlCommand command = new NpgsqlCommand();
+            command.Connection = connection;
+            command.CommandText = $"Select * from {TABLE} where in_use = false and (reserved < (current_timestamp + interval '1h') or reserved is null);";
+            NpgsqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                allVehicles.Add(new Vehicle(connection)
+                {
+                    CarId = reader.GetInt64(0),
+                    LocationId = reader.GetInt64(1),
+                    Modell = reader.IsDBNull(2) ? null : reader.GetString(2),
+                    Brand = reader.IsDBNull(3) ? null : reader.GetString(3),
+                    HP = reader.IsDBNull(4) ? 0 : reader.GetInt64(4),
+                    Price = reader.IsDBNull(5) ? 0 : reader.GetDouble(5),
+                    Feature1 = reader.IsDBNull(6) ? 0 : reader.GetInt64(6),
+                    Feature2 = reader.IsDBNull(7) ? 0 : reader.GetInt64(7),
+                    Feature3 = reader.IsDBNull(8) ? 0 : reader.GetInt64(8),
+                    Feature4 = reader.IsDBNull(9) ? 0 : reader.GetInt64(9),
+                    NotAvailable = reader.IsDBNull(10) ? true : reader.GetBoolean(10),
+                    Reserved = reader.IsDBNull(11) ? null : (DateTime?)reader.GetDateTime(11),
+                    InUse = reader.IsDBNull(12) ? true : reader.GetBoolean(12),
+                    Locked = reader.IsDBNull(13) ? true : reader.GetBoolean(13)
+                });
+            }
+            reader.Close();
+            return allVehicles;
         }
 
         public static double Getprice(NpgsqlConnection connection)
@@ -233,6 +266,7 @@ namespace InstaCarManagement.Data
             {
                 command.CommandText = $"select nextval('{TABLE}_seq')";
                 this.CarId = (long?)command.ExecuteScalar();
+                
                 command.CommandText = $" insert into {TABLE} ( car_id,location_id, modell , brand, hp, price, feature1, feature2,feature3, feature4, notavailable, in_use, locked )" +
                     $" values(:cid,:lid, :mo, :br, :hp, :pr, :f1, :f2, :f3, :f4, :no, :iu, :lo)";
             }
@@ -251,11 +285,14 @@ namespace InstaCarManagement.Data
             command.Parameters.AddWithValue("iu", false);
 
             int result = command.ExecuteNonQuery();
-
-            foreach (ImageCar pic in this.pictures)
+            if (this.pictures != null)
             {
-                pic.Save();
+                foreach (ImageCar pic in this.pictures)
+                {
+                    pic.Save();
+                }
             }
+            
 
             return result;
         }
