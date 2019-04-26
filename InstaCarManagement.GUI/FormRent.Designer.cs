@@ -397,6 +397,7 @@
             this.dateTimePickerBegin.ShowCheckBox = true;
             this.dateTimePickerBegin.Size = new System.Drawing.Size(154, 20);
             this.dateTimePickerBegin.TabIndex = 45;
+            this.dateTimePickerBegin.ValueChanged += new System.EventHandler(this.dateTimePickerBegin_ValueChanged);
             // 
             // buttonEndNow
             // 

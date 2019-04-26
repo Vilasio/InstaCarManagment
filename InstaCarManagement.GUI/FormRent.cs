@@ -60,11 +60,16 @@ namespace InstaCarManagement.GUI
         {
             this.groupBoxHeader.Paint += PaintBorderlessGroupBox;
             this.customers = Customer.GetAllCustomer(this.connection);
-            this.vehicles = Vehicle.GetAvailableVehicles(this.connection);
+            this.vehicles = Vehicle.GetAvailableVehicles(this.connection, this.dateTimePickerBegin.Value);
+            this.locations = LocationCar.GetAllLocation(this.connection);
             FillListViewCustomer();
             FillListViewVehicle();
             ClearVehicle();
             ClearCustomer();
+
+            this.comboBoxVehicleLocation.DataSource = this.locations;
+            this.comboBoxVehicleLocation.DisplayMember = "Name";
+            this.comboBoxVehicleLocation.ValueMember = "LocationId";
         }
 
         private bool editRent = false;
@@ -73,6 +78,7 @@ namespace InstaCarManagement.GUI
         private Customer customer = null;
         private List<Vehicle> vehicles = null;
         private Vehicle vehicle = null;
+        private List<LocationCar> locations = null;
 
 
         private void FillListViewCustomer()
@@ -297,7 +303,7 @@ namespace InstaCarManagement.GUI
             this.dateTimePickerBegin.Checked = false;
             this.dateTimePickerEnd.Checked = false;
             this.customers = Customer.GetAllCustomer(this.connection);
-            this.vehicles = Vehicle.GetAvailableVehicles(this.connection);
+            this.vehicles = Vehicle.GetAvailableVehicles(this.connection, this.dateTimePickerBegin.Value);
             FillListViewCustomer();
             FillListViewVehicle();
         }
@@ -332,6 +338,28 @@ namespace InstaCarManagement.GUI
         private void buttonClose_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void dateTimePickerBegin_ValueChanged(object sender, EventArgs e)
+        {
+            this.vehicles = Vehicle.GetAvailableVehicles(this.connection, this.dateTimePickerBegin.Value);
+            FillListViewVehicle();
+            bool contains = false;
+            foreach (Vehicle vehicle in vehicles)
+            {
+                if (this.vehicle.CarId == vehicle.CarId || !this.vehicle.CarId.HasValue)
+                {
+                    contains = true;
+                }
+            }
+
+            if (!contains)
+            {
+                this.labelStatus.Visible = true;
+                this.labelStatus.Text = "Das Fahrzeug ist zu diesen Zeitpunkt vermietet";
+                SystemSounds.Asterisk.Play();
+                ClearVehicle();
+            }
         }
     }
 }

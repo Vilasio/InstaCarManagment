@@ -14,6 +14,7 @@ namespace InstaCarManagement.Data
         //----------------------------------------------------------------------------------------------
         #region const
         private const string TABLE = "InstaCar.car";
+        private const string TABLERENT = "InstaCar.rent";
         private const string COLUMN = "car_id, location_id, modell, brand, hp, price, feature1, feature2, feature3, feature4, notavailable";
         #endregion
 
@@ -148,7 +149,7 @@ namespace InstaCarManagement.Data
             return vehicle;
         }
 
-        public static List<Vehicle> GetAvailableVehicles(NpgsqlConnection connection)
+        /*public static List<Vehicle> GetAvailableVehicles(NpgsqlConnection connection)
         {
             List<Vehicle> allVehicles = new List<Vehicle>();
 
@@ -179,15 +180,19 @@ namespace InstaCarManagement.Data
             }
             reader.Close();
             return allVehicles;
-        }
+        }*/
 
-        public static List<Vehicle> GetAvailableVehicles(NpgsqlConnection connection)
+        public static List<Vehicle> GetAvailableVehicles(NpgsqlConnection connection, DateTime time)
         {
             List<Vehicle> allVehicles = new List<Vehicle>();
 
             NpgsqlCommand command = new NpgsqlCommand();
             command.Connection = connection;
-            command.CommandText = $"Select * from {TABLE} where in_use = false and (reserved < (current_timestamp + interval '1h') or reserved is null);";
+            command.CommandText = $"Select c.car_id, c.location_id, c.modell, c.brand, c.hp, c.price, c.feature1, c.feature2, c.feature3, c.feature4, " +
+                $"c.notavailable, c.reserved, c.in_use, c.locked from {TABLE} as c left join {TABLERENT} as r on r.car_id = c.car_id " +
+                $"where (r.datebegin > :t or r.dateend < :t) or r.datebegin is null;";
+            command.Parameters.AddWithValue("t", time);
+
             NpgsqlDataReader reader = command.ExecuteReader();
 
             while (reader.Read())
