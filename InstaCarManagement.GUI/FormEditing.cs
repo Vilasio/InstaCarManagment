@@ -501,7 +501,10 @@ namespace InstaCarManagement.GUI
 
                         }
                     }
-
+                }
+                if (this.vehicle.CarId.HasValue)
+                {
+                    this.vehicle.PicturesSave();
                 }
             }
         }

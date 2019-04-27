@@ -16,7 +16,7 @@ namespace InstaCarManagement.Data
         //----------------------------------------------------------------------------------------------
         #region const
         private const string TABLE = "InstaCar.image";
-        private const string COLUMN = "image_id, car_id, picture, kind, main, description";
+        private const string COLUMN = "image_id, car_id, picture, kind, main, description, accident";
         #endregion
 
         //----------------------------------------------------------------------------------------------
@@ -58,6 +58,7 @@ namespace InstaCarManagement.Data
         public string Kind { get; set; }
         public bool Main { get; set; }
         public string Description { get; set; }
+        public bool Accident { get; set; }
         #endregion
         //----------------------------------------------------------------------------------------------
         //Static
@@ -70,7 +71,7 @@ namespace InstaCarManagement.Data
             List<ImageCar> images = new List<ImageCar>();
             if (vehicle.CarId.HasValue)
             {
-                NpgsqlCommand command = new NpgsqlCommand($"Select image_id, picture, kind, main, description from {TABLE} where car_id = :cid", connection);
+                NpgsqlCommand command = new NpgsqlCommand($"Select image_id, picture, kind, main, description, accident from {TABLE} where car_id = :cid", connection);
                 command.Parameters.AddWithValue("cid", vehicle.CarId.Value);
                 NpgsqlDataReader reader = command.ExecuteReader();
 
@@ -83,6 +84,7 @@ namespace InstaCarManagement.Data
                     imageCar.Kind = reader.IsDBNull(2) ? null : reader.GetString(2);
                     imageCar.Main = reader.IsDBNull(3) ? false : reader.GetBoolean(3);
                     imageCar.Description = reader.IsDBNull(4) ? null : reader.GetString(4);
+                    imageCar.Accident = reader.IsDBNull(5) ? false : reader.GetBoolean(5);
 
                     MemoryStream memoryStream = new MemoryStream(imageCar.Picture);
                     imageCar.Image = Image.FromStream(memoryStream);
@@ -114,6 +116,8 @@ namespace InstaCarManagement.Data
                     image.Kind = reader.IsDBNull(2) ? null : reader.GetString(2);
                     image.Main = reader.IsDBNull(3) ? false : reader.GetBoolean(3);
                     image.Description = reader.IsDBNull(4) ? null : reader.GetString(4);
+                    image.Accident = reader.IsDBNull(5) ? false : reader.GetBoolean(5);
+
 
                     MemoryStream memoryStream = new MemoryStream(image.Picture);
                     image.Image = Image.FromStream(memoryStream);
@@ -147,7 +151,7 @@ namespace InstaCarManagement.Data
                 command.CommandText = $"select nextval('{TABLE}_seq')";
                 this.ImageId = (long?)command.ExecuteScalar();
                 command.CommandText = $" insert into {TABLE} ({COLUMN})" +
-                    $" values(:iid, :cid, :pi, :ki, :ma, :de)";
+                    $" values(:iid, :cid, :pi, :ki, :ma, :de, :ac)";
             }
 
             command.Parameters.AddWithValue("iid", this.ImageId.Value);
@@ -156,7 +160,7 @@ namespace InstaCarManagement.Data
             command.Parameters.AddWithValue("ki", String.IsNullOrEmpty(this.Kind) ? (object)DBNull.Value : this.Kind);
             command.Parameters.AddWithValue("ma", this.Main);
             command.Parameters.AddWithValue("de", String.IsNullOrEmpty(this.Description) ? (object)DBNull.Value : this.Description);
-
+            command.Parameters.AddWithValue("ac", this.Accident);
 
             int result = command.ExecuteNonQuery();
 

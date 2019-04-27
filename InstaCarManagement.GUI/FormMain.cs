@@ -129,14 +129,22 @@ namespace InstaCarManagement.GUI
 
         private void MenuItemPrint_Click(object sender, EventArgs e)
         {
-            DataTable printAccounts = Account.GetTable(this.connection);
+            DataTable currentRents = Rent.GetTable(this.connection);
 
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "PDF-File|*.pdf";
             saveFileDialog.Title = "Pdf exportieren";
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                ExportPdf.ExportToPdfQuer(printAccounts, saveFileDialog.FileName);
+                try
+                {
+                    ExportPdf.ExportToPdfQuer(currentRents, saveFileDialog.FileName);
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Leider ist etwas beim Speichern der Datei schief gelaufen.", "Fehlgeschlagen!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
             }
         }
 
@@ -148,6 +156,18 @@ namespace InstaCarManagement.GUI
         private void MenuItemRentCar_Click(object sender, EventArgs e)
         {
             FormRent formRent = new FormRent(this.connection);
+
+            if (formRent.ShowDialog() == DialogResult.OK)
+            {
+                FilllistviewRent();
+            }
+        }
+
+        private void listViewRent_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            ListViewItem item = this.listViewRent.GetItemAt(e.X, e.Y);
+            Rent rent = (Rent)item.Tag;
+            FormRent formRent = new FormRent(this.connection, rent);
 
             if (formRent.ShowDialog() == DialogResult.OK)
             {

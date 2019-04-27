@@ -227,5 +227,8 @@
   <ItemGroup>
     <None Include="Resources\icons8-multiply-32.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-export-pdf-32.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

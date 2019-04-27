@@ -174,6 +174,7 @@ namespace InstaCarManagement.GUI
                         uS.ImageCar.Main = uS.Main;
                         uS.ImageCar.Kind = uS.Kind;
                         uS.ImageCar.Description = uS.Description;
+                        uS.ImageCar.Accident = uS.Accident;
                         if (!this.vehicle.Pictures.Contains(uS.ImageCar))
                         {
                             this.vehicle.Pictures.Add(uS.ImageCar);

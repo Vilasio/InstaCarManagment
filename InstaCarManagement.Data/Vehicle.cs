@@ -190,7 +190,7 @@ namespace InstaCarManagement.Data
             command.Connection = connection;
             command.CommandText = $"Select c.car_id, c.location_id, c.modell, c.brand, c.hp, c.price, c.feature1, c.feature2, c.feature3, c.feature4, " +
                 $"c.notavailable, c.reserved, c.in_use, c.locked from {TABLE} as c left join {TABLERENT} as r on r.car_id = c.car_id " +
-                $"where (r.datebegin > :t or r.dateend < :t) or r.datebegin is null;";
+                $"where ((r.datebegin > :t or r.dateend < :t) or r.datebegin is null) and c.notavailable = false;";
             command.Parameters.AddWithValue("t", time);
 
             NpgsqlDataReader reader = command.ExecuteReader();
@@ -300,6 +300,17 @@ namespace InstaCarManagement.Data
             
 
             return result;
+        }
+
+        public void PicturesSave()
+        {
+            if (this.pictures != null)
+            {
+                foreach (ImageCar pic in this.pictures)
+                {
+                    pic.Save();
+                }
+            }
         }
 
         public int Lock()

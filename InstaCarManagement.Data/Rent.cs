@@ -1,6 +1,7 @@
 ﻿using Npgsql;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -133,6 +134,34 @@ namespace InstaCarManagement.Data
             reader.Close();
             return currentRents;
         }
+
+        public static DataTable GetTable(NpgsqlConnection connection)
+        {
+            DataTable currentRents = new DataTable("Vermietet");
+            currentRents.Columns.Add(new DataColumn("RentNo"));
+            currentRents.Columns.Add(new DataColumn("Vorname"));
+            currentRents.Columns.Add(new DataColumn("Nachname"));
+            currentRents.Columns.Add(new DataColumn("Marke"));
+            currentRents.Columns.Add(new DataColumn("Modell"));
+            currentRents.Columns.Add(new DataColumn("Anfang"));
+            currentRents.Columns.Add(new DataColumn("Ende"));
+
+            List<Rent> rents = GetCurrentRents(connection);
+
+            foreach (Rent rent in rents)
+            {
+                currentRents.Rows.Add(
+                    rent.RentNo,
+                    rent.Name,
+                    rent.FamilyName,
+                    rent.Brand, 
+                    rent.Modell,
+                    rent.Begin.ToString(),
+                    rent.End.ToString()
+                    );
+            }
+            return currentRents;
+        }
         #endregion
         //----------------------------------------------------------------------------------------------
         //Public
@@ -146,7 +175,7 @@ namespace InstaCarManagement.Data
             {
 
                 command.CommandText =
-                $"update {TABLE} set datebegin = :db, dateend = :de, sumprice = :sp, units = :un";
+                $"update {TABLE} set datebegin = :db, dateend = :de, sumprice = :sp, hours = :un where rent_id = :rid";
 
 
             }

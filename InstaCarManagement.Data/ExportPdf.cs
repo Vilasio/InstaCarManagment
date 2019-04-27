@@ -79,7 +79,7 @@ namespace InstaCarManagement.Data
 
             
             PdfPCell cell = new PdfPCell(new Phrase((dt.TableName), fontHeader));
-            cell.Colspan = dt.Rows.Count;
+            cell.Colspan = dt.Columns.Count;
             cell.HorizontalAlignment = 1;
             table.AddCell(cell);
 

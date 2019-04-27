@@ -62,14 +62,40 @@ namespace InstaCarManagement.GUI
             this.customers = Customer.GetAllCustomer(this.connection);
             this.vehicles = Vehicle.GetAvailableVehicles(this.connection, this.dateTimePickerBegin.Value);
             this.locations = LocationCar.GetAllLocation(this.connection);
-            FillListViewCustomer();
-            FillListViewVehicle();
+            
             ClearVehicle();
             ClearCustomer();
 
             this.comboBoxVehicleLocation.DataSource = this.locations;
             this.comboBoxVehicleLocation.DisplayMember = "Name";
             this.comboBoxVehicleLocation.ValueMember = "LocationId";
+
+            if (this.editRent)
+            {
+                this.vehicle = Vehicle.GetSpecificVehicles(this.connection, (int)this.rent.CarId);
+                this.customer = customers.Find(x => x.CustomerId.Equals(this.rent.CustomerId));
+                this.vehicles.Add(vehicle);
+                FillCustomer();
+                FillVehicle();
+                
+                if (this.rent.Begin.HasValue)
+                {
+                    this.dateTimePickerBegin.Value = this.rent.Begin.Value;
+                    this.dateTimePickerBegin.Checked = true;
+                }
+                if (this.rent.End.HasValue)
+                {
+                    this.dateTimePickerEnd.Value = this.rent.End.Value;
+                    this.dateTimePickerEnd.Checked = true;
+                }
+                this.listViewCustomer.Enabled = false;
+                if (this.rent.Begin.Value < DateTime.Now)
+                {
+                    this.listViewVehicle.Enabled = false;
+                }
+            }
+            FillListViewCustomer();
+            FillListViewVehicle();
         }
 
         private bool editRent = false;
@@ -250,9 +276,9 @@ namespace InstaCarManagement.GUI
             }
             else
             {
-                this.rent.CustomerId = this.customer.CustomerId;
-                this.rent.Name = this.customer.Name;
-                this.rent.FamilyName = this.customer.Familyname;
+                this.rent.CarId = this.vehicle.CarId;
+                this.rent.Modell = this.vehicle.Modell;
+                this.rent.Brand = this.vehicle.Brand;
             }
             if (this.customer == null)
             {
@@ -263,9 +289,9 @@ namespace InstaCarManagement.GUI
             }
             else
             {
-                this.rent.CarId = this.vehicle.CarId;
-                this.rent.Modell = this.vehicle.Modell;
-                this.rent.Brand = this.vehicle.Brand;
+                this.rent.CustomerId = this.customer.CustomerId;
+                this.rent.Name = this.customer.Name;
+                this.rent.FamilyName = this.customer.Familyname;
             }
 
             if (this.dateTimePickerBegin.Value > this.dateTimePickerEnd.Value )
@@ -325,24 +351,34 @@ namespace InstaCarManagement.GUI
             if (ValidateRent())
             {
                 this.rent.Save();
-                this.vehicle.InUse = true;
-                this.vehicle.Save();
+                //this.vehicle.InUse = true;
+                //this.vehicle.Save();
+                this.editRent = false;
+                this.listViewCustomer.Enabled = true;
+                this.listViewVehicle.Enabled = true;
                 ClearVehicle();
                 ClearCustomer();
                 ClearRent();
                 this.labelStatus.Visible = true;
                 this.labelStatus.Text = "Erfolg!";
+                
+
             }
         }
 
         private void buttonClose_Click(object sender, EventArgs e)
         {
+            this.DialogResult = DialogResult.OK;
             this.Close();
         }
 
         private void dateTimePickerBegin_ValueChanged(object sender, EventArgs e)
         {
             this.vehicles = Vehicle.GetAvailableVehicles(this.connection, this.dateTimePickerBegin.Value);
+            if (editRent)
+            {
+                this.vehicles.Add(vehicle);
+            }
             FillListViewVehicle();
             bool contains = false;
             foreach (Vehicle vehicle in vehicles)

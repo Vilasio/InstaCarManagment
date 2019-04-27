@@ -86,6 +86,15 @@ namespace InstaCarManagement.GUI
             set { this.textBoxDescription.Text = value; }
         }
 
+        public bool Accident
+        {
+            get
+            {
+                return this.checkBoxAccident.Checked;
+            }
+            set { this.checkBoxAccident.Checked = value; }
+        }
+
         private void pictureBoxImage_DragEnter(object sender, DragEventArgs e)
         {
             string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
@@ -114,6 +123,24 @@ namespace InstaCarManagement.GUI
         private void ImageUS_Load(object sender, EventArgs e)
         {
             this.pictureBoxImage.AllowDrop = true;
+        }
+
+        private void checkBoxAccident_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxAccident.Checked)
+            {
+                checkBoxMainImage.Checked = false;
+                checkBoxOfficial.Checked = false;
+                checkBoxMainImage.Enabled = false;
+                checkBoxOfficial.Enabled = false;
+            }
+            else
+            {
+                checkBoxMainImage.Checked = false;
+                checkBoxOfficial.Checked = false;
+                checkBoxMainImage.Enabled = true;
+                checkBoxOfficial.Enabled = true;
+            }
         }
     }
 }

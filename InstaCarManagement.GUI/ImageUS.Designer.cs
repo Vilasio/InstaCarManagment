@@ -34,6 +34,7 @@
             this.textBoxDescription = new System.Windows.Forms.TextBox();
             this.labelDescription = new System.Windows.Forms.Label();
             this.labelDragAndDrop = new System.Windows.Forms.Label();
+            this.checkBoxAccident = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxImage)).BeginInit();
             this.SuspendLayout();
             // 
@@ -96,11 +97,23 @@
             this.labelDragAndDrop.TabIndex = 6;
             this.labelDragAndDrop.Text = "Drag and Drop";
             // 
+            // checkBoxAccident
+            // 
+            this.checkBoxAccident.AutoSize = true;
+            this.checkBoxAccident.Location = new System.Drawing.Point(342, 130);
+            this.checkBoxAccident.Name = "checkBoxAccident";
+            this.checkBoxAccident.Size = new System.Drawing.Size(53, 17);
+            this.checkBoxAccident.TabIndex = 7;
+            this.checkBoxAccident.Text = "Unfall";
+            this.checkBoxAccident.UseVisualStyleBackColor = true;
+            this.checkBoxAccident.CheckedChanged += new System.EventHandler(this.checkBoxAccident_CheckedChanged);
+            // 
             // ImageUS
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Controls.Add(this.checkBoxAccident);
             this.Controls.Add(this.labelDragAndDrop);
             this.Controls.Add(this.labelDescription);
             this.Controls.Add(this.textBoxDescription);
@@ -124,5 +137,6 @@
         private System.Windows.Forms.TextBox textBoxDescription;
         private System.Windows.Forms.Label labelDescription;
         private System.Windows.Forms.Label labelDragAndDrop;
+        private System.Windows.Forms.CheckBox checkBoxAccident;
     }
 }
