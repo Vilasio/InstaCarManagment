@@ -85,7 +85,7 @@ namespace InstaCarManagement.Data
             Vehicle vehicle = null;
             NpgsqlCommand command = new NpgsqlCommand();
             command.Connection = connection;
-            command.CommandText = $"Select * from {TABLE};";
+            command.CommandText = $"Select * from {TABLE} where deleted = false;";
 
             NpgsqlDataReader reader = command.ExecuteReader();
 
@@ -190,7 +190,7 @@ namespace InstaCarManagement.Data
             command.Connection = connection;
             command.CommandText = $"Select c.car_id, c.location_id, c.modell, c.brand, c.hp, c.price, c.feature1, c.feature2, c.feature3, c.feature4, " +
                 $"c.notavailable, c.reserved, c.in_use, c.locked from {TABLE} as c left join {TABLERENT} as r on r.car_id = c.car_id " +
-                $"where ((r.datebegin > :t or r.dateend < :t) or r.datebegin is null) and c.notavailable = false;";
+                $"where ((r.datebegin > :t or r.dateend < :t) or r.datebegin is null) and c.notavailable = false and deleted = false;";
             command.Parameters.AddWithValue("t", time);
 
             NpgsqlDataReader reader = command.ExecuteReader();
@@ -345,6 +345,19 @@ namespace InstaCarManagement.Data
                 Locked = false;
             }
             return result;
+        }
+
+        public int Delete()
+        {
+            NpgsqlCommand command = new NpgsqlCommand();
+            command.Connection = this.connection;
+            command.CommandText = $"update {TABLE} set deleted = :de where car_id = :cid";
+
+
+            command.Parameters.AddWithValue("cid", this.CarId.Value);
+            command.Parameters.AddWithValue("de", true);
+
+            return command.ExecuteNonQuery();
         }
 
         #endregion

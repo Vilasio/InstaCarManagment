@@ -53,6 +53,9 @@
             this.columnHeaderFeature2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderFeature3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderFeature4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.labelStatus = new System.Windows.Forms.Label();
+            this.buttonClose = new System.Windows.Forms.Button();
+            this.buttonSave = new System.Windows.Forms.Button();
             this.labelRentEnd = new System.Windows.Forms.Label();
             this.labelRentBegin = new System.Windows.Forms.Label();
             this.dateTimePickerEnd = new System.Windows.Forms.DateTimePicker();
@@ -98,9 +101,8 @@
             this.labelCustomerStreet = new System.Windows.Forms.Label();
             this.labelCustomerPostcode = new System.Windows.Forms.Label();
             this.labelCustomerHouseNr = new System.Windows.Forms.Label();
-            this.buttonSave = new System.Windows.Forms.Button();
-            this.buttonClose = new System.Windows.Forms.Button();
-            this.labelStatus = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.buttonDelete = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerPricing)).BeginInit();
             this.splitContainerPricing.Panel1.SuspendLayout();
             this.splitContainerPricing.Panel2.SuspendLayout();
@@ -196,6 +198,7 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.buttonDelete);
             this.splitContainer1.Panel2.Controls.Add(this.labelStatus);
             this.splitContainer1.Panel2.Controls.Add(this.buttonClose);
             this.splitContainer1.Panel2.Controls.Add(this.buttonSave);
@@ -357,6 +360,36 @@
             // 
             this.columnHeaderFeature4.Text = "Austattung";
             this.columnHeaderFeature4.Width = 100;
+            // 
+            // labelStatus
+            // 
+            this.labelStatus.AutoSize = true;
+            this.labelStatus.Location = new System.Drawing.Point(6, 533);
+            this.labelStatus.Name = "labelStatus";
+            this.labelStatus.Size = new System.Drawing.Size(37, 13);
+            this.labelStatus.TabIndex = 51;
+            this.labelStatus.Text = "Status";
+            this.labelStatus.Visible = false;
+            // 
+            // buttonClose
+            // 
+            this.buttonClose.Location = new System.Drawing.Point(401, 576);
+            this.buttonClose.Name = "buttonClose";
+            this.buttonClose.Size = new System.Drawing.Size(75, 23);
+            this.buttonClose.TabIndex = 50;
+            this.buttonClose.Text = "Schließen";
+            this.buttonClose.UseVisualStyleBackColor = true;
+            this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
+            // 
+            // buttonSave
+            // 
+            this.buttonSave.Location = new System.Drawing.Point(9, 571);
+            this.buttonSave.Name = "buttonSave";
+            this.buttonSave.Size = new System.Drawing.Size(75, 23);
+            this.buttonSave.TabIndex = 49;
+            this.buttonSave.Text = "Speichern";
+            this.buttonSave.UseVisualStyleBackColor = true;
+            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
             // labelRentEnd
             // 
@@ -804,41 +837,31 @@
             this.labelCustomerHouseNr.TabIndex = 43;
             this.labelCustomerHouseNr.Text = "Haus Nr.";
             // 
-            // buttonSave
+            // button1
             // 
-            this.buttonSave.Location = new System.Drawing.Point(9, 571);
-            this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(75, 23);
-            this.buttonSave.TabIndex = 49;
-            this.buttonSave.Text = "Speichern";
-            this.buttonSave.UseVisualStyleBackColor = true;
-            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
+            this.button1.Location = new System.Drawing.Point(0, 0);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
             // 
-            // buttonClose
+            // buttonDelete
             // 
-            this.buttonClose.Location = new System.Drawing.Point(401, 576);
-            this.buttonClose.Name = "buttonClose";
-            this.buttonClose.Size = new System.Drawing.Size(75, 23);
-            this.buttonClose.TabIndex = 50;
-            this.buttonClose.Text = "Schließen";
-            this.buttonClose.UseVisualStyleBackColor = true;
-            this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
-            // 
-            // labelStatus
-            // 
-            this.labelStatus.AutoSize = true;
-            this.labelStatus.Location = new System.Drawing.Point(6, 533);
-            this.labelStatus.Name = "labelStatus";
-            this.labelStatus.Size = new System.Drawing.Size(37, 13);
-            this.labelStatus.TabIndex = 51;
-            this.labelStatus.Text = "Status";
-            this.labelStatus.Visible = false;
+            this.buttonDelete.Location = new System.Drawing.Point(401, 523);
+            this.buttonDelete.Name = "buttonDelete";
+            this.buttonDelete.Size = new System.Drawing.Size(75, 23);
+            this.buttonDelete.TabIndex = 52;
+            this.buttonDelete.Text = "Löschen";
+            this.buttonDelete.UseVisualStyleBackColor = true;
+            this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
             // 
             // FormRent
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1134, 711);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.splitContainerPricing);
             this.Name = "FormRent";
             this.Text = "Vermieten";
@@ -942,5 +965,7 @@
         private System.Windows.Forms.Button buttonClose;
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.Label labelStatus;
+        private System.Windows.Forms.Button buttonDelete;
+        private System.Windows.Forms.Button button1;
     }
 }

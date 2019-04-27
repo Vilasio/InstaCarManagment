@@ -17,7 +17,7 @@ namespace InstaCarManagement.Data
         private const string TABLE = "InstaCar.rent";
         private const string TABLECar = "InstaCar.car";
         private const string TABLECus = "InstaCar.customer";
-        private const string COLUMN = "rent_id, customer_id, car_id, cust_no, datebegin, dateend, sumprice, units";
+        private const string COLUMN = "rent_id, customer_id, car_id, cust_no, datebegin, dateend, sumprice, hours";
         #endregion
 
         //----------------------------------------------------------------------------------------------
@@ -66,13 +66,43 @@ namespace InstaCarManagement.Data
         //Static
         //----------------------------------------------------------------------------------------------
         #region static
+        static List<Rent> GetAllRentsWithDeleted(NpgsqlConnection connection)
+        {
+            List<Rent> allRents = new List<Rent>();
+            Rent Rent = null;
+            NpgsqlCommand command = new NpgsqlCommand();
+            command.Connection = connection;
+            command.CommandText = $"Select {COLUMN} from {TABLE};";
+
+            NpgsqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                allRents.Add(
+                    Rent = new Rent(connection)
+                    {
+                        RentId = reader.GetInt64(0),
+                        CustomerId = reader.GetInt64(1),
+                        CarId = reader.GetInt64(2),
+                        RentNo = reader.GetString(3),
+                        Begin = reader.IsDBNull(4) ? null : (DateTime?)reader.GetDateTime(4),
+                        End = reader.IsDBNull(5) ? null : (DateTime?)reader.GetDateTime(5),
+                        SumPrice = reader.IsDBNull(6) ? 0 : (double?)reader.GetDouble(6),
+                        Units = reader.IsDBNull(7) ? 0 : (long?)reader.GetInt64(7)
+                    }
+                );
+            }
+            reader.Close();
+            return allRents;
+        }
+
         static List<Rent> GetAllRents(NpgsqlConnection connection)
         {
             List<Rent> allRents = new List<Rent>();
             Rent Rent = null;
             NpgsqlCommand command = new NpgsqlCommand();
             command.Connection = connection;
-            command.CommandText = $"Select * from {TABLE};";
+            command.CommandText = $"Select {COLUMN} from {TABLE} where deleted = false;";
 
             NpgsqlDataReader reader = command.ExecuteReader();
 
@@ -106,7 +136,7 @@ namespace InstaCarManagement.Data
                 $"from {TABLE} as r " +
                 $"inner join {TABLECar} as v on r.car_id = v.car_id " +
                 $"inner join {TABLECus} as c on r.customer_id = c.customer_id" +
-                $" where dateend > current_Timestamp or dateend is null;";
+                $" where (dateend > current_Timestamp or dateend is null) and r.deleted = false;";
 
             NpgsqlDataReader reader = command.ExecuteReader();
 
@@ -204,6 +234,32 @@ namespace InstaCarManagement.Data
             command.Parameters.AddWithValue("de", this.End.HasValue ? (object)this.End.Value : (object)DBNull.Value);
             command.Parameters.AddWithValue("sp", this.SumPrice.HasValue ? (object)this.SumPrice.Value : 0);
             command.Parameters.AddWithValue("un", this.Units.HasValue ? (object)this.Units.Value : 0);
+
+            return command.ExecuteNonQuery();
+        }
+
+        public int Delete()
+        {
+            NpgsqlCommand command = new NpgsqlCommand();
+            command.Connection = this.connection;
+            command.CommandText = $"update {TABLE} set deleted = :de where rent_id = :rid";
+
+
+            command.Parameters.AddWithValue("rid", this.RentId.Value);
+            command.Parameters.AddWithValue("de", true);
+
+            return command.ExecuteNonQuery();
+        }
+
+        public int DeleteAndEnd()
+        {
+            NpgsqlCommand command = new NpgsqlCommand();
+            command.Connection = this.connection;
+            command.CommandText = $"update {TABLE} set deleted = :de, dateend = current_timestamp where rent_id = :rid";
+
+
+            command.Parameters.AddWithValue("rid", this.RentId.Value);
+            command.Parameters.AddWithValue("de", true);
 
             return command.ExecuteNonQuery();
         }

@@ -397,5 +397,34 @@ namespace InstaCarManagement.GUI
                 ClearVehicle();
             }
         }
+
+        private void buttonDelete_Click(object sender, EventArgs e)
+        {
+            if (this.rent.RentId.HasValue)
+            {
+                if (!this.rent.End.HasValue)
+                {
+                    this.rent.DeleteAndEnd();
+                }
+                else
+                {
+                    this.rent.Delete();
+                }
+                this.rent.Delete();
+                ClearRent();
+                ClearVehicle();
+                ClearCustomer();
+                this.labelStatus.Visible = true;
+                this.labelStatus.Text = "Erfolg";
+            }
+            else
+            {
+                ClearRent();
+                ClearVehicle();
+                ClearCustomer();
+                this.labelStatus.Visible = true;
+                this.labelStatus.Text = "Erfolg";
+            }
+        }
     }
 }
