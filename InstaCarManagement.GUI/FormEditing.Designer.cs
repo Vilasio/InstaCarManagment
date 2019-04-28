@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tabControlBaseData = new System.Windows.Forms.TabControl();
             this.tabPageCustomer = new System.Windows.Forms.TabPage();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
@@ -136,6 +137,15 @@
             this.labelHeader = new System.Windows.Forms.Label();
             this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
             this.splitContainerFormEditing = new System.Windows.Forms.SplitContainer();
+            this.contextMenuStripCustomer = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.MenuItemCustomerDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuItemCustomerEdit = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStripVehicle = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.MenuItemVehicleDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuItemVehicleEdit = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStripLocation = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.MenuItemLocationDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemLocationEdit = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControlBaseData.SuspendLayout();
             this.tabPageCustomer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
@@ -162,6 +172,9 @@
             this.splitContainerFormEditing.Panel1.SuspendLayout();
             this.splitContainerFormEditing.Panel2.SuspendLayout();
             this.splitContainerFormEditing.SuspendLayout();
+            this.contextMenuStripCustomer.SuspendLayout();
+            this.contextMenuStripVehicle.SuspendLayout();
+            this.contextMenuStripLocation.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControlBaseData
@@ -392,7 +405,7 @@
             this.buttonCustomerCancel.Name = "buttonCustomerCancel";
             this.buttonCustomerCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCustomerCancel.TabIndex = 13;
-            this.buttonCustomerCancel.Text = "Abbrechen";
+            this.buttonCustomerCancel.Text = "Neu";
             this.buttonCustomerCancel.UseVisualStyleBackColor = true;
             this.buttonCustomerCancel.Click += new System.EventHandler(this.buttonCustomerCancel_Click);
             // 
@@ -518,6 +531,7 @@
             this.columnHeaderHouseNr,
             this.columnHeaderPostCode,
             this.columnHeaderCity});
+            this.listViewCustomer.ContextMenuStrip = this.contextMenuStripCustomer;
             this.listViewCustomer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listViewCustomer.FullRowSelect = true;
             this.listViewCustomer.GridLines = true;
@@ -527,6 +541,7 @@
             this.listViewCustomer.TabIndex = 0;
             this.listViewCustomer.UseCompatibleStateImageBehavior = false;
             this.listViewCustomer.View = System.Windows.Forms.View.Details;
+            this.listViewCustomer.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listViewCustomer_MouseClick);
             this.listViewCustomer.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listViewCustomer_MouseDoubleClick);
             // 
             // columnHeaderCustomerNo
@@ -717,7 +732,7 @@
             this.buttonVehicleCancel.Name = "buttonVehicleCancel";
             this.buttonVehicleCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonVehicleCancel.TabIndex = 10;
-            this.buttonVehicleCancel.Text = "Abrechen";
+            this.buttonVehicleCancel.Text = "Neu";
             this.buttonVehicleCancel.UseVisualStyleBackColor = true;
             this.buttonVehicleCancel.Click += new System.EventHandler(this.buttonVehicleCancel_Click);
             // 
@@ -886,6 +901,7 @@
             this.columnHeaderFeature2,
             this.columnHeaderFeature3,
             this.columnHeaderFeature4});
+            this.listViewVehicle.ContextMenuStrip = this.contextMenuStripVehicle;
             this.listViewVehicle.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listViewVehicle.FullRowSelect = true;
             this.listViewVehicle.GridLines = true;
@@ -895,6 +911,7 @@
             this.listViewVehicle.TabIndex = 0;
             this.listViewVehicle.UseCompatibleStateImageBehavior = false;
             this.listViewVehicle.View = System.Windows.Forms.View.Details;
+            this.listViewVehicle.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listViewVehicle_MouseClick);
             this.listViewVehicle.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listViewVehicle_MouseDoubleClick);
             // 
             // columnHeaderModell
@@ -1012,7 +1029,7 @@
             this.buttonLocationCancel.Name = "buttonLocationCancel";
             this.buttonLocationCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonLocationCancel.TabIndex = 6;
-            this.buttonLocationCancel.Text = "Abbrechen";
+            this.buttonLocationCancel.Text = "Neu";
             this.buttonLocationCancel.UseVisualStyleBackColor = true;
             this.buttonLocationCancel.Click += new System.EventHandler(this.buttonLocationCancel_Click);
             // 
@@ -1114,6 +1131,7 @@
             this.columnHeaderLocationHouseNr,
             this.columnHeaderLocationPostCode,
             this.columnHeaderLocationCity});
+            this.listViewLocation.ContextMenuStrip = this.contextMenuStripLocation;
             this.listViewLocation.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listViewLocation.FullRowSelect = true;
             this.listViewLocation.GridLines = true;
@@ -1123,6 +1141,7 @@
             this.listViewLocation.TabIndex = 0;
             this.listViewLocation.UseCompatibleStateImageBehavior = false;
             this.listViewLocation.View = System.Windows.Forms.View.Details;
+            this.listViewLocation.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listViewLocation_MouseClick);
             this.listViewLocation.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listViewLocation_MouseDoubleClick);
             // 
             // columnHeaderLocationName
@@ -1215,6 +1234,72 @@
             this.splitContainerFormEditing.SplitterDistance = 102;
             this.splitContainerFormEditing.TabIndex = 0;
             // 
+            // contextMenuStripCustomer
+            // 
+            this.contextMenuStripCustomer.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MenuItemCustomerDelete,
+            this.MenuItemCustomerEdit});
+            this.contextMenuStripCustomer.Name = "contextMenuStripCustomer";
+            this.contextMenuStripCustomer.Size = new System.Drawing.Size(131, 48);
+            // 
+            // MenuItemCustomerDelete
+            // 
+            this.MenuItemCustomerDelete.Name = "MenuItemCustomerDelete";
+            this.MenuItemCustomerDelete.Size = new System.Drawing.Size(130, 22);
+            this.MenuItemCustomerDelete.Text = "Löschen";
+            this.MenuItemCustomerDelete.Click += new System.EventHandler(this.MenuItemCustomerDelete_Click);
+            // 
+            // MenuItemCustomerEdit
+            // 
+            this.MenuItemCustomerEdit.Name = "MenuItemCustomerEdit";
+            this.MenuItemCustomerEdit.Size = new System.Drawing.Size(130, 22);
+            this.MenuItemCustomerEdit.Text = "Bearbeiten";
+            this.MenuItemCustomerEdit.Click += new System.EventHandler(this.MenuItemCustomerEdit_Click);
+            // 
+            // contextMenuStripVehicle
+            // 
+            this.contextMenuStripVehicle.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MenuItemVehicleDelete,
+            this.MenuItemVehicleEdit});
+            this.contextMenuStripVehicle.Name = "contextMenuStripVehicle";
+            this.contextMenuStripVehicle.Size = new System.Drawing.Size(131, 48);
+            // 
+            // MenuItemVehicleDelete
+            // 
+            this.MenuItemVehicleDelete.Name = "MenuItemVehicleDelete";
+            this.MenuItemVehicleDelete.Size = new System.Drawing.Size(130, 22);
+            this.MenuItemVehicleDelete.Text = "Löschen";
+            this.MenuItemVehicleDelete.Click += new System.EventHandler(this.MenuItemVehicleDelete_Click);
+            // 
+            // MenuItemVehicleEdit
+            // 
+            this.MenuItemVehicleEdit.Name = "MenuItemVehicleEdit";
+            this.MenuItemVehicleEdit.Size = new System.Drawing.Size(130, 22);
+            this.MenuItemVehicleEdit.Text = "Bearbeiten";
+            this.MenuItemVehicleEdit.Click += new System.EventHandler(this.MenuItemVehicleEdit_Click);
+            // 
+            // contextMenuStripLocation
+            // 
+            this.contextMenuStripLocation.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MenuItemLocationDelete,
+            this.toolStripMenuItemLocationEdit});
+            this.contextMenuStripLocation.Name = "contextMenuStripVehicle";
+            this.contextMenuStripLocation.Size = new System.Drawing.Size(131, 48);
+            // 
+            // MenuItemLocationDelete
+            // 
+            this.MenuItemLocationDelete.Name = "MenuItemLocationDelete";
+            this.MenuItemLocationDelete.Size = new System.Drawing.Size(130, 22);
+            this.MenuItemLocationDelete.Text = "Löschen";
+            this.MenuItemLocationDelete.Click += new System.EventHandler(this.MenuItemLocationDelete_Click);
+            // 
+            // toolStripMenuItemLocationEdit
+            // 
+            this.toolStripMenuItemLocationEdit.Name = "toolStripMenuItemLocationEdit";
+            this.toolStripMenuItemLocationEdit.Size = new System.Drawing.Size(130, 22);
+            this.toolStripMenuItemLocationEdit.Text = "Bearbeiten";
+            this.toolStripMenuItemLocationEdit.Click += new System.EventHandler(this.toolStripMenuItemLocationEdit_Click);
+            // 
             // FormEditing
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1254,6 +1339,9 @@
             this.splitContainerFormEditing.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerFormEditing)).EndInit();
             this.splitContainerFormEditing.ResumeLayout(false);
+            this.contextMenuStripCustomer.ResumeLayout(false);
+            this.contextMenuStripVehicle.ResumeLayout(false);
+            this.contextMenuStripLocation.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1368,5 +1456,14 @@
         private System.Windows.Forms.Label labelVehicleStatusLocked;
         private System.Windows.Forms.SplitContainer splitContainerFormEditing;
         private System.Windows.Forms.Button buttonImage;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripCustomer;
+        private System.Windows.Forms.ToolStripMenuItem MenuItemCustomerDelete;
+        private System.Windows.Forms.ToolStripMenuItem MenuItemCustomerEdit;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripVehicle;
+        private System.Windows.Forms.ToolStripMenuItem MenuItemVehicleDelete;
+        private System.Windows.Forms.ToolStripMenuItem MenuItemVehicleEdit;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripLocation;
+        private System.Windows.Forms.ToolStripMenuItem MenuItemLocationDelete;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemLocationEdit;
     }
 }

@@ -190,7 +190,7 @@ namespace InstaCarManagement.Data
             command.Connection = connection;
             command.CommandText = $"Select c.car_id, c.location_id, c.modell, c.brand, c.hp, c.price, c.feature1, c.feature2, c.feature3, c.feature4, " +
                 $"c.notavailable, c.reserved, c.in_use, c.locked from {TABLE} as c left join {TABLERENT} as r on r.car_id = c.car_id " +
-                $"where ((r.datebegin > :t or r.dateend < :t) or r.datebegin is null) and c.notavailable = false and deleted = false;";
+                $"where ((r.datebegin > :t or r.dateend < :t) or r.datebegin is null) and c.notavailable = false and c.deleted = false;";
             command.Parameters.AddWithValue("t", time);
 
             NpgsqlDataReader reader = command.ExecuteReader();
@@ -272,8 +272,8 @@ namespace InstaCarManagement.Data
                 command.CommandText = $"select nextval('{TABLE}_seq')";
                 this.CarId = (long?)command.ExecuteScalar();
                 
-                command.CommandText = $" insert into {TABLE} ( car_id,location_id, modell , brand, hp, price, feature1, feature2,feature3, feature4, notavailable, in_use, locked )" +
-                    $" values(:cid,:lid, :mo, :br, :hp, :pr, :f1, :f2, :f3, :f4, :no, :iu, :lo)";
+                command.CommandText = $" insert into {TABLE} ( car_id,location_id, modell , brand, hp, price, feature1, feature2,feature3, feature4, notavailable, in_use, locked, deleted )" +
+                    $" values(:cid,:lid, :mo, :br, :hp, :pr, :f1, :f2, :f3, :f4, :no, :iu, :lo, :de)";
             }
             command.Parameters.AddWithValue("cid", this.CarId.Value);
             command.Parameters.AddWithValue("lid", this.LocationId.Value);
@@ -288,6 +288,7 @@ namespace InstaCarManagement.Data
             command.Parameters.AddWithValue("no", this.NotAvailable);
             command.Parameters.AddWithValue("lo", true);
             command.Parameters.AddWithValue("iu", false);
+            command.Parameters.AddWithValue("de", false);
 
             int result = command.ExecuteNonQuery();
             if (this.pictures != null)

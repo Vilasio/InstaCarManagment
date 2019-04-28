@@ -62,7 +62,7 @@ namespace InstaCarManagement.Data
             LocationCar location = null;
             NpgsqlCommand command = new NpgsqlCommand();
             command.Connection = connection;
-            command.CommandText = $"Select * from {TABLE};";
+            command.CommandText = $"Select {COLUMN} from {TABLE} where deleted = false;";
 
             NpgsqlDataReader reader = command.ExecuteReader();
 
@@ -129,8 +129,8 @@ namespace InstaCarManagement.Data
             {
                 command.CommandText = $"select nextval('{TABLE}_seq')";
                 this.LocationId = (long?)command.ExecuteScalar();
-                command.CommandText = $" insert into {TABLE} (location_id, name, street, housenr, postcode, city)" +
-                    $" values(:lid, :na, :st, :hn, :pc, :ci)";
+                command.CommandText = $" insert into {TABLE} (location_id, name, street, housenr, postcode, city, deleted)" +
+                    $" values(:lid, :na, :st, :hn, :pc, :ci, :de)";
             }
             command.Parameters.AddWithValue("lid", this.LocationId.Value);
             command.Parameters.AddWithValue("na", String.IsNullOrEmpty(this.Name) ? (object)DBNull.Value : this.Name);
@@ -138,6 +138,21 @@ namespace InstaCarManagement.Data
             command.Parameters.AddWithValue("hn", this.HouseNr.HasValue ? (object)this.HouseNr.Value : 3);
             command.Parameters.AddWithValue("pc", String.IsNullOrEmpty(this.Postcode) ? (object)DBNull.Value : this.Postcode);
             command.Parameters.AddWithValue("ci", String.IsNullOrEmpty(this.City) ? (object)DBNull.Value : this.City);
+            command.Parameters.AddWithValue("de", false);
+
+
+            return command.ExecuteNonQuery();
+        }
+
+        public int Delete()
+        {
+            NpgsqlCommand command = new NpgsqlCommand();
+            command.Connection = this.connection;
+            command.CommandText = $"update {TABLE} set deleted = :de where location_id = :lid";
+
+
+            command.Parameters.AddWithValue("lid", this.LocationId.Value);
+            command.Parameters.AddWithValue("de", true);
 
             return command.ExecuteNonQuery();
         }

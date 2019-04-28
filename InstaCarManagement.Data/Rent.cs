@@ -213,8 +213,8 @@ namespace InstaCarManagement.Data
             {
                 command.CommandText = $"select nextval('{TABLE}_seq')";
                 this.RentId = (long?)command.ExecuteScalar();
-                command.CommandText = $" insert into {TABLE} (rent_id, customer_id, car_id, rent_no, datebegin, dateend, sumprice, hours)" +
-                    $" values(:rid, :cid, :caid, :rno, :db, :de, :sp, :un)";
+                command.CommandText = $" insert into {TABLE} (rent_id, customer_id, car_id, rent_no, datebegin, dateend, sumprice, hours, deleted)" +
+                    $" values(:rid, :cid, :caid, :rno, :db, :de, :sp, :un, :del)";
             }
             if (this.RentNo == null || this.RentNo == "")// CustomerNO generieren--------------------------
             {
@@ -234,6 +234,8 @@ namespace InstaCarManagement.Data
             command.Parameters.AddWithValue("de", this.End.HasValue ? (object)this.End.Value : (object)DBNull.Value);
             command.Parameters.AddWithValue("sp", this.SumPrice.HasValue ? (object)this.SumPrice.Value : 0);
             command.Parameters.AddWithValue("un", this.Units.HasValue ? (object)this.Units.Value : 0);
+            command.Parameters.AddWithValue("del", false);
+
 
             return command.ExecuteNonQuery();
         }

@@ -48,9 +48,10 @@ namespace InstaCarManagement.GUI
             {
                 case 0:
                     this.tabControlBaseData.SelectedTab = tabPageCustomer;
-                        break;
+                    break;
                 case 1:
                     this.tabControlBaseData.SelectedTab = tabPageCustomer;
+                    FillListViewCustomer();
                     break;
                 case 2:
                     this.tabControlBaseData.SelectedTab = tabPageVehicle;
@@ -78,6 +79,7 @@ namespace InstaCarManagement.GUI
         #region Customer
         List<Customer> customers = null;
         Customer customer = null;
+        Customer customerclick = null;
         bool editCust = false;
 
         #region Methods Customer
@@ -238,7 +240,7 @@ namespace InstaCarManagement.GUI
             this.textBoxCustomerEmail.Text = string.Empty;
             this.textBoxCustomerNickname.Text = string.Empty;
             this.textBoxCustomerPasswort.Text = string.Empty;
-
+            this.editCust = false;
            
 
         }
@@ -273,7 +275,7 @@ namespace InstaCarManagement.GUI
         }
 
         private void buttonCustomerCancel_Click(object sender, EventArgs e)
-        {
+        { 
             ClearCustomer();
         }
 
@@ -290,6 +292,36 @@ namespace InstaCarManagement.GUI
             this.editCust = true;
             FillCustomer();
         }
+
+        private void MenuItemCustomerDelete_Click(object sender, EventArgs e)
+        {
+            if (this.customerclick != null)
+            {
+                this.customerclick.Delete();
+                this.customers = Customer.GetAllCustomer(this.connection);
+                FillListViewCustomer();
+                this.customerclick = null;
+            }
+            
+        }
+
+        private void listViewCustomer_MouseClick(object sender, MouseEventArgs e)
+        {
+            ListViewItem item = this.listViewCustomer.GetItemAt(e.X, e.Y);
+            this.customerclick = (Customer)item.Tag;
+        }
+
+        private void MenuItemCustomerEdit_Click(object sender, EventArgs e)
+        {
+            if (this.customerclick != null)
+            {
+                this.customer = this.customerclick;
+                FillCustomer();
+                this.customerclick = null;
+                this.editCust = true;
+            }
+            
+        }
         #endregion
         #endregion
 
@@ -300,6 +332,8 @@ namespace InstaCarManagement.GUI
         List<Vehicle> vehicles = null;
         List<Feature> features = null;
         Vehicle vehicle = null;
+        Vehicle vehicleclick = null;
+
         bool editVehic = false;
 
         enum enumFeatures
@@ -476,7 +510,7 @@ namespace InstaCarManagement.GUI
             this.comboBoxVehicleFeature3.DataSource = Enum.GetValues(typeof(enumFeatures));
             this.comboBoxVehicleFeature4.DataSource = Enum.GetValues(typeof(enumFeatures));
             this.comboBoxVehicleLocation.SelectedValue = (long)1;
-            
+            this.editVehic = false;
             this.pictureBoxVehicleImage.Image = null;
 
             this.groupBoxVehicles.Text = "Neues Fahrzeug anlegen";
@@ -555,6 +589,7 @@ namespace InstaCarManagement.GUI
 
         private void buttonVehicleCancel_Click(object sender, EventArgs e)
         {
+            
             ClearVehicle();
         }
 
@@ -595,6 +630,35 @@ namespace InstaCarManagement.GUI
             FillVehicle();
             
         }
+
+        private void listViewVehicle_MouseClick(object sender, MouseEventArgs e)
+        {
+            ListViewItem item = this.listViewVehicle.GetItemAt(e.X, e.Y);
+            this.vehicleclick = (Vehicle)item.Tag;
+        }
+
+        private void MenuItemVehicleDelete_Click(object sender, EventArgs e)
+        {
+            if (this.vehicleclick != null)
+            {
+                this.vehicleclick.Delete();
+                this.vehicles = Vehicle.GetAllVehicles(this.connection);
+                FillListViewVehicle();
+                this.vehicleclick = null;
+            }
+        }
+
+        private void MenuItemVehicleEdit_Click(object sender, EventArgs e)
+        {
+            if (this.vehicleclick != null)
+            {
+                this.vehicle = this.vehicleclick;
+                FillVehicle();
+                this.vehicleclick = null;
+                this.editVehic = true;
+            }
+            
+        }
         #endregion
         #endregion
 
@@ -604,6 +668,7 @@ namespace InstaCarManagement.GUI
         #region Location
         List<LocationCar> locations = null;
         LocationCar location = null;
+        LocationCar locationclick = null;
         bool editLocat = false;
 
 
@@ -723,6 +788,7 @@ namespace InstaCarManagement.GUI
             this.textBoxLocationHouseNr.Text = string.Empty;
             this.textBoxLocationPostcode.Text = string.Empty;
             this.textBoxLocationCity.Text = string.Empty;
+            this.editLocat = false;
 
             this.groupBoxLocation.Text = "Neuen Standort anlegen";
             this.labelLocationStatus.Visible = false;
@@ -759,7 +825,7 @@ namespace InstaCarManagement.GUI
 
         private void buttonLocationCancel_Click(object sender, EventArgs e)
         {
-            ClearCustomer();
+            ClearLocation();
         }
 
         private void buttonLocationClose_Click(object sender, EventArgs e)
@@ -776,15 +842,39 @@ namespace InstaCarManagement.GUI
             FillLocation();
         }
 
+        private void MenuItemLocationDelete_Click(object sender, EventArgs e)
+        {
+            if (this.locationclick != null)
+            {
+                this.locationclick.Delete();
+                this.locations = LocationCar.GetAllLocation(this.connection);
+                FillListViewLocation();
+                this.locationclick = null;
+            }
+        }
 
+        private void toolStripMenuItemLocationEdit_Click(object sender, EventArgs e)
+        {
+            if (this.locationclick != null)
+            {
+                this.location = this.locationclick;
+                FillLocation();
+                this.locationclick = null;
+                this.editLocat = true;
+            }
+        }
 
-
+        private void listViewLocation_MouseClick(object sender, MouseEventArgs e)
+        {
+            ListViewItem item = this.listViewLocation.GetItemAt(e.X, e.Y);
+            this.locationclick = (LocationCar)item.Tag;
+        }
 
 
         #endregion
 
         #endregion
 
-        
+       
     }
 }

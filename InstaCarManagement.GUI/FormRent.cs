@@ -73,7 +73,7 @@ namespace InstaCarManagement.GUI
             if (this.editRent)
             {
                 this.vehicle = Vehicle.GetSpecificVehicles(this.connection, (int)this.rent.CarId);
-                this.customer = customers.Find(x => x.CustomerId.Equals(this.rent.CustomerId));
+                this.customer = Customer.GetSpecificCustomer(this.connection, (int)this.rent.CustomerId);
                 this.vehicles.Add(vehicle);
                 FillCustomer();
                 FillVehicle();
@@ -294,7 +294,7 @@ namespace InstaCarManagement.GUI
                 this.rent.FamilyName = this.customer.Familyname;
             }
 
-            if (this.dateTimePickerBegin.Value > this.dateTimePickerEnd.Value )
+            if (this.dateTimePickerBegin.Value > this.dateTimePickerEnd.Value && this.dateTimePickerEnd.Checked)
             {
                 this.labelStatus.Visible = true;
                 this.labelStatus.Text = "Das Beginndatum kann nicht nach dem EndeDatum stattfinden";

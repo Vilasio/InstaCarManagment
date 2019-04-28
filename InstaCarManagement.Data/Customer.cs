@@ -15,7 +15,7 @@ namespace InstaCarManagement.Data
         #region const
         private const string TABLE = "InstaCar.customer";
         private const string COLUMN = "customer_id, customer_no, name, familyname, street, housenr, postcode, city, email, telefon, iban, bic, nickname";
-        private const string COLUMNPW = "customer_id, customer_no, name, familyname, street, housenr, postcode, city, email, telefon, iban, bic, password, nickname";
+        private const string COLUMNPW = "customer_id, customer_no, name, familyname, street, housenr, postcode, city, email, telefon, iban, bic, password, nickname, deleted";
         #endregion
         //----------------------------------------------------------------------------------------------
         //PrivateMember
@@ -70,7 +70,7 @@ namespace InstaCarManagement.Data
             Customer customer = null;
             NpgsqlCommand command = new NpgsqlCommand();
             command.Connection = connection;
-            command.CommandText = $"Select {COLUMN} from {TABLE};";
+            command.CommandText = $"Select {COLUMN} from {TABLE} where deleted = false;";
 
             NpgsqlDataReader reader = command.ExecuteReader();
 
@@ -100,7 +100,7 @@ namespace InstaCarManagement.Data
             return allCustomers;
         }
 
-        static Customer GetSpecificCustomer(NpgsqlConnection connection, int key)
+        public static Customer GetSpecificCustomer(NpgsqlConnection connection, int key)
         { 
             Customer customer = null;
             NpgsqlCommand command = new NpgsqlCommand();
@@ -160,7 +160,7 @@ namespace InstaCarManagement.Data
                 command.CommandText = $"select nextval('{TABLE}_seq')";
                 this.CustomerId = (long?)command.ExecuteScalar();
                 command.CommandText = $" insert into {TABLE} ({COLUMNPW})" +
-                    $" values(:cid, :cno, :na, :fn, :st, :hn, :pc, :ci, :em, :te, :ib, :bi, :pa, :ni)";
+                    $" values(:cid, :cno, :na, :fn, :st, :hn, :pc, :ci, :em, :te, :ib, :bi, :pa, :ni, :de)";
             }
 
             if (this.CustomerNo == null || this.CustomerNo == "")// CustomerNO generieren--------------------------
@@ -185,6 +185,7 @@ namespace InstaCarManagement.Data
             command.Parameters.AddWithValue("te", String.IsNullOrEmpty(this.Telefon) ? (object)DBNull.Value : this.Telefon);
             command.Parameters.AddWithValue("pa", String.IsNullOrEmpty(this.Password) ? (object)DBNull.Value : this.Password);
             command.Parameters.AddWithValue("ni", String.IsNullOrEmpty(this.Nickname) ? (object)DBNull.Value : this.Nickname);
+            command.Parameters.AddWithValue("de", false);
 
             return command.ExecuteNonQuery();
         }
@@ -212,6 +213,19 @@ namespace InstaCarManagement.Data
 
             }
             return result;
+        }
+
+        public int Delete()
+        {
+            NpgsqlCommand command = new NpgsqlCommand();
+            command.Connection = this.connection;
+            command.CommandText = $"update {TABLE} set deleted = :de where customer_id = :cid";
+
+
+            command.Parameters.AddWithValue("cid", this.CustomerId.Value);
+            command.Parameters.AddWithValue("de", true);
+
+            return command.ExecuteNonQuery();
         }
         #endregion
         //----------------------------------------------------------------------------------------------
