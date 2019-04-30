@@ -81,7 +81,6 @@ namespace InstaCarManagement.GUI
                 if (this.rent.Begin.HasValue)
                 {
                     this.dateTimePickerBegin.Value = this.rent.Begin.Value;
-                    this.dateTimePickerBegin.Checked = true;
                 }
                 if (this.rent.End.HasValue)
                 {
@@ -267,20 +266,8 @@ namespace InstaCarManagement.GUI
         {
             bool result = true;
             this.labelStatus.Visible = false;
-            if (this.vehicle == null)
-            {
-                this.labelStatus.Visible = true;
-                this.labelStatus.Text = "Es wurde kein Fahrzeug ausgewählt";
-                SystemSounds.Asterisk.Play();
-                return false;
-            }
-            else
-            {
-                this.rent.CarId = this.vehicle.CarId;
-                this.rent.Modell = this.vehicle.Modell;
-                this.rent.Brand = this.vehicle.Brand;
-            }
-            if (this.customer == null)
+            
+            if (!this.customer.CustomerId.HasValue)
             {
                 this.labelStatus.Visible = true;
                 this.labelStatus.Text = "Es wurde kein Kunde ausgewählt";
@@ -294,6 +281,20 @@ namespace InstaCarManagement.GUI
                 this.rent.FamilyName = this.customer.Familyname;
             }
 
+            if (!this.vehicle.CarId.HasValue)
+            {
+                this.labelStatus.Visible = true;
+                this.labelStatus.Text = "Es wurde kein Fahrzeug ausgewählt";
+                SystemSounds.Asterisk.Play();
+                return false;
+            }
+            else
+            {
+                this.rent.CarId = this.vehicle.CarId;
+                this.rent.Modell = this.vehicle.Modell;
+                this.rent.Brand = this.vehicle.Brand;
+            }
+
             if (this.dateTimePickerBegin.Value > this.dateTimePickerEnd.Value && this.dateTimePickerEnd.Checked)
             {
                 this.labelStatus.Visible = true;
@@ -302,10 +303,8 @@ namespace InstaCarManagement.GUI
                 return false;
             }
 
-            if (this.dateTimePickerBegin.Checked)
-            {
-                this.rent.Begin = this.dateTimePickerBegin.Value;
-            }
+            this.rent.Begin = this.dateTimePickerBegin.Value;
+            
             if (this.dateTimePickerEnd.Checked)
             {
                 this.rent.End = this.dateTimePickerEnd.Value;
@@ -318,6 +317,8 @@ namespace InstaCarManagement.GUI
                 this.rent.SumPrice = this.vehicle.Price * this.rent.Units;
             }
 
+            this.rent.PricePerHour = this.vehicle.Price;
+
             return result;
         }
 
@@ -326,7 +327,6 @@ namespace InstaCarManagement.GUI
             this.rent = new Rent(this.connection);
             this.dateTimePickerBegin.Value = DateTime.Now;
             this.dateTimePickerEnd.Value = DateTime.Now;
-            this.dateTimePickerBegin.Checked = false;
             this.dateTimePickerEnd.Checked = false;
             this.customers = Customer.GetAllCustomer(this.connection);
             this.vehicles = Vehicle.GetAvailableVehicles(this.connection, this.dateTimePickerBegin.Value);
@@ -336,7 +336,6 @@ namespace InstaCarManagement.GUI
 
         private void buttonBeginNow_Click(object sender, EventArgs e)
         {
-            this.dateTimePickerBegin.Checked = true;
             this.dateTimePickerBegin.Value = DateTime.Now;
         }
 

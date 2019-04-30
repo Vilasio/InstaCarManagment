@@ -17,7 +17,7 @@ namespace InstaCarManagement.Data
         private const string TABLE = "InstaCar.rent";
         private const string TABLECar = "InstaCar.car";
         private const string TABLECus = "InstaCar.customer";
-        private const string COLUMN = "rent_id, customer_id, car_id, cust_no, datebegin, dateend, sumprice, hours";
+        private const string COLUMN = "rent_id, customer_id, car_id, cust_no, datebegin, dateend, sumprice, hours, priceperhour";
         #endregion
 
         //----------------------------------------------------------------------------------------------
@@ -52,6 +52,7 @@ namespace InstaCarManagement.Data
         public DateTime? Begin { get; set; }
         public DateTime? End { get; set; }
         public double? SumPrice { get; set; }
+        public double? PricePerHour { get; set; }
         public long? Units { get; set; }
         public string Name { get; set; }
         public string FamilyName { get; set; }
@@ -88,7 +89,8 @@ namespace InstaCarManagement.Data
                         Begin = reader.IsDBNull(4) ? null : (DateTime?)reader.GetDateTime(4),
                         End = reader.IsDBNull(5) ? null : (DateTime?)reader.GetDateTime(5),
                         SumPrice = reader.IsDBNull(6) ? 0 : (double?)reader.GetDouble(6),
-                        Units = reader.IsDBNull(7) ? 0 : (long?)reader.GetInt64(7)
+                        Units = reader.IsDBNull(7) ? 0 : (long?)reader.GetInt64(7),
+                        PricePerHour = reader.IsDBNull(8) ? 0 : (long?)reader.GetDouble(8)
                     }
                 );
             }
@@ -118,7 +120,8 @@ namespace InstaCarManagement.Data
                         Begin = reader.IsDBNull(4) ? null : (DateTime?)reader.GetDateTime(4),
                         End = reader.IsDBNull(5) ? null : (DateTime?)reader.GetDateTime(5),
                         SumPrice = reader.IsDBNull(6) ? 0 : (double?)reader.GetDouble(6),
-                        Units = reader.IsDBNull(7) ? 0 : (long?)reader.GetInt64(7)
+                        Units = reader.IsDBNull(7) ? 0 : (long?)reader.GetInt64(7),
+                        PricePerHour = reader.IsDBNull(8) ? 0 : (long?)reader.GetDouble(8)
                     }
                 );
             }
@@ -132,7 +135,7 @@ namespace InstaCarManagement.Data
             Rent Rent = null;
             NpgsqlCommand command = new NpgsqlCommand();
             command.Connection = connection;
-            command.CommandText = $"Select r.rent_id, r.customer_id, r.car_id, r.rent_no, r.datebegin, r.dateend, r.sumprice, r.hours, v.modell, v.brand, c.name, c.familyname " +
+            command.CommandText = $"Select r.rent_id, r.customer_id, r.car_id, r.rent_no, r.datebegin, r.dateend, r.sumprice, r.hours, v.modell, v.brand, c.name, c.familyname, r.priceperhour " +
                 $"from {TABLE} as r " +
                 $"inner join {TABLECar} as v on r.car_id = v.car_id " +
                 $"inner join {TABLECus} as c on r.customer_id = c.customer_id" +
@@ -156,7 +159,8 @@ namespace InstaCarManagement.Data
                         Modell = reader.IsDBNull(8) ? null : reader.GetString(8),
                         Brand = reader.IsDBNull(9) ? null : reader.GetString(9),
                         Name = reader.IsDBNull(10) ? null : reader.GetString(10),
-                        FamilyName = reader.IsDBNull(11) ? null : reader.GetString(11)
+                        FamilyName = reader.IsDBNull(11) ? null : reader.GetString(11),
+                        PricePerHour = reader.IsDBNull(12) ? 0 : (double?)reader.GetDouble(12)
 
                     }
                 );

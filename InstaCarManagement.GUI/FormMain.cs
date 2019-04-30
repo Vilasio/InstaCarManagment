@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Npgsql;
 using InstaCarManagement.Data;
-
+using System.IO;
 
 namespace InstaCarManagement.GUI
 {
@@ -67,8 +67,10 @@ namespace InstaCarManagement.GUI
                 item.SubItems.Add(rent.FamilyName);
                 item.SubItems.Add(rent.Modell);
                 item.SubItems.Add(rent.Brand);
-                item.SubItems.Add(rent.Begin.Value.ToShortDateString());
-                if(rent.End.HasValue)item.SubItems.Add(rent.End.Value.ToShortDateString());
+                if (rent.Begin.HasValue) item.SubItems.Add($"{rent.Begin.Value.ToShortDateString()} - {rent.Begin.Value.ToShortTimeString()}");
+                else item.SubItems.Add("");
+                if (rent.End.HasValue)item.SubItems.Add($"{rent.End.Value.ToShortDateString()} - {rent.End.Value.ToShortTimeString()}");
+                else item.SubItems.Add("");
                 item.Tag = rent;
                 this.listViewRent.Items.Add(item);
             }
@@ -129,6 +131,22 @@ namespace InstaCarManagement.GUI
 
         private void MenuItemPrint_Click(object sender, EventArgs e)
         {
+            PrintPreviewDialog dialog = new PrintPreviewDialog();
+            dialog.Document = this.printDocument;
+            ((ToolStrip)(dialog.Controls[1])).Items.RemoveAt(0);
+
+            ToolStripButton b = new ToolStripButton();
+            //b.Image = Properties.Resources.PrintDialog;
+            b.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            b.Click += dialogPrint_Click;
+            ((ToolStrip)(dialog.Controls[1])).Items.Insert(0, b);
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                MessageBox.Show("Erfolg");
+            }
+
+            /*this.timerRents.Enabled = false;
             DataTable currentRents = Rent.GetTable(this.connection);
 
             SaveFileDialog saveFileDialog = new SaveFileDialog();
@@ -138,7 +156,7 @@ namespace InstaCarManagement.GUI
             {
                 try
                 {
-                    ExportPdf.ExportToPdfQuer(currentRents, saveFileDialog.FileName);
+                    ExportPdf.ExportToPdfQuerMitPic(rents, saveFileDialog.FileName, this.connection);
 
                 }
                 catch (Exception ex)
@@ -146,6 +164,8 @@ namespace InstaCarManagement.GUI
                     MessageBox.Show("Leider ist etwas beim Speichern der Datei schief gelaufen.", "Fehlgeschlagen!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
             }
+            this.timerRents.Enabled = true;
+            */
         }
 
         private void timerRents_Tick(object sender, EventArgs e)
@@ -173,6 +193,88 @@ namespace InstaCarManagement.GUI
             {
                 FilllistviewRent();
             }
+        }
+
+        private void toolStripMenuItemTest_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void dialogPrint_Click(object sender, EventArgs e)
+        {
+            PrintDialog dialog = new PrintDialog();
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                lastIndex = 0;
+                this.printDocument.PrinterSettings = dialog.PrinterSettings;
+                this.printDocument.Print();
+            }
+
+        }
+
+        private int lastIndex = 0;
+
+        private void printDocument_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            this.timerRents.Enabled = false;
+            Image image = null;
+            float top = 10;
+            float ratio = 0;
+            float nHeight = 0;
+            float topOffset = 0;
+            Rent rent = null;
+
+            Font fontStd = new Font("Verdana", 10f, FontStyle.Regular);
+            Font fontHead = new Font("Arial Black", 20f, FontStyle.Regular);
+            Font fontLabel = new Font("Verdana", 10f, FontStyle.Bold | FontStyle.Underline);
+
+            e.Graphics.DrawString($"Vermietungs Liste vom {DateTime.Now.ToShortDateString()}", fontHead, Brushes.Black, new PointF(20f, top));
+            SizeF textSize = e.Graphics.MeasureString($"Personen Liste vom {DateTime.Now.ToShortDateString()}", fontHead);
+            top += textSize.Height + 10f;
+            e.Graphics.DrawLine(new Pen(Brushes.Blue, 3f), new PointF(20f, top), new PointF(e.PageSettings.PaperSize.Width - 20, top));
+            top += 13f;
+
+            for (int idx = lastIndex; idx < this.rents.Count; idx++)
+            {
+                rent = this.rents[idx];
+                image = ImageCar.GetMainImage(this.connection, rent.CarId);
+                if (image != null)
+                {
+                    ratio = (float)image.Width / 150f;
+                    nHeight = (float)image.Height / ratio;
+                    e.Graphics.DrawImage(image, new RectangleF(30f, top, 150, nHeight), new RectangleF(0, 0, image.Width, image.Height), GraphicsUnit.Pixel);
+                }
+                else
+                {
+                    nHeight = 150f;
+                }
+
+                topOffset = 30f;
+                e.Graphics.DrawString("Name: ", fontLabel, Brushes.Black, new PointF(220f, top + topOffset));
+                e.Graphics.DrawString($"{rent.Name} {rent.FamilyName}", fontStd, Brushes.Black, new PointF(350f, top + topOffset));
+                textSize = e.Graphics.MeasureString($"{rent.Name} {rent.FamilyName}", fontStd);
+
+                topOffset += textSize.Height + 10f;
+                e.Graphics.DrawString("Fahrzeug: ", fontLabel, Brushes.Black, new PointF(220f, top + topOffset));
+                e.Graphics.DrawString($"{(rent.Brand != String.Empty ? rent.Brand : string.Empty)} {(rent.Modell != String.Empty ? rent.Modell : string.Empty)}", fontStd, Brushes.Black, new PointF(350f, top + topOffset));
+
+                topOffset += textSize.Height + 10f;
+                e.Graphics.DrawString("Vermietet: ", fontLabel, Brushes.Black, new PointF(220f, top + topOffset));
+                e.Graphics.DrawString($"{(rent.Begin.HasValue ? rent.Begin.Value.ToShortDateString() : string.Empty)} {(rent.Begin.HasValue ? rent.Begin.Value.ToShortTimeString() : string.Empty)} " +
+                    $"- {(rent.End.HasValue ? rent.End.Value.ToShortDateString() : "noch offen")} {(rent.End.HasValue ? rent.End.Value.ToShortTimeString() : "")}", fontStd, Brushes.Black, new PointF(350f, top + topOffset));
+
+                top += nHeight + 20f;
+
+
+                if (top > (float)e.PageSettings.PaperSize.Height / 3f * 2f)
+                {
+                    lastIndex = idx + 1;
+                    e.HasMorePages = true;
+                    break;
+                }
+            }
+
+            this.timerRents.Enabled = true;
         }
     }
 }

@@ -52,6 +52,7 @@
             this.labelTopic = new System.Windows.Forms.Label();
             this.labelHeader = new System.Windows.Forms.Label();
             this.timerRents = new System.Windows.Forms.Timer(this.components);
+            this.printDocument = new System.Drawing.Printing.PrintDocument();
             this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
             this.MenuItemExit = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuItemEditCar = new System.Windows.Forms.ToolStripMenuItem();
@@ -60,6 +61,7 @@
             this.MenuItemRentCar = new System.Windows.Forms.ToolStripMenuItem();
             this.passwortÄndernToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuItemPrint = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemTest = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuItemUserManagment = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuItemPricing = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
@@ -153,7 +155,8 @@
             // 
             this.MenuItemExtras.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.passwortÄndernToolStripMenuItem,
-            this.MenuItemPrint});
+            this.MenuItemPrint,
+            this.toolStripMenuItemTest});
             this.MenuItemExtras.Name = "MenuItemExtras";
             this.MenuItemExtras.Size = new System.Drawing.Size(49, 20);
             this.MenuItemExtras.Text = "Extras";
@@ -212,12 +215,12 @@
             // columnHeaderDateBegin
             // 
             this.columnHeaderDateBegin.Text = "Beginn";
-            this.columnHeaderDateBegin.Width = 100;
+            this.columnHeaderDateBegin.Width = 175;
             // 
             // columnHeaderDateEnd
             // 
             this.columnHeaderDateEnd.Text = "Ende";
-            this.columnHeaderDateEnd.Width = 100;
+            this.columnHeaderDateEnd.Width = 175;
             // 
             // splitContainerMain
             // 
@@ -279,6 +282,10 @@
             this.timerRents.Enabled = true;
             this.timerRents.Interval = 5000;
             this.timerRents.Tick += new System.EventHandler(this.timerRents_Tick);
+            // 
+            // printDocument
+            // 
+            this.printDocument.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument_PrintPage);
             // 
             // pictureBoxLogo
             // 
@@ -351,6 +358,14 @@
             this.MenuItemPrint.Size = new System.Drawing.Size(217, 22);
             this.MenuItemPrint.Text = "Als PDF exportieren";
             this.MenuItemPrint.Click += new System.EventHandler(this.MenuItemPrint_Click);
+            // 
+            // toolStripMenuItemTest
+            // 
+            this.toolStripMenuItemTest.Image = global::InstaCarManagement.GUI.Properties.Resources.PrintDialog_16x;
+            this.toolStripMenuItemTest.Name = "toolStripMenuItemTest";
+            this.toolStripMenuItemTest.Size = new System.Drawing.Size(217, 22);
+            this.toolStripMenuItemTest.Text = "Test";
+            this.toolStripMenuItemTest.Click += new System.EventHandler(this.toolStripMenuItemTest_Click);
             // 
             // MenuItemUserManagment
             // 
@@ -433,5 +448,7 @@
         private System.Windows.Forms.PictureBox pictureBoxLogo;
         private System.Windows.Forms.ToolStripMenuItem MenuItemPrint;
         private System.Windows.Forms.Timer timerRents;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemTest;
+        private System.Drawing.Printing.PrintDocument printDocument;
     }
 }

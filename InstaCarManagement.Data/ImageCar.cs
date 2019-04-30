@@ -130,6 +130,29 @@ namespace InstaCarManagement.Data
             }
             return image;
         }
+
+        public static Image GetMainImage(NpgsqlConnection connection, long? CarId)
+        {
+            Image image = null;
+            Byte[] pic = null;
+            if (CarId.HasValue)
+            {
+                NpgsqlCommand command = new NpgsqlCommand($"Select picture from {TABLE} where car_id = :cid and main = true", connection);
+                command.Parameters.AddWithValue("cid", CarId.Value);
+                NpgsqlDataReader reader = command.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    reader.Read();
+                    pic = reader.IsDBNull(0) ? null : (byte[])reader.GetValue(0);
+                    MemoryStream memoryStream = new MemoryStream(pic);
+                    image = Image.FromStream(memoryStream);
+                    memoryStream.Close();
+                }
+
+                reader.Close();
+            }
+            return image;
+        }
         #endregion
         //----------------------------------------------------------------------------------------------
         //Public
@@ -144,7 +167,7 @@ namespace InstaCarManagement.Data
             if (this.ImageId.HasValue)
             {
                 command.CommandText =
-                    $"update {TABLE} set picture = :pi, kind = :ki, main = :ma, description = :de";
+                    $"update {TABLE} set picture = :pi, kind = :ki, main = :ma, description = :de where image_id = :iid";
             }
             else
             {

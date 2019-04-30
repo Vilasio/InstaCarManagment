@@ -431,12 +431,10 @@
             // 
             // dateTimePickerBegin
             // 
-            this.dateTimePickerBegin.Checked = false;
             this.dateTimePickerBegin.CustomFormat = "HH:mm - ddd. dd.MM.yyyy";
             this.dateTimePickerBegin.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePickerBegin.Location = new System.Drawing.Point(8, 456);
             this.dateTimePickerBegin.Name = "dateTimePickerBegin";
-            this.dateTimePickerBegin.ShowCheckBox = true;
             this.dateTimePickerBegin.Size = new System.Drawing.Size(154, 20);
             this.dateTimePickerBegin.TabIndex = 45;
             this.dateTimePickerBegin.ValueChanged += new System.EventHandler(this.dateTimePickerBegin_ValueChanged);

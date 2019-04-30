@@ -164,7 +164,7 @@ namespace InstaCarManagement.GUI
             {
                 result = false;
                 this.labelCustomerStatus.Visible = true;
-                this.labelCustomerStatus.Text = "Straße angegeben werden.";
+                this.labelCustomerStatus.Text = "Straße muss angegeben werden.";
                 SystemSounds.Asterisk.Play();
                 return result;
             }
@@ -177,8 +177,8 @@ namespace InstaCarManagement.GUI
             else
             {
                 result = false;
-                this.labelVehicleStatus.Visible = true;
-                this.labelVehicleStatus.Text = "Hausnummer darf nur Zahlen beinhalten.";
+                this.labelCustomerStatus.Visible = true;
+                this.labelCustomerStatus.Text = "Hausnummer darf nur Zahlen beinhalten.";
                 SystemSounds.Asterisk.Play();
                 return result;
 
@@ -406,6 +406,7 @@ namespace InstaCarManagement.GUI
             {
                 this.buttonLock.Enabled = true;
                 this.buttonLock.Visible = true;
+                this.labelVehicleStatusLocked.Visible = true;
                 this.checkBoxVehicleNotAvailable.Enabled = true;
                 
                 if (this.vehicle.Locked)
@@ -462,7 +463,7 @@ namespace InstaCarManagement.GUI
             {
                 result = false;
                 this.labelVehicleStatus.Visible = true;
-                this.labelVehicleStatus.Text = "Modell muss mindestens 2 Zeichen lang sein.";
+                this.labelVehicleStatus.Text = "Marke muss mindestens 2 Zeichen lang sein.";
                 SystemSounds.Asterisk.Play();
                 return result;
             }
@@ -514,7 +515,7 @@ namespace InstaCarManagement.GUI
             this.pictureBoxVehicleImage.Image = null;
 
             this.groupBoxVehicles.Text = "Neues Fahrzeug anlegen";
-
+            this.labelVehicleStatusLocked.Visible = false;
 
 
             this.labelVehicleStatus.Visible = false;
