@@ -188,9 +188,11 @@ namespace InstaCarManagement.Data
 
             NpgsqlCommand command = new NpgsqlCommand();
             command.Connection = connection;
-            command.CommandText = $"Select c.car_id, c.location_id, c.modell, c.brand, c.hp, c.price, c.feature1, c.feature2, c.feature3, c.feature4, " +
-                $"c.notavailable, c.reserved, c.in_use, c.locked from {TABLE} as c left join {TABLERENT} as r on r.car_id = c.car_id " +
-                $"where ((r.datebegin > :t or r.dateend < :t) or r.datebegin is null) and c.notavailable = false and c.deleted = false;";
+            command.CommandText = $"Select car_id, location_id, modell, brand, hp, price, feature1, feature2, feature3, feature4, notavailable, reserved, in_use, locked from instacar.car where deleted = false " +
+                $"except " +
+                $"Select c.car_id, c.location_id, c.modell, c.brand, c.hp, c.price, c.feature1, c.feature2, c.feature3, c.feature4, " +
+                $"c.notavailable, c.reserved, c.in_use, c.locked from {TABLE} as c inner join {TABLERENT} as r on r.car_id = c.car_id " +
+                $"where ((dateend > :t and datebegin < :t) or dateend is null) and c.notavailable = false and c.deleted = false;";
             command.Parameters.AddWithValue("t", time);
 
             NpgsqlDataReader reader = command.ExecuteReader();

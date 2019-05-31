@@ -373,9 +373,11 @@
             // labelStatus
             // 
             this.labelStatus.AutoSize = true;
+            this.labelStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelStatus.ForeColor = System.Drawing.Color.Red;
             this.labelStatus.Location = new System.Drawing.Point(6, 533);
             this.labelStatus.Name = "labelStatus";
-            this.labelStatus.Size = new System.Drawing.Size(37, 13);
+            this.labelStatus.Size = new System.Drawing.Size(45, 16);
             this.labelStatus.TabIndex = 51;
             this.labelStatus.Text = "Status";
             this.labelStatus.Visible = false;

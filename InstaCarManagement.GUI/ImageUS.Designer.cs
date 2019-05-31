@@ -60,6 +60,7 @@
             this.checkBoxMainImage.TabIndex = 1;
             this.checkBoxMainImage.Text = "Hauptbild";
             this.checkBoxMainImage.UseVisualStyleBackColor = true;
+            this.checkBoxMainImage.CheckedChanged += new System.EventHandler(this.checkBoxMainImage_CheckedChanged);
             // 
             // checkBoxOfficial
             // 

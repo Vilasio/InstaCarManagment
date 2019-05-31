@@ -63,10 +63,10 @@ namespace InstaCarManagement.GUI
             foreach (Rent rent in rents)
             {
                 item = new ListViewItem();
-                item.Text = rent.Name;
-                item.SubItems.Add(rent.FamilyName);
-                item.SubItems.Add(rent.Modell);
+                item.Text = rent.Modell;
                 item.SubItems.Add(rent.Brand);
+                item.SubItems.Add(rent.Name);
+                item.SubItems.Add(rent.FamilyName);
                 if (rent.Begin.HasValue) item.SubItems.Add($"{rent.Begin.Value.ToShortDateString()} - {rent.Begin.Value.ToShortTimeString()}");
                 else item.SubItems.Add("");
                 if (rent.End.HasValue)item.SubItems.Add($"{rent.End.Value.ToShortDateString()} - {rent.End.Value.ToShortTimeString()}");
@@ -136,7 +136,7 @@ namespace InstaCarManagement.GUI
             ((ToolStrip)(dialog.Controls[1])).Items.RemoveAt(0);
 
             ToolStripButton b = new ToolStripButton();
-            //b.Image = Properties.Resources.PrintDialog;
+            b.Image = Properties.Resources.PrintDialog_16x;
             b.DisplayStyle = ToolStripItemDisplayStyle.Image;
             b.Click += dialogPrint_Click;
             ((ToolStrip)(dialog.Controls[1])).Items.Insert(0, b);
@@ -146,26 +146,6 @@ namespace InstaCarManagement.GUI
                 MessageBox.Show("Erfolg");
             }
 
-            /*this.timerRents.Enabled = false;
-            DataTable currentRents = Rent.GetTable(this.connection);
-
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "PDF-File|*.pdf";
-            saveFileDialog.Title = "Pdf exportieren";
-            if (saveFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                try
-                {
-                    ExportPdf.ExportToPdfQuerMitPic(rents, saveFileDialog.FileName, this.connection);
-
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Leider ist etwas beim Speichern der Datei schief gelaufen.", "Fehlgeschlagen!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                }
-            }
-            this.timerRents.Enabled = true;
-            */
         }
 
         private void timerRents_Tick(object sender, EventArgs e)
@@ -195,10 +175,7 @@ namespace InstaCarManagement.GUI
             }
         }
 
-        private void toolStripMenuItemTest_Click(object sender, EventArgs e)
-        {
-            
-        }
+  
 
         private void dialogPrint_Click(object sender, EventArgs e)
         {
@@ -211,6 +188,7 @@ namespace InstaCarManagement.GUI
             }
 
         }
+
 
         private int lastIndex = 0;
 
@@ -276,5 +254,12 @@ namespace InstaCarManagement.GUI
 
             this.timerRents.Enabled = true;
         }
+
+        private void MenuItemExit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+       
     }
 }

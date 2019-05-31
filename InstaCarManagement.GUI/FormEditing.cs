@@ -52,6 +52,7 @@ namespace InstaCarManagement.GUI
                 case 1:
                     this.tabControlBaseData.SelectedTab = tabPageCustomer;
                     FillListViewCustomer();
+                    ClearCustomer();
                     break;
                 case 2:
                     this.tabControlBaseData.SelectedTab = tabPageVehicle;
@@ -227,6 +228,7 @@ namespace InstaCarManagement.GUI
         private void ClearCustomer()
         {
             this.customer = new Customer(this.connection);
+            this.groupBoxCustomer.Text = "Neuen Kunden Anlegen";
             this.textBoxCustomerName.Text = string.Empty;
             this.textBoxCustomerCustomerNo.Text = string.Empty;
             this.textBoxCustomerFamilyName.Text = string.Empty;
@@ -541,6 +543,12 @@ namespace InstaCarManagement.GUI
                 {
                     this.vehicle.PicturesSave();
                 }
+                else
+                {
+                    this.labelVehicleStatus.Visible = true;
+                    this.labelVehicleStatus.Text = "Nicht vergessen auf Speichern zu klicken.";
+                    SystemSounds.Asterisk.Play();
+                }
             }
         }
         #endregion
@@ -660,6 +668,62 @@ namespace InstaCarManagement.GUI
             }
             
         }
+
+        private void pictureBoxVehicleImage_DragEnter(object sender, DragEventArgs e)
+        {
+            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+            if (files.Length == 1) e.Effect = DragDropEffects.Copy;
+            else e.Effect = DragDropEffects.None;
+        }
+
+        private void pictureBoxVehicleImage_DragDrop(object sender, DragEventArgs e)
+        {
+            try
+            {
+                Image image = null;
+                string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+                if (files.Length == 1) e.Effect = DragDropEffects.Copy;
+                else e.Effect = DragDropEffects.None;
+
+                image = Image.FromFile(files[0]);
+
+                ImageCar imageCar = new ImageCar(this.connection, this.vehicle);
+                imageCar.Accident = false;
+                imageCar.Main = true;
+                imageCar.Kind = "Public";
+                imageCar.Description = "";
+                imageCar.Image = image;
+
+                foreach (ImageCar i in this.vehicle.Pictures)
+                {
+                    if (i.Main)
+                    {
+                        i.Main = false;
+                        i.Save();
+                    }
+                }
+
+                MemoryStream memoryStream = new MemoryStream();
+                imageCar.Image.Save(memoryStream, ImageFormat.Png);
+                memoryStream.Seek(0, SeekOrigin.Begin);
+                memoryStream.Close();
+                imageCar.Picture = memoryStream.GetBuffer();
+
+                this.vehicle.Pictures.Add(imageCar);
+                this.pictureBoxVehicleImage.Image = image;
+
+                if (!this.vehicle.CarId.HasValue)
+                {
+
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
         #endregion
         #endregion
 
@@ -744,8 +808,8 @@ namespace InstaCarManagement.GUI
             else
             {
                 result = false;
-                this.labelVehicleStatus.Visible = true;
-                this.labelVehicleStatus.Text = "Hausnummer darf nur Zahlen beinhalten.";
+                this.labelLocationStatus.Visible = true;
+                this.labelLocationStatus.Text = "Hausnummer darf nur Zahlen beinhalten.";
                 SystemSounds.Asterisk.Play();
                 return result;
 
@@ -772,7 +836,7 @@ namespace InstaCarManagement.GUI
             {
                 result = false;
                 this.labelLocationStatus.Visible = true;
-                this.labelLocationStatus.Text = "Straße angegeben werden.";
+                this.labelLocationStatus.Text = "Stadt muss angegeben werden.";
                 SystemSounds.Asterisk.Play();
                 return result;
             }
@@ -870,6 +934,7 @@ namespace InstaCarManagement.GUI
             ListViewItem item = this.listViewLocation.GetItemAt(e.X, e.Y);
             this.locationclick = (LocationCar)item.Tag;
         }
+
 
 
         #endregion

@@ -78,6 +78,7 @@
             // 
             this.textBoxPassword.Location = new System.Drawing.Point(142, 34);
             this.textBoxPassword.Name = "textBoxPassword";
+            this.textBoxPassword.PasswordChar = '*';
             this.textBoxPassword.Size = new System.Drawing.Size(200, 20);
             this.textBoxPassword.TabIndex = 1;
             this.textBoxPassword.Text = "admin";
@@ -106,10 +107,11 @@
             // labelMsg
             // 
             this.labelMsg.AutoSize = true;
+            this.labelMsg.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelMsg.ForeColor = System.Drawing.Color.Red;
             this.labelMsg.Location = new System.Drawing.Point(4, 68);
             this.labelMsg.Name = "labelMsg";
-            this.labelMsg.Size = new System.Drawing.Size(139, 13);
+            this.labelMsg.Size = new System.Drawing.Size(175, 16);
             this.labelMsg.TabIndex = 9;
             this.labelMsg.Text = "Name oder Passwort falsch!";
             this.labelMsg.Visible = false;

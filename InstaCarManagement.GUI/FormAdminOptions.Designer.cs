@@ -171,9 +171,11 @@
             // labelVehiclePriceStatus
             // 
             this.labelVehiclePriceStatus.AutoSize = true;
+            this.labelVehiclePriceStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelVehiclePriceStatus.ForeColor = System.Drawing.Color.Red;
             this.labelVehiclePriceStatus.Location = new System.Drawing.Point(6, 84);
             this.labelVehiclePriceStatus.Name = "labelVehiclePriceStatus";
-            this.labelVehiclePriceStatus.Size = new System.Drawing.Size(37, 13);
+            this.labelVehiclePriceStatus.Size = new System.Drawing.Size(45, 16);
             this.labelVehiclePriceStatus.TabIndex = 5;
             this.labelVehiclePriceStatus.Text = "Status";
             this.labelVehiclePriceStatus.Visible = false;

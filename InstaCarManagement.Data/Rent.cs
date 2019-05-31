@@ -135,11 +135,7 @@ namespace InstaCarManagement.Data
             Rent Rent = null;
             NpgsqlCommand command = new NpgsqlCommand();
             command.Connection = connection;
-            command.CommandText = $"Select r.rent_id, r.customer_id, r.car_id, r.rent_no, r.datebegin, r.dateend, r.sumprice, r.hours, v.modell, v.brand, c.name, c.familyname, r.priceperhour " +
-                $"from {TABLE} as r " +
-                $"inner join {TABLECar} as v on r.car_id = v.car_id " +
-                $"inner join {TABLECus} as c on r.customer_id = c.customer_id" +
-                $" where (dateend > current_Timestamp or dateend is null) and r.deleted = false;";
+            command.CommandText = $"Select * from instacar.get_current_rents";
 
             NpgsqlDataReader reader = command.ExecuteReader();
 

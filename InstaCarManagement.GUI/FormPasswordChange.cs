@@ -28,6 +28,8 @@ namespace InstaCarManagement.GUI
             this.actualUser = actualUser;
         }
 
+        private bool activate = false;
+
         private void PaintBorderlessGroupBox(object sender, PaintEventArgs p)
         {
             GroupBox box = (GroupBox)sender;
@@ -51,24 +53,29 @@ namespace InstaCarManagement.GUI
                 SystemSounds.Asterisk.Play();
                 this.labelStatus.Text = "Die Passwörter stimmen nicht überein.";
             }
+            this.activate = true;
         }
 
         private void textBoxNewPassword_Leave(object sender, EventArgs e)
         {
-            if (this.textBoxNewPassword.Text == this.textBoxNewPasswordRep.Text)
+            if (activate)
             {
-                this.pictureBoxCheck.Visible = true;
-                this.pictureBoxUncheck.Visible = false;
-                this.labelStatus.Visible = false;
+                if (this.textBoxNewPassword.Text == this.textBoxNewPasswordRep.Text)
+                {
+                    this.pictureBoxCheck.Visible = true;
+                    this.pictureBoxUncheck.Visible = false;
+                    this.labelStatus.Visible = false;
 
+                }
+                else
+                {
+                    this.pictureBoxCheck.Visible = false;
+                    this.pictureBoxUncheck.Visible = true;
+                    this.labelStatus.Visible = true;
+                    this.labelStatus.Text = "Die Passwörter stimmen nicht überein.";
+                }
             }
-            else
-            {
-                this.pictureBoxCheck.Visible = false;
-                this.pictureBoxUncheck.Visible = true;
-                this.labelStatus.Visible = true;
-                this.labelStatus.Text = "Die Passwörter stimmen nicht überein.";
-            }
+            
         }
 
         private void buttonChange_Click(object sender, EventArgs e)
@@ -120,6 +127,11 @@ namespace InstaCarManagement.GUI
         private void FormPasswordChange_Load(object sender, EventArgs e)
         {
             this.groupBoxHeader.Paint += PaintBorderlessGroupBox;
+        }
+
+        private void buttonChange_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -142,5 +142,13 @@ namespace InstaCarManagement.GUI
                 checkBoxOfficial.Enabled = true;
             }
         }
+
+        private void checkBoxMainImage_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.checkBoxMainImage.Checked)
+            {
+                this.checkBoxOfficial.Checked = true;
+            }
+        }
     }
 }

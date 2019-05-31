@@ -165,6 +165,18 @@
     <EmbeddedResource Include="UserManagment.resx">
       <DependentUpon>UserManagment.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Fonts\Roboto-Black.ttf" />
+    <EmbeddedResource Include="Fonts\Roboto-BlackItalic.ttf" />
+    <EmbeddedResource Include="Fonts\Roboto-Bold.ttf" />
+    <EmbeddedResource Include="Fonts\Roboto-BoldItalic.ttf" />
+    <EmbeddedResource Include="Fonts\Roboto-Italic.ttf" />
+    <EmbeddedResource Include="Fonts\Roboto-Light.ttf" />
+    <EmbeddedResource Include="Fonts\Roboto-LightItalic.ttf" />
+    <EmbeddedResource Include="Fonts\Roboto-Medium.ttf" />
+    <EmbeddedResource Include="Fonts\Roboto-MediumItalic.ttf" />
+    <EmbeddedResource Include="Fonts\Roboto-Regular.ttf" />
+    <EmbeddedResource Include="Fonts\Roboto-Thin.ttf" />
+    <EmbeddedResource Include="Fonts\Roboto-ThinItalic.ttf" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

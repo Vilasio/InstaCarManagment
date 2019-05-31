@@ -71,6 +71,9 @@
             this.columnHeaderHouseNr = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderPostCode = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderCity = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.contextMenuStripCustomer = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.MenuItemCustomerDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuItemCustomerEdit = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPageVehicle = new System.Windows.Forms.TabPage();
             this.splitContainerVehicle = new System.Windows.Forms.SplitContainer();
             this.groupBoxVehicles = new System.Windows.Forms.GroupBox();
@@ -109,6 +112,9 @@
             this.columnHeaderFeature2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderFeature3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderFeature4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.contextMenuStripVehicle = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.MenuItemVehicleDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuItemVehicleEdit = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPageLocation = new System.Windows.Forms.TabPage();
             this.splitContainerLocation = new System.Windows.Forms.SplitContainer();
             this.groupBoxLocation = new System.Windows.Forms.GroupBox();
@@ -132,20 +138,14 @@
             this.columnHeaderLocationHouseNr = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderLocationPostCode = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderLocationCity = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.contextMenuStripLocation = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.MenuItemLocationDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemLocationEdit = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBoxHeader = new System.Windows.Forms.GroupBox();
             this.labelTopic = new System.Windows.Forms.Label();
             this.labelHeader = new System.Windows.Forms.Label();
             this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
             this.splitContainerFormEditing = new System.Windows.Forms.SplitContainer();
-            this.contextMenuStripCustomer = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.MenuItemCustomerDelete = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuItemCustomerEdit = new System.Windows.Forms.ToolStripMenuItem();
-            this.contextMenuStripVehicle = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.MenuItemVehicleDelete = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuItemVehicleEdit = new System.Windows.Forms.ToolStripMenuItem();
-            this.contextMenuStripLocation = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.MenuItemLocationDelete = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemLocationEdit = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControlBaseData.SuspendLayout();
             this.tabPageCustomer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
@@ -153,6 +153,7 @@
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
             this.groupBoxCustomer.SuspendLayout();
+            this.contextMenuStripCustomer.SuspendLayout();
             this.tabPageVehicle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerVehicle)).BeginInit();
             this.splitContainerVehicle.Panel1.SuspendLayout();
@@ -160,21 +161,20 @@
             this.splitContainerVehicle.SuspendLayout();
             this.groupBoxVehicles.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxVehicleImage)).BeginInit();
+            this.contextMenuStripVehicle.SuspendLayout();
             this.tabPageLocation.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerLocation)).BeginInit();
             this.splitContainerLocation.Panel1.SuspendLayout();
             this.splitContainerLocation.Panel2.SuspendLayout();
             this.splitContainerLocation.SuspendLayout();
             this.groupBoxLocation.SuspendLayout();
+            this.contextMenuStripLocation.SuspendLayout();
             this.groupBoxHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerFormEditing)).BeginInit();
             this.splitContainerFormEditing.Panel1.SuspendLayout();
             this.splitContainerFormEditing.Panel2.SuspendLayout();
             this.splitContainerFormEditing.SuspendLayout();
-            this.contextMenuStripCustomer.SuspendLayout();
-            this.contextMenuStripVehicle.SuspendLayout();
-            this.contextMenuStripLocation.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControlBaseData
@@ -383,11 +383,14 @@
             // labelCustomerStatus
             // 
             this.labelCustomerStatus.AutoSize = true;
+            this.labelCustomerStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelCustomerStatus.ForeColor = System.Drawing.Color.Red;
             this.labelCustomerStatus.Location = new System.Drawing.Point(6, 520);
             this.labelCustomerStatus.Name = "labelCustomerStatus";
-            this.labelCustomerStatus.Size = new System.Drawing.Size(37, 13);
+            this.labelCustomerStatus.Size = new System.Drawing.Size(45, 16);
             this.labelCustomerStatus.TabIndex = 15;
             this.labelCustomerStatus.Text = "Status";
+            this.labelCustomerStatus.Visible = false;
             // 
             // buttonCustomerClose
             // 
@@ -579,6 +582,28 @@
             this.columnHeaderCity.Text = "Stadt";
             this.columnHeaderCity.Width = 100;
             // 
+            // contextMenuStripCustomer
+            // 
+            this.contextMenuStripCustomer.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MenuItemCustomerDelete,
+            this.MenuItemCustomerEdit});
+            this.contextMenuStripCustomer.Name = "contextMenuStripCustomer";
+            this.contextMenuStripCustomer.Size = new System.Drawing.Size(131, 48);
+            // 
+            // MenuItemCustomerDelete
+            // 
+            this.MenuItemCustomerDelete.Name = "MenuItemCustomerDelete";
+            this.MenuItemCustomerDelete.Size = new System.Drawing.Size(130, 22);
+            this.MenuItemCustomerDelete.Text = "Löschen";
+            this.MenuItemCustomerDelete.Click += new System.EventHandler(this.MenuItemCustomerDelete_Click);
+            // 
+            // MenuItemCustomerEdit
+            // 
+            this.MenuItemCustomerEdit.Name = "MenuItemCustomerEdit";
+            this.MenuItemCustomerEdit.Size = new System.Drawing.Size(130, 22);
+            this.MenuItemCustomerEdit.Text = "Bearbeiten";
+            this.MenuItemCustomerEdit.Click += new System.EventHandler(this.MenuItemCustomerEdit_Click);
+            // 
             // tabPageVehicle
             // 
             this.tabPageVehicle.Controls.Add(this.splitContainerVehicle);
@@ -698,9 +723,11 @@
             // labelVehicleStatus
             // 
             this.labelVehicleStatus.AutoSize = true;
+            this.labelVehicleStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelVehicleStatus.ForeColor = System.Drawing.Color.Red;
             this.labelVehicleStatus.Location = new System.Drawing.Point(6, 289);
             this.labelVehicleStatus.Name = "labelVehicleStatus";
-            this.labelVehicleStatus.Size = new System.Drawing.Size(37, 13);
+            this.labelVehicleStatus.Size = new System.Drawing.Size(45, 16);
             this.labelVehicleStatus.TabIndex = 22;
             this.labelVehicleStatus.Text = "Status";
             this.labelVehicleStatus.Visible = false;
@@ -714,6 +741,8 @@
             this.pictureBoxVehicleImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxVehicleImage.TabIndex = 21;
             this.pictureBoxVehicleImage.TabStop = false;
+            this.pictureBoxVehicleImage.DragDrop += new System.Windows.Forms.DragEventHandler(this.pictureBoxVehicleImage_DragDrop);
+            this.pictureBoxVehicleImage.DragEnter += new System.Windows.Forms.DragEventHandler(this.pictureBoxVehicleImage_DragEnter);
             this.pictureBoxVehicleImage.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBoxVehicleImage_MouseClick);
             // 
             // buttonVehicleClose
@@ -949,6 +978,28 @@
             this.columnHeaderFeature4.Text = "Austattung";
             this.columnHeaderFeature4.Width = 100;
             // 
+            // contextMenuStripVehicle
+            // 
+            this.contextMenuStripVehicle.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MenuItemVehicleDelete,
+            this.MenuItemVehicleEdit});
+            this.contextMenuStripVehicle.Name = "contextMenuStripVehicle";
+            this.contextMenuStripVehicle.Size = new System.Drawing.Size(131, 48);
+            // 
+            // MenuItemVehicleDelete
+            // 
+            this.MenuItemVehicleDelete.Name = "MenuItemVehicleDelete";
+            this.MenuItemVehicleDelete.Size = new System.Drawing.Size(130, 22);
+            this.MenuItemVehicleDelete.Text = "Löschen";
+            this.MenuItemVehicleDelete.Click += new System.EventHandler(this.MenuItemVehicleDelete_Click);
+            // 
+            // MenuItemVehicleEdit
+            // 
+            this.MenuItemVehicleEdit.Name = "MenuItemVehicleEdit";
+            this.MenuItemVehicleEdit.Size = new System.Drawing.Size(130, 22);
+            this.MenuItemVehicleEdit.Text = "Bearbeiten";
+            this.MenuItemVehicleEdit.Click += new System.EventHandler(this.MenuItemVehicleEdit_Click);
+            // 
             // tabPageLocation
             // 
             this.tabPageLocation.Controls.Add(this.splitContainerLocation);
@@ -1006,9 +1057,11 @@
             // labelLocationStatus
             // 
             this.labelLocationStatus.AutoSize = true;
+            this.labelLocationStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelLocationStatus.ForeColor = System.Drawing.Color.Red;
             this.labelLocationStatus.Location = new System.Drawing.Point(3, 222);
             this.labelLocationStatus.Name = "labelLocationStatus";
-            this.labelLocationStatus.Size = new System.Drawing.Size(37, 13);
+            this.labelLocationStatus.Size = new System.Drawing.Size(45, 16);
             this.labelLocationStatus.TabIndex = 12;
             this.labelLocationStatus.Text = "Status";
             this.labelLocationStatus.Visible = false;
@@ -1169,6 +1222,28 @@
             this.columnHeaderLocationCity.Text = "Stadt";
             this.columnHeaderLocationCity.Width = 100;
             // 
+            // contextMenuStripLocation
+            // 
+            this.contextMenuStripLocation.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MenuItemLocationDelete,
+            this.toolStripMenuItemLocationEdit});
+            this.contextMenuStripLocation.Name = "contextMenuStripVehicle";
+            this.contextMenuStripLocation.Size = new System.Drawing.Size(131, 48);
+            // 
+            // MenuItemLocationDelete
+            // 
+            this.MenuItemLocationDelete.Name = "MenuItemLocationDelete";
+            this.MenuItemLocationDelete.Size = new System.Drawing.Size(130, 22);
+            this.MenuItemLocationDelete.Text = "Löschen";
+            this.MenuItemLocationDelete.Click += new System.EventHandler(this.MenuItemLocationDelete_Click);
+            // 
+            // toolStripMenuItemLocationEdit
+            // 
+            this.toolStripMenuItemLocationEdit.Name = "toolStripMenuItemLocationEdit";
+            this.toolStripMenuItemLocationEdit.Size = new System.Drawing.Size(130, 22);
+            this.toolStripMenuItemLocationEdit.Text = "Bearbeiten";
+            this.toolStripMenuItemLocationEdit.Click += new System.EventHandler(this.toolStripMenuItemLocationEdit_Click);
+            // 
             // groupBoxHeader
             // 
             this.groupBoxHeader.BackColor = System.Drawing.Color.Blue;
@@ -1234,72 +1309,6 @@
             this.splitContainerFormEditing.SplitterDistance = 102;
             this.splitContainerFormEditing.TabIndex = 0;
             // 
-            // contextMenuStripCustomer
-            // 
-            this.contextMenuStripCustomer.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.MenuItemCustomerDelete,
-            this.MenuItemCustomerEdit});
-            this.contextMenuStripCustomer.Name = "contextMenuStripCustomer";
-            this.contextMenuStripCustomer.Size = new System.Drawing.Size(131, 48);
-            // 
-            // MenuItemCustomerDelete
-            // 
-            this.MenuItemCustomerDelete.Name = "MenuItemCustomerDelete";
-            this.MenuItemCustomerDelete.Size = new System.Drawing.Size(130, 22);
-            this.MenuItemCustomerDelete.Text = "Löschen";
-            this.MenuItemCustomerDelete.Click += new System.EventHandler(this.MenuItemCustomerDelete_Click);
-            // 
-            // MenuItemCustomerEdit
-            // 
-            this.MenuItemCustomerEdit.Name = "MenuItemCustomerEdit";
-            this.MenuItemCustomerEdit.Size = new System.Drawing.Size(130, 22);
-            this.MenuItemCustomerEdit.Text = "Bearbeiten";
-            this.MenuItemCustomerEdit.Click += new System.EventHandler(this.MenuItemCustomerEdit_Click);
-            // 
-            // contextMenuStripVehicle
-            // 
-            this.contextMenuStripVehicle.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.MenuItemVehicleDelete,
-            this.MenuItemVehicleEdit});
-            this.contextMenuStripVehicle.Name = "contextMenuStripVehicle";
-            this.contextMenuStripVehicle.Size = new System.Drawing.Size(131, 48);
-            // 
-            // MenuItemVehicleDelete
-            // 
-            this.MenuItemVehicleDelete.Name = "MenuItemVehicleDelete";
-            this.MenuItemVehicleDelete.Size = new System.Drawing.Size(130, 22);
-            this.MenuItemVehicleDelete.Text = "Löschen";
-            this.MenuItemVehicleDelete.Click += new System.EventHandler(this.MenuItemVehicleDelete_Click);
-            // 
-            // MenuItemVehicleEdit
-            // 
-            this.MenuItemVehicleEdit.Name = "MenuItemVehicleEdit";
-            this.MenuItemVehicleEdit.Size = new System.Drawing.Size(130, 22);
-            this.MenuItemVehicleEdit.Text = "Bearbeiten";
-            this.MenuItemVehicleEdit.Click += new System.EventHandler(this.MenuItemVehicleEdit_Click);
-            // 
-            // contextMenuStripLocation
-            // 
-            this.contextMenuStripLocation.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.MenuItemLocationDelete,
-            this.toolStripMenuItemLocationEdit});
-            this.contextMenuStripLocation.Name = "contextMenuStripVehicle";
-            this.contextMenuStripLocation.Size = new System.Drawing.Size(131, 48);
-            // 
-            // MenuItemLocationDelete
-            // 
-            this.MenuItemLocationDelete.Name = "MenuItemLocationDelete";
-            this.MenuItemLocationDelete.Size = new System.Drawing.Size(130, 22);
-            this.MenuItemLocationDelete.Text = "Löschen";
-            this.MenuItemLocationDelete.Click += new System.EventHandler(this.MenuItemLocationDelete_Click);
-            // 
-            // toolStripMenuItemLocationEdit
-            // 
-            this.toolStripMenuItemLocationEdit.Name = "toolStripMenuItemLocationEdit";
-            this.toolStripMenuItemLocationEdit.Size = new System.Drawing.Size(130, 22);
-            this.toolStripMenuItemLocationEdit.Text = "Bearbeiten";
-            this.toolStripMenuItemLocationEdit.Click += new System.EventHandler(this.toolStripMenuItemLocationEdit_Click);
-            // 
             // FormEditing
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1317,6 +1326,7 @@
             this.splitContainer2.ResumeLayout(false);
             this.groupBoxCustomer.ResumeLayout(false);
             this.groupBoxCustomer.PerformLayout();
+            this.contextMenuStripCustomer.ResumeLayout(false);
             this.tabPageVehicle.ResumeLayout(false);
             this.splitContainerVehicle.Panel1.ResumeLayout(false);
             this.splitContainerVehicle.Panel2.ResumeLayout(false);
@@ -1325,6 +1335,7 @@
             this.groupBoxVehicles.ResumeLayout(false);
             this.groupBoxVehicles.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxVehicleImage)).EndInit();
+            this.contextMenuStripVehicle.ResumeLayout(false);
             this.tabPageLocation.ResumeLayout(false);
             this.splitContainerLocation.Panel1.ResumeLayout(false);
             this.splitContainerLocation.Panel2.ResumeLayout(false);
@@ -1332,6 +1343,7 @@
             this.splitContainerLocation.ResumeLayout(false);
             this.groupBoxLocation.ResumeLayout(false);
             this.groupBoxLocation.PerformLayout();
+            this.contextMenuStripLocation.ResumeLayout(false);
             this.groupBoxHeader.ResumeLayout(false);
             this.groupBoxHeader.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).EndInit();
@@ -1339,9 +1351,6 @@
             this.splitContainerFormEditing.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerFormEditing)).EndInit();
             this.splitContainerFormEditing.ResumeLayout(false);
-            this.contextMenuStripCustomer.ResumeLayout(false);
-            this.contextMenuStripVehicle.ResumeLayout(false);
-            this.contextMenuStripLocation.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

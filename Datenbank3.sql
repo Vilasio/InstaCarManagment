@@ -19,6 +19,7 @@ DROP SEQUENCE InstaCar.image_seq;
 DROP SEQUENCE InstaCar.location_seq;
 
 
+DROP VIEW InstaCar.get_current_rents;
 DROP TABLE InstaCar.customer;
 DROP TABLE InstaCar.account;
 DROP TABLE InstaCar.rent;
@@ -194,6 +195,17 @@ CREATE TABLE InstaCar.location
 );
 
 CREATE SEQUENCE InstaCar.location_seq START WITH 1 INCREMENT BY 1;
+--*************************************************
+-- Views
+--*************************************************
+
+CREATE VIEW Instacar.get_current_rents as
+Select 
+r.rent_id, r.customer_id, r.car_id, r.rent_no, r.datebegin, r.dateend, r.sumprice, r.hours, v.modell, v.brand, c.name, c.familyname, r.priceperhour 
+from InstaCar.rent as r 
+inner join InstaCar.car as v on r.car_id = v.car_id 
+inner join InstaCar.customer as c on r.customer_id = c.customer_id
+where (dateend > current_Timestamp or dateend is null) and r.deleted = false;
 
 
 --*************************************************
@@ -225,6 +237,8 @@ GRANT SELECT, USAGE ON SEQUENCE InstaCar.feature_seq to clerk;
 GRANT SELECT, USAGE ON SEQUENCE InstaCar.image_seq to clerk;
 GRANT SELECT, USAGE ON SEQUENCE InstaCar.location_seq to clerk;
 GRANT SELECT, USAGE ON SEQUENCE InstaCar.rent_seq to clerk;
+
+GRANT SELECT ON TABLE InstaCar.get_current_rents to clerk;
 
 --*************************************************
 -- TestDaten
@@ -273,29 +287,10 @@ INSERT INTO InstaCar.rent (rent_id, customer_id, car_id, rent_no, datebegin, pri
 INSERT INTO InstaCar.rent (rent_id, customer_id, car_id, rent_no, datebegin, priceperhour, deleted) values((SELECT NEXTVAL('InstaCar.rent_seq')),2 , 2, '2019/03/000002', CURRENT_TIMESTAMP, 20.00, FALSE);
 INSERT INTO InstaCar.rent (rent_id, customer_id, car_id, rent_no, datebegin, priceperhour, deleted) values((SELECT NEXTVAL('InstaCar.rent_seq')),3 , 3, '2019/03/000003', CURRENT_TIMESTAMP, 20.00, FALSE);
 
---*************************************************
--- Views
---*************************************************
-CREATE VIEW get_rent as
-Select 
-	account_id,
-	username,
-	role,
-	tried,
-	blocked
-from 
-	InstaCar.account;
 
 
-CREATE VIEW get_all_accounts as
-Select 
-	account_id,
-	username,
-	role,
-	tried,
-	blocked
-from 
-	InstaCar.account;
+
+
 
 
 --*************************************************
